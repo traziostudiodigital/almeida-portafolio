@@ -223,7 +223,7 @@ Para optimizar el desarrollo y la gestión de recursos, el ecosistema se divide 
 
 > **Estrategia de Despliegue:** Se despliega primero en la URL de vista previa gratuita de Cloudflare (`almeida-portafolio.pages.dev`) para auditar la web en vivo y corregir errores de CSS/responsive desde móviles reales. Una vez pulida, se vincula el dominio definitivo `almeidatasacion.com`.
 
-- [ ] **5.5.1 — Inicialización de Git Local y Repositorio GitHub:**
+- [x] **5.5.1 — Inicialización de Git Local y Repositorio GitHub:**
   - `[IA]`: Verificación y ajuste de `.gitignore` (para excluir `node_modules/`, temporales, logs y archivos del sistema). Inicialización de Git en local, creación del primer commit y configuración de rama principal `main`.
   - `[Usuario]`: Crear repositorio privado/público en la cuenta de GitHub (`dalmeida.cu@gmail.com`) y copiar la URL remota.
   - `[IA]`: Vincular el remoto y realizar el primer `git push origin main`.
