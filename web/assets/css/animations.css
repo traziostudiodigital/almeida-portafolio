@@ -1,0 +1,116 @@
+/* Animaciones definidas para el hero y scroll-reveal */
+
+/* Cursor-líneas animación */
+@keyframes cursor-line {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Rotación de frases en hero */
+@keyframes pulse-opacity {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Dibujo de líneas SVG */
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Hover de links */
+@keyframes link-pulse {
+  0%, 100% {
+    color: var(--color-accent);
+  }
+  50% {
+    color: var(--color-brand-dark);
+  }
+}
+
+/* Fade in para scroll-reveal */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in lateral derecha */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade in lateral izquierda */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================
+   FASE C: Líneas SVG Progresivas (line-draw-svg)
+   ========================================== */
+.line-draw-svg line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+.line-draw-svg.is-drawn line {
+  animation: draw-line 900ms ease-out forwards;
+}
+
+/* ==========================================
+   FASE E: Coreografía Tipográfica Hero (stagger-word)
+   ========================================== */
+.stagger-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInUp 500ms ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stagger-word { opacity: 1; transform: none; animation: none; }
+}
+
+/* ==========================================
+   FASE F: Contenedores de imagen listos para recepción futura
+   ========================================== */
+.photo-duotone {
+  filter: grayscale(15%) sepia(8%) contrast(1.05);
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+  display: block;
+}
+.photo-duotone.is-revealed {
+  opacity: 1;
+  transform: scale(1);
+}

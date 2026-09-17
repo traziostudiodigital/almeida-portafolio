@@ -1,0 +1,12 @@
+node_modules/
+npm-debug.log
+.DS_Store
+*.temp
+*.tmp
+*.log
+.vscode/
+.env
+.env.local
+.cache/
+dist/
+output.css

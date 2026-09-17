@@ -1,0 +1,89 @@
+{
+  "perfil": {
+    "nombre": "Luis Manuel Almeida Luis",
+    "titulo": "Perito Tasador y Valuador de Bienes de Alto Valor",
+    "contacto": {
+      "whatsapp": "+53 52493677",
+      "email": "luisluisalmeida58@gmail.com",
+      "web": "www.almeida-peritaje.com"
+    }
+  },
+  "configuracion_economica": {
+    "monedas_permitidas": ["EUR", "USD"],
+    "moneda_defecto": "EUR",
+    "provision_fondos_porcentaje": 50,
+    "validez_oferta_dias": 30
+  },
+  "tarifas_base": {
+    "hora_pericial": 125,
+    "consulta_puntual_usd": 50,
+    "minimo_horas_investigacion": 3,
+    "comision_intermediacion_privada": 10
+  },
+  "factores_ponderacion": {
+    "formalidad": [
+      { "id": "verbal", "etiqueta": "Dictamen/Informe Verbal", "factor": 0.6, "descripcion": "Sin documento vinculante ni firma oficial" },
+      { "id": "certificado_simple", "etiqueta": "Certificado de Tasación Simple", "factor": 1.0, "descripcion": "Documento breve para seguros o inventario básico" },
+      { "id": "dictamen_completo", "etiqueta": "Dictamen Pericial Oficial Completo", "factor": 1.5, "descripcion": "Dossier técnico con análisis profundo y bibliografía" },
+      { "id": "judicial", "etiqueta": "Dictamen Judicial / Testifical", "factor": 2.0, "descripcion": "Informe ratificable ante tribunales con responsabilidad legal" }
+    ],
+    "complejidad": [
+      { "id": "contemporaneo", "etiqueta": "Arte Contemporáneo / Firma Registrada", "factor": 1.0 },
+      { "id": "vanguardia_cubana", "etiqueta": "Vanguardia Cubana / Arte Moderno", "factor": 1.3 },
+      { "id": "manuscritos", "etiqueta": "Manuscritos y Fondos Documentales", "factor": 1.4 },
+      { "id": "arqueologico", "etiqueta": "Bienes Arqueológicos y Subacuáticos", "factor": 1.5 },
+      { "id": "anonimo_antiguo", "etiqueta": "Atribución Incierta / Anónimo Antiguo", "factor": 1.6 }
+    ],
+    "urgencia": [
+      { "id": "estandar", "etiqueta": "Estándar (10-15 días)", "factor": 1.0 },
+      { "id": "prioritario", "etiqueta": "Prioritario (5-7 días)", "factor": 1.2 },
+      { "id": "urgente", "etiqueta": "Urgente (48-72 horas)", "factor": 1.5 },
+      { "id": "expres", "etiqueta": "Exprés (24 horas)", "factor": 2.0 }
+    ],
+    "volumen": [
+      { "limite_min": 1, "limite_max": 3, "factor_ajuste": 1.0 },
+      { "limite_min": 4, "limite_max": 10, "factor_ajuste": 0.9 },
+      { "limite_min": 11, "limite_max": 30, "factor_ajuste": 0.8 },
+      { "limite_min": 31, "limite_max": 999, "factor_ajuste": 0.7 }
+    ]
+  },
+  "gastos_reembolsables": {
+    "visita_local_fija": 50,
+    "dieta_diaria_nacional": 40,
+    "dieta_diaria_internacional": 80,
+    "precio_km_transporte": 0.50,
+    "hora_desplazamiento": 25
+  },
+  "nichos_servicio": [
+    {
+      "id": "herencias",
+      "nombre": "Repartición y tasación de herencias",
+      "modalidad_sugerida": "M3",
+      "notas_especificas": "Requiere inventario heterogéneo y mediación entre herederos."
+    },
+    {
+      "id": "institucional",
+      "nombre": "Tasación de bienes institucionales y diplomáticos",
+      "modalidad_sugerida": "M4",
+      "notas_especificas": "Protocolos de seguridad y catalogación patrimonial grado I."
+    },
+    {
+      "id": "personalidades",
+      "nombre": "Peritaje de bienes de personalidades de la cultura",
+      "modalidad_sugerida": "M1",
+      "notas_especificas": "Alta exigencia de autentificación y trazabilidad de procedencia."
+    },
+    {
+      "id": "aduanas",
+      "nombre": "Control de aduanas y tráfico ilícito",
+      "modalidad_sugerida": "M1",
+      "notas_especificas": "Colaboración con organismos internacionales (UNESCO, Carabinieri)."
+    }
+  ],
+  "plantilla_notas_predeterminadas": [
+    "Los honorarios no incluyen el coste de análisis científicos externos ni tasas de bases de datos internacionales.",
+    "El dictamen se entregará en formato digital (PDF) y una copia impresa bajo firma.",
+    "La validez de la tasación está sujeta al estado de conservación observado en la fecha de inspección.",
+    "Independencia Pericial: El perito declara no tener interés económico en el valor final del bien."
+  ]
+}

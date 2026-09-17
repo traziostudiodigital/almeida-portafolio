@@ -1,0 +1,16 @@
+{
+  "name": "Luis Manuel Almeida Luis | Peritaje de Arte y Patrimonio Cultural",
+  "short_name": "Almeida Peritaje",
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#2E3238",
+  "background_color": "#EAE7E2",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/"
+}

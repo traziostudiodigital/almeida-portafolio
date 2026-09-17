@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://luismanuelalmeida.com/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/?lang=en" />
+  </url>
+  <url>
+    <loc>https://luismanuelalmeida.com/coleccionistas-particulares.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/coleccionistas-particulares.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/coleccionistas-particulares.html?lang=en" />
+  </url>
+  <url>
+    <loc>https://luismanuelalmeida.com/docencia-conferencias.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/docencia-conferencias.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/docencia-conferencias.html?lang=en" />
+  </url>
+  <url>
+    <loc>https://luismanuelalmeida.com/herencias-sucesiones.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/herencias-sucesiones.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/herencias-sucesiones.html?lang=en" />
+  </url>
+  <url>
+    <loc>https://luismanuelalmeida.com/abogados-notarios.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/abogados-notarios.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/abogados-notarios.html?lang=en" />
+  </url>
+  <url>
+    <loc>https://luismanuelalmeida.com/aseguradoras-family-offices.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/aseguradoras-family-offices.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/aseguradoras-family-offices.html?lang=en" />
+  </url>
+  <url>
+    <loc>https://luismanuelalmeida.com/patrimonio-subacuatico.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/patrimonio-subacuatico.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/patrimonio-subacuatico.html?lang=en" />
+  </url>
+</urlset>

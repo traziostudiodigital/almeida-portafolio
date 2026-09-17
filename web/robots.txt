@@ -1,0 +1,9 @@
+# robots.txt para https://luismanuelalmeida.com
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /gracias.html
+Disallow: /aviso-legal.html
+Disallow: /privacidad.html
+
+Sitemap: https://luismanuelalmeida.com/sitemap.xml

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&amp;display=swap');
+      .badge-bg { fill: #2E3238; }
+      .badge-circle { fill: #FFFFFF; }
+      .badge-ring { fill: none; stroke: #B08D57; stroke-width: 8; stroke-dasharray: 6 4; }
+      .brand-letter {
+        font-family: 'Alex Brush', 'Brush Script MT', 'Great Vibes', cursive;
+        font-size: 340px;
+        fill: #2E3238;
+        text-anchor: middle;
+        dominant-baseline: central;
+      }
+      @media (prefers-color-scheme: dark) {
+        .badge-bg { fill: #1E2024; }
+      }
+    </style>
+    <filter id="subtle-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Dark outer background square with rounded corners for crisp icon rendering -->
+  <rect width="512" height="512" rx="112" class="badge-bg" />
+
+  <!-- Inner White Circle Medallion -->
+  <circle cx="256" cy="256" r="200" class="badge-circle" filter="url(#subtle-shadow)" />
+
+  <!-- Refined Gold Accent Ring -->
+  <circle cx="256" cy="256" r="188" class="badge-ring" />
+
+  <!-- Calligraphic "A" from Alex Brush -->
+  <text x="256" y="278" class="brand-letter">A</text>
+</svg>

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoja de Encargo y Presupuesto Pericial — Luis Manuel Almeida Luis</title>
+
+  <!-- Tipografías: Alex Brush (Wordmark, local) y Source Serif 4 (Cuerpo y Títulos, Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/alex-brush.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES Y REGLAS DE DISEÑO DE IDENTIDAD VISUAL "ALMEIDA"
+       ========================================================================== */
+    :root {
+      --color-bg-visor: #EAE7E2;
+      --color-page-bg: #FFFFFF;
+      --color-page-alt: #FCFBF9;
+      --color-card-bg: #F8F7F4;
+      --color-text-main: #2E3238;
+      --color-text-muted: #5A6069;
+      --color-accent-gold: #B08D57;
+      --color-accent-gold-dark: #8C6D3B;
+      --color-accent-gold-light: #F4EFE6;
+      --color-border: #DCD7CE;
+      --color-border-dark: #B5AEA1;
+      
+      --font-main: 'Source Serif 4', serif;
+      --font-script: 'Alex Brush', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-bg-visor);
+      color: var(--color-text-main);
+      font-family: var(--font-main);
+      font-size: 13px;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ==========================================================================
+       2.BARRA DE HERRAMIENTAS Y NAVEGACIÓN EN PANTALLA (NO IMPRIMIBLE)
+       ========================================================================== */
+    .toolbar-container {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #1E2124;
+      color: #FFFFFF;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .toolbar-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toolbar-wordmark {
+      font-family: var(--font-script);
+      font-size: 32px;
+      color: var(--color-accent-gold);
+      line-height: 1;
+    }
+
+    .toolbar-subtitle {
+      font-size: 13px;
+      font-weight: 400;
+      color: #DCD7CE;
+      border-left: 1px solid #40454D;
+      padding-left: 12px;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-action {
+      background-color: var(--color-accent-gold);
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-action:hover {
+      background-color: var(--color-accent-gold-dark);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: #EAE7E2;
+      border: 1px solid #5A6069;
+    }
+
+    .btn-secondary:hover {
+      background-color: #2E3238;
+      border-color: #DCD7CE;
+    }
+
+    /* ==========================================================================
+       3. ESTRUCTURA EDITORIAL DE PÁGINAS CARTA (VISOR EN PANTALLA)
+       ========================================================================== */
+    .document-wrapper {
+      padding: 32px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .page-sheet {
+      background-color: var(--color-page-bg);
+      width: 215.9mm; /* Formato Carta */
+      height: 279.4mm; /* Formato Carta */
+      padding: 12mm 15mm 10mm 15mm;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* ==========================================================================
+       4. COMPONENTES Y ELEMENTOS DE LA HOJA PERICIAL
+       ========================================================================== */
+    /* Header / Membrete */
+    .header-pericial {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--color-accent-gold);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wordmark-large {
+      font-family: var(--font-script);
+      font-size: 42px;
+      color: var(--color-accent-gold-dark);
+      line-height: 0.8;
+      margin-bottom: 6px;
+    }
+
+    .perito-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--color-text-main);
+      text-transform: uppercase;
+    }
+
+    .perito-title {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      letter-spacing: 0.2px;
+      font-style: italic;
+    }
+
+    .perito-contact-line {
+      font-size: 10px;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+      font-weight: 300;
+    }
+
+    .doc-meta-box {
+      border: 1px solid var(--color-border);
+      background-color: var(--color-card-bg);
+      padding: 8px 12px;
+      border-radius: 3px;
+      text-align: right;
+      min-width: 190px;
+    }
+
+    .doc-type-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-accent-gold-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .doc-meta-item {
+      font-size: 11px;
+      color: var(--color-text-main);
+      line-height: 1.4;
+    }
+
+    .doc-meta-item strong {
+      font-weight: 600;
+    }
+
+    /* Titulos de Seccion */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 4px;
+    }
+
+    .section-num {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-accent-gold-dark);
+      background-color: var(--color-accent-gold-light);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Cajas Grid de Datos del Cliente */
+    .grid-info-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 16px;
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .info-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field-label {
+      font-size: 10px;
+      font-weight: 300; /* Light para labels */
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px; /* Tracking amplio */
+      margin-bottom: 2px;
+    }
+
+    .field-value {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-main);
+    }
+
+    /* Tablas Periciales */
+    .table-pericial {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+      font-size: 11px;
+    }
+
+    .table-pericial th {
+      background-color: var(--color-text-main);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 6px 10px;
+      text-align: left;
+      border: 1px solid var(--color-text-main);
+    }
+
+    .table-pericial td {
+      padding: 6px 10px;
+      border: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+
+    .table-pericial tr:nth-child(even) td {
+      background-color: var(--color-page-alt);
+    }
+
+    .td-num {
+      text-align: center;
+      font-weight: 600;
+      width: 30px;
+    }
+
+    .td-money {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* Cajas Metodologicas y Notas */
+    .text-block-box {
+      background-color: var(--color-card-bg);
+      border-left: 3px solid var(--color-accent-gold);
+      border-top: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: 8px 12px;
+      border-radius: 0 4px 4px 0;
+      font-size: 11px;
+      line-height: 1.45;
+      color: var(--color-text-main);
+      margin-bottom: 10px;
+    }
+
+    .bullet-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 4px;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      color: var(--color-accent-gold-dark);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* Cuadro de Honorarios & Gastos Reembolsables */
+    .financial-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+
+    .financial-summary-table th {
+      background-color: var(--color-accent-gold-light);
+      color: var(--color-accent-gold-dark);
+      border: 1px solid var(--color-border);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .financial-summary-table td {
+      padding: 6px 10px;
+      border: 1px solid var(--color-border);
+      font-size: 11px;
+    }
+
+    .row-subtotal td {
+      background-color: var(--color-card-bg);
+      font-weight: 600;
+    }
+
+    .row-total td {
+      background-color: var(--color-text-main);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 10px;
+    }
+
+    .row-total td.td-money {
+      color: var(--color-accent-gold-light);
+      font-size: 15px;
+    }
+
+    /* Bloque Condicion de Pago 50/50 */
+    .provision-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .provision-card {
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 8px 12px;
+      background-color: var(--color-card-bg);
+    }
+
+    .provision-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-accent-gold-dark);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .provision-card-amount {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-main);
+      margin-bottom: 2px;
+    }
+
+    .provision-card-desc {
+      font-size: 10px;
+      color: var(--color-text-muted);
+      line-height: 1.3;
+    }
+
+    /* Declaracion de Imparcialidad / Etica */
+    .ethical-clause-box {
+      border: 1px solid var(--color-border);
+      background-color: var(--color-accent-gold-light);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      line-height: 1.4;
+      color: #4A3E2C;
+      margin-bottom: 14px;
+    }
+
+    .ethical-clause-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+      color: var(--color-accent-gold-dark);
+      font-size: 11px;
+    }
+
+    /* Doble Firma */
+    .signatures-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: auto;
+      padding-top: 10px;
+    }
+
+    .signature-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .signature-line {
+      width: 100%;
+      border-bottom: 1px solid var(--color-border-dark);
+      height: 48px;
+      margin-bottom: 6px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .signature-digital-preview {
+      font-family: var(--font-script);
+      font-size: 28px;
+      color: #1A2B4C;
+      line-height: 1;
+      padding-bottom: 4px;
+    }
+
+    .signature-role {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--color-text-main);
+      letter-spacing: 0.4px;
+    }
+
+    .signature-subtext {
+      font-size: 10px;
+      color: var(--color-text-muted);
+      line-height: 1.3;
+      font-weight: 300;
+    }
+
+    /* Footer de Hoja */
+    .footer-pericial {
+      border-top: 1px solid var(--color-border);
+      padding-top: 6px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: var(--color-text-muted);
+    }
+
+    .footer-left {
+      font-weight: 400;
+    }
+
+    .footer-right {
+      font-weight: 700;
+      color: var(--color-accent-gold-dark);
+    }
+
+    /* ==========================================================================
+       5. REGLAS MILIMÉTRICAS @MEDIA PRINT (IMPRESIÓN Y PDF PERFECTO CARTA)
+       ========================================================================== */
+    @media print {
+      @page {
+        size: letter portrait; /* Formato Carta */
+        margin: 0;
+      }
+
+      html, body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        width: 215.9mm;
+        height: 279.4mm;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .no-print, .toolbar-container {
+        display: none !important;
+      }
+
+      .document-wrapper {
+        padding: 0 !important;
+        gap: 0 !important;
+      }
+
+      .page-sheet {
+        width: 215.9mm !important;
+        height: 279.4mm !important;
+        min-height: 279.4mm !important;
+        max-height: 279.4mm !important;
+        padding: 10mm 12mm 10mm 12mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        overflow: hidden !important;
+      }
+
+      .table-pericial th {
+        background-color: #2E3238 !important;
+        color: #FFFFFF !important;
+      }
+
+      .row-total td {
+        background-color: #2E3238 !important;
+        color: #FFFFFF !important;
+      }
+
+      .row-total td.td-money {
+        color: #F4EFE6 !important;
+      }
+    }
+
+    /* ========================================================
+       ESTILOS PARA FORMULARIO INTERACTIVO (PANTALLA)
+       ======================================================== */
+    .form-input, .form-select {
+      padding: 8px 10px;
+      font-size: 13px;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: var(--color-text-main);
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--color-accent-gold);
+      box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE HERRAMIENTAS EN NAVEGADOR -->
+  <div class="toolbar-container no-print">
+    <div class="toolbar-title">
+      <span class="toolbar-wordmark">Almeida</span>
+      <span class="toolbar-subtitle">Calculadora Pericial Interactiva</span>
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn-action btn-secondary" onclick="reiniciarFormulario()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        Restablecer
+      </button>
+      <button class="btn-action" onclick="generarDocumentoPreview()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        Vista
+      </button>
+      <button class="btn-action" onclick="window.print();">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        PDF
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function reiniciarFormulario() {
+      cotizadorApp.reiniciar();
+    }
+    function generarDocumentoPreview() {
+      cotizadorApp.mostrarDocumento();
+    }
+  </script>
+
+  <div class="document-wrapper" style="display: none;">
+
+    <!-- ========================================================
+         VISTA PRESENTACIÓN PDF (generada dinámicamente)
+         ======================================================== -->
+    <div id="pdf-preview-page1" class="page-sheet">
+      <div>
+        <!-- Membrete Profesional -->
+        <header class="header-pericial">
+          <div class="brand-block">
+            <span class="wordmark-large">Almeida</span>
+            <h1 class="perito-name">Luis Manuel Almeida Luis</h1>
+            <p class="perito-title">Perito Tasador y Valuador de Obras de Arte y Bienes de Alto Valor</p>
+            <p class="perito-contact-line">La Habana — Internacional | WhatsApp: +53 52493677 | email: luisluisalmeida58@gmail.com</p>
+          </div>
+          <div class="doc-meta-box">
+            <span class="doc-type-badge">Hoja de Encargo Pericial</span>
+            <div class="doc-meta-item">N.º Expediente: <strong id="expediente-id">EXP-2026-0428</strong></div>
+            <div class="doc-meta-item">Fecha de Emisión: <span id="meta-fecha-emision">12 de Septiembre de 2026</span></div>
+            <div class="doc-meta-item">Validez Oferta: <strong>30 días naturales</strong></div>
+            <div class="doc-meta-item">Moneda del Contrato: <strong id="meta-moneda">EUR (€)</strong></div>
+          </div>
+        </header>
+
+        <!-- Sección 1: Datos del Solicitante -->
+        <section>
+          <div class="section-header">
+            <span class="section-num">1</span>
+            <h2 class="section-title">Datos del Solicitante / Cliente</h2>
+          </div>
+          <div class="grid-info-box">
+            <div class="info-field">
+              <span class="field-label">Cliente / Entidad Solicitante:</span>
+              <span class="field-value" id="cliente-nombre">Bufete Jurídico & Notarial D. Roberto Hernández</span>
+            </div>
+            <div class="info-field">
+              <span class="field-label">Identificación / NIF / Pasaporte:</span>
+              <span class="field-value" id="cliente-doc">NIF B-84920115</span>
+            </div>
+            <div class="info-field">
+              <span class="field-label">Domicilio / Representación Legal:</span>
+              <span class="field-value" id="cliente-direccion">Calle Paseo #402, Vedado, La Habana / Madrid</span>
+            </div>
+            <div class="info-field">
+              <span class="field-label">Contacto / Correo Electrónico:</span>
+              <span class="field-value" id="cliente-contacto">r.hernandez@bufetelegal.com | +34 611 22 33 44</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección 2: Objeto del Encargo & Catálogo de Bienes -->
+        <section>
+          <div class="section-header">
+            <span class="section-num">2</span>
+            <h2 class="section-title">Objeto del Peritaje y Catálogo de Bienes Objeto de Estudio</h2>
+          </div>
+          <p style="font-size: 11px; margin-bottom: 6px; color: var(--color-text-muted);">
+            El presente encargo tiene por objeto el examen organoléptico, estudio historiográfico y dictamen técnico de tasación para la siguiente relación de piezas:
+          </p>
+          <table class="table-pericial">
+            <thead>
+              <tr>
+                <th class="td-num">#</th>
+                <th>Descripción de la Obra / Bien</th>
+                <th>Autor Atribuido / Época</th>
+                <th>Técnica / Soporte</th>
+                <th>Finalidad Declarada</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-bienes-body">
+              <tr>
+                <td class="td-num">1</td>
+                <td><strong>"Paisaje con Figuras"</strong> (Óleo sobre lienzo)</td>
+                <td>Amelia Peláez (Atribuido, c. 1945)</td>
+                <td>Óleo / Lienzo (65 x 50 cm)</td>
+                <td>Repartición Sucesoria / Herencia</td>
+              </tr>
+              <tr>
+                <td class="td-num">2</td>
+                <td><strong>Manuscrito Autógrafo y Epistolario</strong> (12 folios)</td>
+                <td>Dulce María Loynaz (c. 1952)</td>
+                <td>Tinta sobre papel de hilo</td>
+                <td>Tasación Patrimonial / Seguro</td>
+              </tr>
+              <tr>
+                <td class="td-num">3</td>
+                <td><strong>Lote de Platería Colonial e Iconografía</strong> (3 piezas)</td>
+                <td>Taller Colonial Hispanoamericano (S. XVIII)</td>
+                <td>Plata cincelada / Relieve</td>
+                <td>Inventario Particular / Adjudicación</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Sección 3: Metodología Pericial y Alcance -->
+        <section>
+          <div class="section-header">
+            <span class="section-num">3</span>
+            <h2 class="section-title">Metodología Técnica y Alcance del Dictamen</h2>
+          </div>
+          <div class="text-block-box">
+            <ul class="bullet-list">
+              <li><strong>Examen Físico Organoléptico:</strong> Inspección directa in situ con luz estandarizada, radiación UV y macrofotografía de soporte, trama, craquelados y firma.</li>
+              <li><strong>Análisis Historiográfico y Proveniencia:</strong> Compulsa bibliográfica, cotejo de catálogos razonados y búsqueda en bases de datos de subastas internacionales (Artnet, Artprice, Invaluable).</li>
+              <li><strong>Tipología del Entregable:</strong> Emisión de <strong>Dictamen Pericial Oficial Completo</strong> con dossier analítico, justificación de valor de mercado y certificado visado firmado.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Sección 4: Notas y Observaciones Particulares del Caso -->
+        <section>
+          <div class="section-header">
+            <span class="section-num">4</span>
+            <h2 class="section-title">Notas y Observaciones Particulares del Encargo</h2>
+          </div>
+          <div class="text-block-box" style="border-left-color: var(--color-text-main);">
+            <ul class="bullet-list" id="lista-notas-particulares">
+              <li>Las obras se encuentran custodiadas en la sede del solicitante y serán examinadas en una jornada técnica presencial previa cita.</li>
+              <li>Los honorarios estipulados no incluyen análisis físico-químicos de laboratorio externo de pigmentos ni tasas de prueba de Carbono 14 si fueren requeridos por anomalías en el soporte.</li>
+              <li>El dictamen resultante se entregará en formato digital de alta resolución (PDF firmado digitalmente) y una copia oficial impresa encuadernada.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- Pie de Página 1 -->
+      <footer class="footer-pericial">
+        <span class="footer-left">Hoja de Encargo Pericial — Ref: EXP-2026-0428 | Confidentiality Reserved</span>
+        <span class="footer-right">Página 1 de 2</span>
+      </footer>
+    </div>
+
+    <!-- ==========================================================================
+         PÁGINA 2: CUADRO ECONÓMICO, CONDICIONES Y FORMALIZACIÓN CONTRACTUAL
+         ========================================================================== -->
+    <div class="page-sheet" id="pagina-2">
+      <div>
+        <!-- Membrete de Continuidad -->
+        <header class="header-pericial" style="padding-bottom: 8px; margin-bottom: 12px;">
+          <div class="brand-block">
+            <span class="wordmark-large" style="font-size: 28px;">Almeida</span>
+            <span class="perito-name" style="font-size: 13px;">Luis Manuel Almeida Luis — Peritaje y Tasación</span>
+          </div>
+          <div style="text-align: right; font-size: 10.5px; color: var(--color-text-muted);">
+            <div>Expediente: <strong>EXP-2026-0428</strong></div>
+            <div>Cliente: <strong>Bufete Jurídico D. Roberto Hernández</strong></div>
+          </div>
+        </header>
+
+        <!-- Sección 5: Desglose Económico Transparente -->
+        <section>
+          <div class="section-header">
+            <span class="section-num">5</span>
+            <h2 class="section-title">Cuadro Económico Pormenorizado (Desglose Bipartito)</h2>
+          </div>
+          <p style="font-size: 10.5px; margin-bottom: 6px; color: var(--color-text-muted);">
+            En cumplimiento del código ético pericial, los honorarios profesionales están desvinculados del valor monetario final asignado a las obras.
+          </p>
+
+          <table class="financial-summary-table">
+            <thead>
+              <tr>
+                <th>Concepto / Estructura de Costes</th>
+                <th style="width: 110px; text-align: center;">Base / Parámetro</th>
+                <th style="width: 120px;" class="td-money">Importe (€)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- BLOQUE A: HONORARIOS -->
+              <tr style="background-color: #FAF8F5;">
+                <td colspan="3" style="font-weight: 700; color: var(--color-accent-gold-dark); text-transform: uppercase;">
+                  A. Honorarios Profesionales Periciales
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Horas de Investigación Técnica y Catalogación</strong><br>
+                  <span style="font-size: 10px; color: var(--color-text-muted); font-weight: 300;">Análisis de 3 obras + compulsa documental de archivo (Mínimo pericial: 8h a 125 €/h)</span>
+                </td>
+                <td style="text-align: center;">8 Horas</td>
+                <td class="td-money">1.000,00 €</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Factor Multiplicador de Formalidad y Complejidad Técnica</strong><br>
+                  <span style="font-size: 10px; color: var(--color-text-muted); font-weight: 300;">Ajuste por Dictamen Judicial / Sucesorio Completo + Vanguardia Cubana (Factores: F_form: 1.5, F_comp: 1.3)</span>
+                </td>
+                <td style="text-align: center;">Factor Ponderado</td>
+                <td class="td-money">450,00 €</td>
+              </tr>
+              <tr class="row-subtotal">
+                <td colspan="2" style="text-align: right;">SUBTOTAL HONORARIOS PROFESIONALES:</td>
+                <td class="td-money" style="color: var(--color-text-main);">1.450,00 €</td>
+              </tr>
+
+              <!-- BLOQUE B: GASTOS REEMBOLSABLES -->
+              <tr style="background-color: #FAF8F5;">
+                <td colspan="3" style="font-weight: 700; color: var(--color-accent-gold-dark); text-transform: uppercase;">
+                  B. Gastos Operativos Reembolsables (A Coste Justificado)
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Inspección Presencial y Desplazamiento Técnico Local</strong><br>
+                  <span style="font-size: 10px; color: var(--color-text-muted); font-weight: 300;">Visita in situ de examen de piezas + traslado de equipamiento óptico</span>
+                </td>
+                <td style="text-align: center;">1 Visita Fija</td>
+                <td class="td-money">50,00 €</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Consultas Especializadas en Bases de Datos Internacionales</strong><br>
+                  <span style="font-size: 10px; color: var(--color-text-muted); font-weight: 300;">Extractos de remate histórico de subastas para Vanguardia y Manuscritos</span>
+                </td>
+                <td style="text-align: center;">3 Extractos</td>
+                <td class="td-money">60,00 €</td>
+              </tr>
+              <tr class="row-subtotal">
+                <td colspan="2" style="text-align: right;">SUBTOTAL GASTOS REEMBOLSABLES ESTIMADOS:</td>
+                <td class="td-money" style="color: var(--color-text-main);">110,00 €</td>
+              </tr>
+
+              <!-- TOTAL GENERAL -->
+              <tr class="row-total">
+                <td colspan="2" style="text-align: right; text-transform: uppercase; letter-spacing: 0.5px;">
+                  TOTAL PRESUPUESTO HOJA DE ENCARGO:
+                </td>
+                <td class="td-money" id="cuadro-total-general">1.560,00 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Sección 6: Condición de Pago y Provisión de Fondos 50/50 -->
+        <section>
+          <div class="section-header">
+            <span class="section-num">6</span>
+            <h2 class="section-title">Esquema de Liquidación y Provisión de Fondos (50 / 50)</h2>
+          </div>
+          <div class="provision-box">
+            <div class="provision-card">
+              <div class="provision-card-title">1. Provisión de Fondos Inicial (50%)</div>
+              <div class="provision-card-amount" id="monto-provision-inicial">780,00 €</div>
+              <div class="provision-card-desc">Exigible a la firma de la presente Hoja de Encargo para el inicio de las actuaciones e inspección técnica in situ.</div>
+            </div>
+            <div class="provision-card">
+              <div class="provision-card-title">2. Liquidación Final (50%)</div>
+              <div class="provision-card-amount" id="monto-provision-final">780,00 € + Ajuste Gastos</div>
+              <div class="provision-card-desc">Exigible contra entrega formal del Dictamen Pericial visado y presentación de justificantes de gastos reales.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección 7: Declaración Deontológica y Cláusula Ética de Independencia -->
+        <section>
+          <div class="ethical-clause-box">
+            <div class="ethical-clause-title">Declaración Deontológica y Cláusula de Imparcialidad Pericial</div>
+            <p>
+              El Perito Tasador firmante, <strong>Prof. Lic. Luis Manuel Almeida Luis</strong>, declara solemnemente bajo su responsabilidad profesional que no mantiene ningún interés económico, comercial, personal ni de parentesco con las partes solicitantes, intermediarios ni con las obras objeto de valoración. Los honorarios profesionales han sido fijados con arreglo al tiempo de investigación, complejidad técnica y responsabilidad formal, garantizando absoluta imparcialidad, independencia de criterio y secreto profesional conforme a los estándares internacionales de peritaje.
+            </p>
+          </div>
+        </section>
+
+        <!-- Sección 8: Doble Firma Contractual -->
+        <section style="margin-top: 10px;">
+          <div class="section-header" style="margin-bottom: 6px;">
+            <span class="section-num">7</span>
+            <h2 class="section-title">Aceptación de Términos y Formalización del Encargo</h2>
+          </div>
+          <div class="signatures-container">
+            <div class="signature-block">
+              <div class="signature-line">
+                <span class="signature-digital-preview">Luis Manuel Almeida</span>
+              </div>
+              <span class="signature-role">El Perito Tasador</span>
+              <span class="signature-subtext">Prof. Lic. Luis Manuel Almeida Luis<br>Firma / Sello Profesional</span>
+            </div>
+            <div class="signature-block">
+              <div class="signature-line"></div>
+              <span class="signature-role">El Cliente / Solicitante</span>
+              <span class="signature-subtext">Conforme y Aceptado<br>Nombre, DNI y Fecha de Firma</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Pie de Página 2 -->
+      <footer class="footer-pericial">
+        <span class="footer-left">Luis Manuel Almeida Luis — Perito Tasador de Obras de Arte | La Habana — Internacional</span>
+        <span class="footer-right">Página 2 de 2</span>
+      </footer>
+    </div>
+
+  </div>
+
+  <!-- ========================================================
+       FORMULARIO INTERACTIVO DE COTIZACIÓN (Visible en pantalla)
+       ======================================================== -->
+  <div id="cotizador-forms" class="no-print">
+    <div style="background: #FFFFFF; border: 1px solid var(--color-border); border-radius: 6px; padding: 16px; margin: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h2 style="font-size: 16px; font-weight: 700; color: var(--color-text-main); margin-bottom: 16px;">Calculadora Pericial Interactiva</h2>
+      
+      <!-- Sección Cliente -->
+      <div style="background: #F8F7F4; border-radius: 6px; padding: 12px; margin-bottom: 16px;">
+        <h3 style="font-size: 13px; font-weight: 600; color: var(--color-text-main); margin-bottom: 8px;">Datos del Cliente</h3>
+        <div style="display: grid; gap: 10px;">
+          <input type="text" id="cliente-nombre-input" class="form-input" placeholder="Nombre del cliente / entidad">
+          <input type="text" id="cliente-doc-input" class="form-input" placeholder="Documento / NIF / Pasaporte">
+          <input type="text" id="cliente-direccion-input" class="form-input" placeholder="Domicilio / Dirección">
+          <input type="text" id="cliente-contacto-input" class="form-input" placeholder="Contacto / Email / Teléfono">
+        </div>
+      </div>
+
+      <!-- Sección Parámetros -->
+      <div style="display: grid; gap: 12px; margin-bottom: 16px;">
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <select id="moneda-select" class="form-select" style="flex: 1; min-width: 120px;">
+            <option value="EUR">EUR (€)</option>
+            <option value="USD">USD ($)</option>
+          </select>
+          <select id="nicho-servicio" class="form-select" style="flex: 1; min-width: 180px;">
+            <option value="">Nicho de Servicio</option>
+          </select>
+          <select id="modalidad" class="form-select" style="flex: 1; min-width: 140px;">
+            <option value="M1">M1: Por Horas</option>
+            <option value="M2">M2: Por Pieza</option>
+            <option value="M3">M3: Por Expediente</option>
+            <option value="M4">M4: Por Proyecto</option>
+          </select>
+        </div>
+
+        <div id="seccion-horas" style="display: flex; gap: 12px;">
+          <input type="number" id="horasEstimadas" class="form-input" type="number" min="0" step="0.5" placeholder="Horas estimadas (mín. 3)" style="flex: 1;">
+          <input type="number" id="numero-obras" class="form-input" type="number" min="1" placeholder="Nº obras (volumen)" style="width: 120px;">
+        </div>
+
+        <div id="seccion-piezas" style="display: none;">
+          <input type="number" id="valorPiezas" class="form-input" type="number" min="0" step="1" placeholder="Nº de piezas" style="width: 120px;">
+        </div>
+      </div>
+
+      <!-- Factores -->
+      <div style="display: grid; gap: 12px; margin-bottom: 16px;">
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <select id="formalidad" class="form-select" style="flex: 1; min-width: 140px;">
+            <option value="verbal">Dictamen/Informe Verbal (x0.6)</option>
+            <option value="certificado_simple" selected>Certificado de Tasación Simple (x1.0)</option>
+            <option value="dictamen_completo">Dictamen Pericial Oficial Completo (x1.5)</option>
+            <option value="judicial">Dictamen Judicial / Testifical (x2.0)</option>
+          </select>
+          <select id="complejidad" class="form-select" style="flex: 1; min-width: 140px;">
+            <option value="contemporaneo" selected>Arte Contemporáneo / Firma Registrada (x1.0)</option>
+            <option value="vanguardia_cubana">Vanguardia Cubana / Arte Moderno (x1.3)</option>
+            <option value="manuscritos">Manuscritos y Fondos Documentales (x1.4)</option>
+            <option value="arqueologico">Bienes Arqueológicos y Subacuáticos (x1.5)</option>
+            <option value="anonimo_antiguo">Atribución Incierta / Anónimo Antiguo (x1.6)</option>
+          </select>
+          <select id="urgencia" class="form-select" style="flex: 1; min-width: 140px;">
+            <option value="estandar" selected>Estándar (10-15 días) (x1.0)</option>
+            <option value="prioritario">Prioritario (5-7 días) (x1.2)</option>
+            <option value="urgente">Urgente (48-72 horas) (x1.5)</option>
+            <option value="expres">Exprés (24 horas) (x2.0)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Gastos -->
+      <div style="background: #F8F7F4; border-radius: 6px; padding: 12px; margin-bottom: 16px;">
+        <h3 style="font-size: 13px; font-weight: 600; color: var(--color-text-main); margin-bottom: 8px;">Gastos Adicionales</h3>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-main);">
+            <input type="checkbox" id="visita-local" checked>
+            Visita local (50 €)
+          </label>
+          <input type="number" id="gastos-extras" class="form-input" type="number" min="0" step="1" placeholder="Gastos extras" style="flex: 1; min-width: 120px;">
+        </div>
+      </div>
+
+      <!-- Notas y Observaciones Particulares -->
+      <div style="background: #F8F7F4; border-radius: 6px; padding: 12px; margin-bottom: 16px; border-left: 3px solid var(--color-accent-gold);">
+        <h3 style="font-size: 13px; font-weight: 600; color: var(--color-text-main); margin-bottom: 8px;">Notas y Observaciones Particulares</h3>
+        <textarea id="notas-particulares" class="form-input" rows="4" placeholder="Condiciones específicas, observaciones del caso, exclusiones... (una por línea)" style="font-family: var(--font-main); resize: vertical;"></textarea>
+        <div style="font-size: 10px; color: var(--color-text-muted); margin-top: 6px;">Se incluirán en el documento PDF final. Usar plantillas del config como base.</div>
+      </div>
+
+      <!-- Total -->
+      <div style="background: var(--color-accent-gold-light); border-radius: 6px; padding: 12px; margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="font-size: 11px; color: var(--color-text-main); margin-bottom: 4px;">Total Estimado</div>
+            <div style="font-size: 24px; font-weight: 700; font-family: var(--font-script); color: var(--color-accent-gold-dark);" id="total-display">0 €</div>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn-action btn-secondary" onclick="cotizadorApp.mostrarDocumento()"><span>Ver Documento</span></button>
+            <button class="btn-action" onclick="cotizadorApp.exportarCSV()">CSV</button>
+            <button class="btn-action" onclick="cotizadorApp.exportarExcel()">Excel</button>
+            <button class="btn-action" onclick="cotizadorApp.mostrarDocumento();window.print()">PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

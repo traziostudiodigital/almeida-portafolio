@@ -1,0 +1,28 @@
+{
+  "name": "almeida-portafolio",
+  "version": "1.0.0",
+  "description": "Portfolio web de Luis Manuel Almeida - Perito Tasador y Valuador de Obras de Arte",
+  "scripts": {
+    "build": "node compilar.js",
+    "dev": "node compilar.js --watch",
+    "compile": "npx tailwindcss -i ./assets/css/input.css -o ./output.css --minify",
+    "validate": "node validar-html.js",
+    "preview": "npx serve ."
+  },
+  "keywords": [
+    "perito tasador",
+    "valuacion arte",
+    "peritaje",
+    "portfolio"
+  ],
+  "author": "Luis Manuel Almeida",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
