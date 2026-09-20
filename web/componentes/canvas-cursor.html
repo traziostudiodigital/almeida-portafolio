@@ -1,16 +1,3 @@
-<!-- Background lines layer & Interactive rotating phrases -->
-<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none" id="canvas-container">
-  
-  <!-- Interactive Phrase Rotator (placed floating elegantly in the lower left/right background) -->
-  <!-- Visible in md+ breakpoint, hidden in mobile -->
-    <div class="h-px w-12 bg-brand-accent/40 mb-4"></div>
-    <p class="text-sm md:text-base font-base text-brand-dark/50 italic leading-relaxed transition-all duration-500 ease-in-out min-h-[1.5em]" id="rotating-phrase-text" data-i18n="home.phrase.1">
-      <!-- Placeholder phrase - will be replaced by cursor-hero.js i18n integration -->
-      "El valor del arte no está en el precio, sino en la verdad que certifica un dictamen."
-    </p>
-    <span class="block mt-2 text-[9px] uppercase tracking-[0.2em] text-[#B08D57]/60 font-light" data-i18n="home.phrase.label">
-      Citas y Referentes de Tasación Pericial
-    </span>
-  </div>
-
+<div id="canvas-container" class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+  <!-- El <canvas> real lo inserta cursor-hero.js dinámicamente en runtime -->
 </div>

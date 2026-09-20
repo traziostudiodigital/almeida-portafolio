@@ -36,6 +36,7 @@
 
   <!-- CSS Build Output -->
   <link rel="stylesheet" href="output.css">
+  <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body class="h-full bg-brand-light text-brand-dark font-body select-none flex flex-col justify-between">
 
@@ -177,162 +178,163 @@
 
 
   <!-- Home Hero and Panels -->
-  <!-- Main content area for index.html, occupying exactly 100vh under fixed header and footer -->
-<main id="main-content" class="relative min-h-[calc(100vh-2.5rem)] flex flex-col justify-between pt-20 overflow-hidden bg-brand-light">
-  
-  <!-- Dynamic Canvas Background & Rotating Phrases Layer -->
-  <!-- Background lines layer & Interactive rotating phrases -->
-<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none" id="canvas-container">
-  
-  <!-- Interactive Phrase Rotator (placed floating elegantly in the lower left/right background) -->
-  <!-- Visible in md+ breakpoint, hidden in mobile -->
-    <div class="h-px w-12 bg-brand-accent/40 mb-4"></div>
-    <p class="text-sm md:text-base font-base text-brand-dark/50 italic leading-relaxed transition-all duration-500 ease-in-out min-h-[1.5em]" id="rotating-phrase-text" data-i18n="home.phrase.1">
-      <!-- Placeholder phrase - will be replaced by cursor-hero.js i18n integration -->
-      "El valor del arte no está en el precio, sino en la verdad que certifica un dictamen."
-    </p>
-    <span class="block mt-2 text-[9px] uppercase tracking-[0.2em] text-[#B08D57]/60 font-light" data-i18n="home.phrase.label">
-      Citas y Referentes de Tasación Pericial
-    </span>
-  </div>
+  <main id="main-content" class="textura-papel relative h-auto lg:h-[calc(100vh-2.5rem)] overflow-visible lg:overflow-hidden flex flex-col pt-20 pb-10 lg:pb-0 bg-brand-light">
 
+  <!-- Dynamic Canvas Background -->
+  <div id="canvas-container" class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+  <!-- El <canvas> real lo inserta cursor-hero.js dinámicamente en runtime -->
 </div>
 
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex-1 min-h-0 flex flex-col gap-3 lg:gap-4">
 
-  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col justify-center flex-grow py-8 md:py-12">
-    <!-- H1 Editorial for SEO & Authority (Visually integrated and elegant) -->
-    <div class="max-w-4xl mb-8 md:mb-12">
-<h1 class="text-sm md:text-xs uppercase tracking-[0.2em] text-[#B08D57] font-semibold mb-2 hero-stagger" data-i18n="home.h1">
-         Peritaje y Tasación de Obras de Arte y Patrimonio Cultural
-       </h1>
-      <p class="text-xl md:text-2xl font-base text-brand-dark/95 leading-relaxed font-light" data-i18n="home.subtitle">
+    <!-- Banda superior: título editorial -->
+    <div class="hero-titulo">
+      <h1 class="hero-titulo__eyebrow hero-stagger" data-i18n="home.h1">
+        Peritaje y Tasación de Obras de Arte y Patrimonio Cultural
+      </h1>
+      <p class="hero-titulo__subtitulo" data-i18n="home.subtitle">
         Dictámenes técnicos independientes respaldados por más de 40 años de trayectoria institucional en Cuba e Iberoamérica.
       </p>
     </div>
 
-    <!-- Interactive Selector Panels Container -->
-    <div class="w-full">
-      <!-- Media Luna Interactiva — Almeida al centro, 7 nichos en arco -->
-<div class="w-full flex justify-center">
-  <div class="arc-selector" id="arc-selector" role="tablist" aria-label="Especialidades de peritaje">
+    <!-- Banda media: Colección Dispersa (cúmulo + cédula) -->
+    <div class="coleccion-dispersa">
 
-  <!-- Centro fijo: Almeida -->
-  <div class="arc-center" id="arc-center">
-    <span class="arc-center__wordmark" data-i18n="brand.name">Almeida</span>
-    <span class="arc-center__role" data-i18n="brand.role">Perito Tasador</span>
+  <!-- ========== Cúmulo de 6 nichos ========== -->
+  <div class="cluster-grid">
+
+    <a href="coleccionistas-particulares.html"
+       class="tarjeta-nicho tarjeta-nicho--01"
+       aria-label="Coleccionistas y Particulares — Ver dictámenes y servicios">
+      <span class="tarjeta-nicho__indice">01</span>
+      <h3 class="tarjeta-nicho__titulo" data-i18n="home.panel2.title">Coleccionistas y Particulares</h3>
+      <span class="tarjeta-nicho__linea" aria-hidden="true"></span>
+      <p class="tarjeta-nicho__resumen-movil" data-i18n="home.panel2.summary">Dictámenes técnicos independientes de autenticidad y valoración. Cero conflicto de interés: no se compra ni se vende arte.</p>
+    </a>
+
+    <a href="docencia-conferencias.html"
+       class="tarjeta-nicho tarjeta-nicho--02"
+       aria-label="Docencia y Conferencias — Ver dictámenes y servicios">
+      <span class="tarjeta-nicho__indice">02</span>
+      <h3 class="tarjeta-nicho__titulo" data-i18n="home.panel3.title">Docencia y Conferencias</h3>
+      <span class="tarjeta-nicho__linea" aria-hidden="true"></span>
+      <p class="tarjeta-nicho__resumen-movil" data-i18n="home.panel3.summary">Más de 25 años de docencia universitaria en tasación de arte, patrimonio y prevención del tráfico ilícito.</p>
+    </a>
+
+    <a href="herencias-sucesiones.html"
+       class="tarjeta-nicho tarjeta-nicho--03"
+       aria-label="Herencias y Sucesiones — Ver dictámenes y servicios">
+      <span class="tarjeta-nicho__indice">03</span>
+      <h3 class="tarjeta-nicho__titulo" data-i18n="home.panel4.title">Herencias y Sucesiones</h3>
+      <span class="tarjeta-nicho__linea" aria-hidden="true"></span>
+      <p class="tarjeta-nicho__resumen-movil" data-i18n="home.panel4.summary">Perito Tasador-Partidor en más de 15 procesos de liquidación hereditaria, bajo estricto secreto profesional.</p>
+    </a>
+
+    <a href="abogados-notarios.html"
+       class="tarjeta-nicho tarjeta-nicho--04"
+       aria-label="Abogados y Notarios — Ver dictámenes y servicios">
+      <span class="tarjeta-nicho__indice">04</span>
+      <h3 class="tarjeta-nicho__titulo" data-i18n="home.panel5.title">Abogados y Notarios</h3>
+      <span class="tarjeta-nicho__linea" aria-hidden="true"></span>
+      <p class="tarjeta-nicho__resumen-movil" data-i18n="home.panel5.summary">Dictámenes con fuerza procesal para litigios, disolución de patrimonios y auxilio judicial como Perito Partidor.</p>
+    </a>
+
+    <a href="aseguradoras-family-offices.html"
+       class="tarjeta-nicho tarjeta-nicho--05"
+       aria-label="Aseguradoras y Family Offices — Ver dictámenes y servicios">
+      <span class="tarjeta-nicho__indice">05</span>
+      <h3 class="tarjeta-nicho__titulo" data-i18n="home.panel6.title">Aseguradoras y Family Offices</h3>
+      <span class="tarjeta-nicho__linea" aria-hidden="true"></span>
+      <p class="tarjeta-nicho__resumen-movil" data-i18n="home.panel6.summary">Valoración técnica de colecciones y auditoría pericial de activos internacionales bajo estándares globales.</p>
+    </a>
+
+    <a href="patrimonio-subacuatico.html"
+       class="tarjeta-nicho tarjeta-nicho--06"
+       aria-label="Patrimonio Subacuático — Ver dictámenes y servicios">
+      <span class="tarjeta-nicho__indice">06</span>
+      <h3 class="tarjeta-nicho__titulo" data-i18n="home.panel7.title">Patrimonio Subacuático</h3>
+      <span class="tarjeta-nicho__linea" aria-hidden="true"></span>
+      <p class="tarjeta-nicho__resumen-movil" data-i18n="home.panel7.summary">Peritaje y catalogación de artefactos recuperados de pecios coloniales, como el Nuestra Señora de las Mercedes.</p>
+    </a>
+
   </div>
 
-  <!-- Segmentos del arco (7 nichos) -->
-  <div class="arc-segment" data-panel="0" id="panel-0" style="--seg-index:0;" role="tab" tabindex="0" aria-selected="false">
-    <div class="arc-segment__label">
-      <span class="arc-segment__num">01</span>
-      <span class="arc-segment__title" data-i18n="home.panel1.title">Perfil y Trayectoria</span>
+  <!-- ========== Cédula de detalle (desktop only, controlada por :has() en home.css) ========== -->
+  <div class="detalle-rail">
+
+    <div class="detalle-rail__idle">
+      <span class="detalle-rail__indice" aria-hidden="true">—</span>
+      <span class="detalle-rail__idle-label" data-i18n="home.rail.idle">Seleccione una especialidad para ver el detalle</span>
     </div>
-    <div class="arc-segment__content">
-      <span class="arc-segment__kicker">01 — PROFILE</span>
-      <h4 class="arc-segment__heading" data-i18n="home.panel1.title">Perfil y Trayectoria</h4>
-      <p class="arc-segment__text" data-i18n="home.panel1.summary">Especialista en Patrimonio Cultural y Tasación de Obras de Arte. Más de 20.000 obras y bienes patrimoniales inventariados y tasados.</p>
-      <div class="arc-segment__photo-wrap">
-        <img src="assets/img/Conferencia-Almeida-Carabinieri-Eusebio.webp" alt="Luis Manuel Almeida, Perito Tasador de Arte y Patrimonio Cultural" class="arc-segment__photo" loading="lazy" decoding="async">
+
+    <div class="detalle-rail__item" data-panel="01">
+      <span class="detalle-rail__indice">01</span>
+      <h4 class="detalle-rail__titulo" data-i18n="home.panel2.title">Coleccionistas y Particulares</h4>
+      <p class="detalle-rail__resumen" data-i18n="home.panel2.summary">Dictámenes técnicos independientes de autenticidad y valoración. Cero conflicto de interés: no se compra ni se vende arte.</p>
+      <p class="mt-[-.4rem] mb-3 text-[.7rem] italic leading-snug text-[#2E3238]/45">+20.000 obras catalogadas — fondos de Portocarrero, Sandú Darié, Fayad Jamís y Quintero</p>
+      <a href="coleccionistas-particulares.html" class="detalle-rail__cta" data-i18n="nicho.cta.ver">Ver dictámenes y servicios →</a>
+    </div>
+
+    <div class="detalle-rail__item" data-panel="02">
+      <span class="detalle-rail__indice">02</span>
+      <h4 class="detalle-rail__titulo" data-i18n="home.panel3.title">Docencia y Conferencias</h4>
+      <p class="detalle-rail__resumen" data-i18n="home.panel3.summary">Más de 25 años de docencia universitaria en tasación de arte, patrimonio y prevención del tráfico ilícito.</p>
+      <p class="mt-[-.4rem] mb-3 text-[.7rem] italic leading-snug text-[#2E3238]/45">Profesor Auxiliar (ISA, Univ. de La Habana, San Gerónimo) — Carabinieri TPC, IBERMUSEOS, UNESCO</p>
+      <a href="docencia-conferencias.html" class="detalle-rail__cta" data-i18n="nicho.cta.ver">Ver dictámenes y servicios →</a>
+    </div>
+
+    <div class="detalle-rail__item" data-panel="03">
+      <span class="detalle-rail__indice">03</span>
+      <h4 class="detalle-rail__titulo" data-i18n="home.panel4.title">Herencias y Sucesiones</h4>
+      <p class="detalle-rail__resumen" data-i18n="home.panel4.summary">Perito Tasador-Partidor en más de 15 procesos de liquidación hereditaria, bajo estricto secreto profesional.</p>
+      <p class="mt-[-.4rem] mb-3 text-[.7rem] italic leading-snug text-[#2E3238]/45">Caudales hereditarios de Dulce María Loynaz, Alejo Carpentier, Servando Cabrera y Amelia Peláez</p>
+      <a href="herencias-sucesiones.html" class="detalle-rail__cta" data-i18n="nicho.cta.ver">Ver dictámenes y servicios →</a>
+    </div>
+
+    <div class="detalle-rail__item" data-panel="04">
+      <span class="detalle-rail__indice">04</span>
+      <h4 class="detalle-rail__titulo" data-i18n="home.panel5.title">Abogados y Notarios</h4>
+      <p class="detalle-rail__resumen" data-i18n="home.panel5.summary">Dictámenes con fuerza procesal para litigios, disolución de patrimonios y auxilio judicial como Perito Partidor.</p>
+      <p class="mt-[-.4rem] mb-3 text-[.7rem] italic leading-snug text-[#2E3238]/45">Perito en aduanas (1988–2024) — dictámenes ratificados en sede judicial (Caso Velázquez, Caso Chiparus)</p>
+      <a href="abogados-notarios.html" class="detalle-rail__cta" data-i18n="nicho.cta.ver">Ver dictámenes y servicios →</a>
+    </div>
+
+    <div class="detalle-rail__item" data-panel="05">
+      <span class="detalle-rail__indice">05</span>
+      <h4 class="detalle-rail__titulo" data-i18n="home.panel6.title">Aseguradoras y Family Offices</h4>
+      <p class="detalle-rail__resumen" data-i18n="home.panel6.summary">Valoración técnica de colecciones y auditoría pericial de activos internacionales bajo estándares globales.</p>
+      <p class="mt-[-.4rem] mb-3 text-[.7rem] italic leading-snug text-[#2E3238]/45">Metodología AAA (Escuela Dr. Alex J. Rosenberg) — inventarios diplomáticos en +15 países</p>
+      <a href="aseguradoras-family-offices.html" class="detalle-rail__cta" data-i18n="nicho.cta.ver">Ver dictámenes y servicios →</a>
+    </div>
+
+    <div class="detalle-rail__item" data-panel="06">
+      <span class="detalle-rail__indice">06</span>
+      <h4 class="detalle-rail__titulo" data-i18n="home.panel7.title">Patrimonio Subacuático</h4>
+      <p class="detalle-rail__resumen" data-i18n="home.panel7.summary">Peritaje y catalogación de artefactos recuperados de pecios coloniales, como el Nuestra Señora de las Mercedes.</p>
+      <p class="mt-[-.4rem] mb-3 text-[.7rem] italic leading-snug text-[#2E3238]/45">Pecios Palemón y fragata Nuestra Señora de las Mercedes (2001–2004)</p>
+      <a href="patrimonio-subacuatico.html" class="detalle-rail__cta" data-i18n="nicho.cta.ver">Ver dictámenes y servicios →</a>
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- Banda inferior: cintillo de cita + firma -->
+    <div class="cintillo-final">
+      <div class="cintillo-final__frase">
+        <p class="cintillo-final__texto" id="frase-texto">Cargando…</p>
+        <span class="cintillo-final__atribucion" id="frase-atribucion"></span>
       </div>
-      <a href="https://wa.me/5352493677" class="arc-segment__cta" data-i18n="generic.request.consultation">Solicitar Consulta Confidencial</a>
+      <span class="cintillo-final__divisor" aria-hidden="true"></span>
+      <div class="cintillo-final__firma">
+        <span class="cintillo-final__wordmark">Almeida</span>
+        <span class="cintillo-final__subtitulo">Perito Tasador</span>
+      </div>
     </div>
-  </div>
 
-  <div class="arc-segment" data-panel="1" id="panel-1" style="--seg-index:1;" role="tab" tabindex="0" aria-selected="false">
-    <div class="arc-segment__label">
-      <span class="arc-segment__num">02</span>
-      <span class="arc-segment__title" data-i18n="home.panel2.title">Coleccionistas y Particulares</span>
-    </div>
-    <div class="arc-segment__content">
-      <span class="arc-segment__kicker">02 — PRIVATE OWNERS</span>
-      <h4 class="arc-segment__heading" data-i18n="home.panel2.title">Coleccionistas y Particulares</h4>
-      <p class="arc-segment__text" data-i18n="home.panel2.summary">Dictámenes técnicos independientes de autenticidad y valoración. Cero conflicto de interés: no se compra ni se vende arte.</p>
-      <a href="coleccionistas-particulares.html" class="arc-segment__cta" data-i18n="generic.explore">Explorar Especialidad →</a>
-    </div>
-  </div>
-
-  <div class="arc-segment" data-panel="2" id="panel-2" style="--seg-index:2;" role="tab" tabindex="0" aria-selected="false">
-    <div class="arc-segment__label">
-      <span class="arc-segment__num">03</span>
-      <span class="arc-segment__title" data-i18n="home.panel3.title">Docencia y Conferencias</span>
-    </div>
-    <div class="arc-segment__content">
-      <span class="arc-segment__kicker">03 — ACADEMIA</span>
-      <h4 class="arc-segment__heading" data-i18n="home.panel3.title">Docencia y Conferencias</h4>
-      <p class="arc-segment__text" data-i18n="home.panel3.summary">Más de 25 años de docencia universitaria en tasación de arte, patrimonio y prevención del tráfico ilícito.</p>
-      <a href="docencia-conferencias.html" class="arc-segment__cta" data-i18n="generic.explore">Explorar Especialidad →</a>
-    </div>
-  </div>
-
-  <div class="arc-segment" data-panel="3" id="panel-3" style="--seg-index:3;" role="tab" tabindex="0" aria-selected="false">
-    <div class="arc-segment__label">
-      <span class="arc-segment__num">04</span>
-      <span class="arc-segment__title" data-i18n="home.panel4.title">Herencias y Sucesiones</span>
-    </div>
-    <div class="arc-segment__content">
-      <span class="arc-segment__kicker">04 — ESTATES</span>
-      <h4 class="arc-segment__heading" data-i18n="home.panel4.title">Herencias y Sucesiones</h4>
-      <p class="arc-segment__text" data-i18n="home.panel4.summary">Perito Tasador-Partidor en más de 15 procesos de liquidación hereditaria, bajo estricto secreto profesional.</p>
-      <a href="herencias-sucesiones.html" class="arc-segment__cta" data-i18n="generic.explore">Explorar Especialidad →</a>
-    </div>
-  </div>
-
-  <div class="arc-segment" data-panel="4" id="panel-4" style="--seg-index:4;" role="tab" tabindex="0" aria-selected="false">
-    <div class="arc-segment__label">
-      <span class="arc-segment__num">05</span>
-      <span class="arc-segment__title" data-i18n="home.panel5.title">Abogados y Notarios</span>
-    </div>
-    <div class="arc-segment__content">
-      <span class="arc-segment__kicker">05 — LEGAL SUPPORT</span>
-      <h4 class="arc-segment__heading" data-i18n="home.panel5.title">Abogados y Notarios</h4>
-      <p class="arc-segment__text" data-i18n="home.panel5.summary">Dictámenes con fuerza procesal para litigios, disolución de patrimonios y auxilio judicial como Perito Partidor.</p>
-      <a href="abogados-notarios.html" class="arc-segment__cta" data-i18n="generic.explore">Explorar Especialidad →</a>
-    </div>
-  </div>
-
-  <div class="arc-segment" data-panel="5" id="panel-5" style="--seg-index:5;" role="tab" tabindex="0" aria-selected="false">
-    <div class="arc-segment__label">
-      <span class="arc-segment__num">06</span>
-      <span class="arc-segment__title" data-i18n="home.panel6.title">Aseguradoras y Family Offices</span>
-    </div>
-    <div class="arc-segment__content">
-      <span class="arc-segment__kicker">06 — ASSET PROTECTION</span>
-      <h4 class="arc-segment__heading" data-i18n="home.panel6.title">Aseguradoras y Family Offices</h4>
-      <p class="arc-segment__text" data-i18n="home.panel6.summary">Valoración técnica de colecciones y auditoría pericial de activos internacionales bajo estándares globales.</p>
-      <a href="aseguradoras-family-offices.html" class="arc-segment__cta" data-i18n="generic.explore">Explorar Especialidad →</a>
-    </div>
-  </div>
-
-  <div class="arc-segment" data-panel="6" id="panel-6" style="--seg-index:6;" role="tab" tabindex="0" aria-selected="false">
-    <div class="arc-segment__label">
-      <span class="arc-segment__num">07</span>
-      <span class="arc-segment__title" data-i18n="home.panel7.title">Patrimonio Subacuático</span>
-    </div>
-    <div class="arc-segment__content">
-      <span class="arc-segment__kicker">07 — UNDERWATER ARCHAEOLOGY</span>
-      <h4 class="arc-segment__heading" data-i18n="home.panel7.title">Patrimonio Subacuático</h4>
-      <p class="arc-segment__text" data-i18n="home.panel7.summary">Peritaje y catalogación de artefactos recuperados de pecios coloniales, como el <em>Nuestra Señora de las Mercedes</em>.</p>
-      <a href="patrimonio-subacuatico.html" class="arc-segment__cta" data-i18n="generic.explore">Explorar Especialidad →</a>
-    </div>
-  </div>
-
-</div>
-</div>
-
-<!-- Frase rotativa debajo del arco -->
-<div class="arc-phrase" id="phrase-rotator-container">
-  <span class="arc-phrase__rule"></span>
-  <p class="arc-phrase__text" id="rotating-phrase-text" data-i18n="home.phrase.1">
-    "El valor del arte no está en el precio, sino en la verdad que certifica un dictamen."
-  </p>
-  <span class="arc-phrase__label" data-i18n="home.phrase.label">Citas y Referentes de Tasación Pericial</span>
-</div>
-    </div>
   </div>
 
 </main>
-
 
   <!-- Contact Modal -->
   <!-- Contact Modal (Initially Hidden) -->
@@ -388,7 +390,6 @@
   <script src="assets/i18n-core.js"></script>
   <script src="assets/cursor-hero.js"></script>
   <script src="assets/hero-stagger.js"></script>
-  <script src="assets/selector-paneles.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

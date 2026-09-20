@@ -8,10 +8,7 @@
 
   let canvas = null;
   let ctx = null;
-  let phraseEl = null;
-  let phrases = [];
-  let currentPhraseIndex = 0;
-  let phraseTimer = null;
+
   let animationFrameId = null;
   let mousePos = { x: -9999, y: -9999 };
   let linePos = { x: 0, y: 0 };
@@ -19,7 +16,6 @@
   let isInitialized = false;
 
   const CONFIG = {
-    phraseRotationInterval: 6000,
     lineOpacity: 0.5,
     lineWidth: 1,
     gap: 22,           // hueco en la intersección
@@ -133,70 +129,36 @@
     if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function initPhraseRotator() {
-    phraseEl = document.getElementById('rotating-phrase-text');
-    const container = document.getElementById('phrase-rotator-container');
-    if (!phraseEl || !container) return;
 
-    if (window.i18nData && window.i18nCore && window.i18nCore.currentLang) {
-      const lang = window.i18nCore.currentLang;
-      const data = window.i18nData[lang];
-      if (data) {
-        phrases = [data['home.phrase.1'], data['home.phrase.2'], data['home.phrase.3'], data['home.phrase.4']].filter(Boolean);
-      }
-    }
-    if (phrases.length === 0) phrases = [phraseEl.textContent.trim()];
 
-    currentPhraseIndex = 0;
-    updatePhrase(0);
-    startPhraseRotation();
-    container.addEventListener('mouseenter', pausePhraseRotation);
-    container.addEventListener('mouseleave', resumePhraseRotation);
-  }
 
-  function updatePhrase(index) {
-    if (!phraseEl || phrases.length === 0) return;
-    phraseEl.style.opacity = '0';
-    phraseEl.style.transform = 'translateY(10px)';
-    setTimeout(() => {
-      phraseEl.textContent = phrases[index];
-      phraseEl.style.opacity = '1';
-      phraseEl.style.transform = 'translateY(0)';
-    }, 250);
-  }
 
-  function startPhraseRotation() {
-    if (phrases.length <= 1) return;
-    phraseTimer = setInterval(() => {
-      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-      updatePhrase(currentPhraseIndex);
-    }, CONFIG.phraseRotationInterval);
-  }
-  function pausePhraseRotation() { if (phraseTimer) { clearInterval(phraseTimer); phraseTimer = null; } }
-  function resumePhraseRotation() { if (!phraseTimer && phrases.length > 1) startPhraseRotation(); }
+
+
+
 
   function init() {
     if (isInitialized) return;
     isDesktop = checkDesktop();
-    if (!isDesktop) { initPhraseRotator(); isInitialized = true; return; }
+    if (!isDesktop) { isInitialized = true; return; }
     if (initCanvas()) startAnimation();
-    initPhraseRotator();
     isInitialized = true;
   }
 
-  function onLanguageChange(newLang) {
-    if (!phraseEl || !window.i18nData || !window.i18nData[newLang]) return;
-    const data = window.i18nData[newLang];
-    phrases = [data['home.phrase.1'], data['home.phrase.2'], data['home.phrase.3'], data['home.phrase.4']].filter(Boolean);
-    currentPhraseIndex = 0;
-    updatePhrase(0);
-  }
 
-  window.CursorHero = { init, onLanguageChange, isDesktop: () => isDesktop };
+
+  window.CursorHero = { init, isDesktop: () => isDesktop };
 
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
     else fn();
   }
   ready(() => setTimeout(init, 50));
+
+  // Eliminar cualquier resto del rotador si se hubiera llamado por evento
+  window.addEventListener('componentLoaded', (e) => {
+    if (e.detail.id === 'canvas-cursor-placeholder') {
+      init();
+    }
+  });
 })();
