@@ -228,7 +228,7 @@ Para optimizar el desarrollo y la gestión de recursos, el ecosistema se divide 
   - `[Usuario]`: Crear repositorio privado/público en la cuenta de GitHub (`dalmeida.cu@gmail.com`) y copiar la URL remota.
   - `[IA]`: Vincular el remoto y realizar el primer `git push origin main`.
 
-- [ ] **5.5.2 — Configuración y Primer Despliegue en Cloudflare Pages (`.pages.dev`):**
+- [x] **5.5.2 — Configuración y Primer Despliegue en Cloudflare Pages (`.pages.dev`):**
   - `[Usuario]`: Entrar al Dashboard de Cloudflare con la cuenta habitual, ir a **Workers & Pages > Create > Pages > Connect to Git** y seleccionar el repositorio `almeida-portafolio`.
   - `[Usuario / Configuración]`: Establecer parámetros de compilación:
     - **Root Directory:** `web`
@@ -236,8 +236,24 @@ Para optimizar el desarrollo y la gestión de recursos, el ecosistema se divide 
     - **Build Output Directory:** `.` (o la raíz del módulo `/web/`)
   - `[IA / Usuario]`: Desplegar la primera build y verificar la URL de vista previa asignada (`almeida-portafolio.pages.dev`).
 
-- [ ] **5.5.3 — Depuración Visual y Ajustes de CSS en Vivo (Preview Staging):**
-  - `[IA]`: Corrección de inconsistencias visuales, ajustes de CSS, Tailwind y layout detectados al navegar la URL real desde múltiples dispositivos.
+- [ ] **5.5.3 — Depuración Visual, Ajustes de CSS y Nueva Página de Perfil:**
+  - `[IA]`: **Optimización de Tarjetas (Bolas) del Home:**
+    - Corregir el recorte y centrado del texto en las 6 tarjetas orgánicas del Home. Solucionar el problema de que el texto de la primera tarjeta ("Coleccionistas y Particulares") se vea cortado o apretado en ciertas resoluciones, y asegurar que el resto de las tarjetas (que muestran solo un fragmento corto e invitan a pasar el cursor) tengan un ritmo visual perfecto y armónico.
+  - `[IA]`: **Micro-mejoras Estéticas en Móvil:**
+    - Añadir un degradado sutil de desvanecimiento lateral en el carrusel de tarjetas móvil (`.cluster-grid::after`) para sugerir visualmente que hay más elementos deslizando hacia la derecha.
+    - Incrementar a un límite de 4 líneas el texto resumen de la primera tarjeta en formato móvil para dar mayor peso de entrada al nicho de Coleccionistas.
+  - `[IA]`: **Nueva Página de Autoridad "Mi perfil" (`perfil.html`):**
+    - **Propósito:** Mostrar las credenciales completas de Luis Manuel Almeida Luis (basado en `cv-moderno-es.md` y `cv-moderno-en.md`) bajo la misma estética editorial de 6 bloques.
+    - **Estructura de Bloques:**
+      - *Bloque 1 (Hero):* Presentación de Luis M. Almeida con su foto institucional, título y un subtítulo de trayectoria pericial de +40 años.
+      - *Bloque 2 (El Problema/Enfoque):* "El valor de la idoneidad: en el peritaje no hay espacio para la conjetura, cada credencial debe ser trazable e independiente."
+      - *Bloque 3 (Áreas Técnicas):* Grid de especialidades (derivadas de las 10 áreas del currículum consolidado).
+      - *Bloque 4 (Evidencia de Autoridad):* Lista 'exhibit' de logros (20.000 obras registradas, 15 procesos sucesorios de grandes figuras, cooperación con Carabinieri e IBERMUSEOS, conferencias en 15 países).
+      - *Bloque 5 (Pull-Quote):* Cita ética destacada sobre la responsabilidad intelectual de proteger el patrimonio.
+      - *Bloque 6 (Interlinking cruzado):* Enlaces hacia las 6 especialidades ordenadas en jerarquía oficial B2B (1-6).
+    - **Integración y Enrutamiento:**
+      - Añadir el enlace "Mi perfil" en el menú del Header (`nav-header.html`), posicionado estratégicamente al final de las especialidades, pero con un estilo más centrado, discreto o sutilmente diferenciado (ej: mayor espacio o peso tipográfico fino).
+      - Actualizar `nav-mobile-overlay.html`, `footer-home.html`, `footer-nicho.html` y el `sitemap.xml` / `robots.txt` para incluir la nueva URL de perfil.
   - `[IA + Usuario]`: Cada cambio subido a GitHub con `git push` compilará automáticamente en Cloudflare Pages en ~15 segundos.
 
 - [ ] **5.5.4 — Vinculación del Dominio Definitivo (`almeidatasacion.com`) y DNS:**
