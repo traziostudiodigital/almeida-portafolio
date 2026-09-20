@@ -42,7 +42,10 @@ const i18nData = {
     "home.panel7.title": "Patrimonio Subacuático",
     "home.panel7.summary": "Peritaje y catalogación de artefactos recuperados de pecios coloniales, como el Nuestra Señora de las Mercedes.",
     
-// Frases Rotativas del Hero (Citas y Referentes de Tasación Pericial)
+    "home.rail.idle": "Seleccione una especialidad para ver el detalle",
+    "nicho.cta.ver": "Ver dictámenes y servicios →",
+
+    // Frases Rotativas del Hero (Citas y Referentes de Tasación Pericial)
      "home.phrase.1": "«El valor de una obra de arte es la cantidad de dinero que una persona está dispuesta a pagar por un bien que esté autorizado a vender.» — Alex Rosenberg",
      "home.phrase.2": "«El mercado del arte y la protección del patrimonio cultural son a la vez antagónicos y complementarios.» — Luis M. Almeida",
      "home.phrase.3": "«En esta profesión hay que tener ética, conocimientos, metodología y sentido común.» — Alex Rosenberg",
@@ -208,7 +211,10 @@ const i18nData = {
     "home.panel7.title": "Underwater Heritage",
     "home.panel7.summary": "Appraisal and cataloguing of artifacts recovered from colonial shipwrecks, including the Nuestra Señora de las Mercedes.",
     
-// Rotating Phrases (Appraisal Principles & Reference Quotes)
+    "home.rail.idle": "Select a specialty to view details",
+    "nicho.cta.ver": "View services & cases →",
+
+    // Rotating Phrases (Appraisal Principles & Reference Quotes)
       "home.phrase.1": "\"The value of a work of art is the amount of money a person is willing to pay for an asset that one is authorized to sell.\" — Alex Rosenberg",
       "home.phrase.2": "\"The art market and the protection of cultural heritage are at once antagonistic and complementary.\" — Luis M. Almeida",
       "home.phrase.3": "\"In this profession, one must possess ethics, expertise, methodology, and common sense.\" — Alex Rosenberg",
