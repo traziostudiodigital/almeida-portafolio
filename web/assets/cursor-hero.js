@@ -16,7 +16,7 @@
   let isInitialized = false;
 
   const CONFIG = {
-    lineOpacity: 0.5,
+    lineOpacity: 0.4, // Reducido en un 20% para hacerlo más sutil
     lineWidth: 1,
     gap: 22,           // hueco en la intersección
     lagH: 0.045,         // suavizado línea horizontal
