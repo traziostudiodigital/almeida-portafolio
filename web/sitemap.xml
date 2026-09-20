@@ -7,10 +7,18 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/?lang=en" />
-  </url>
-  <url>
-    <loc>https://luismanuelalmeida.com/coleccionistas-particulares.html</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/?lang=en" />
+   </url>
+   <url>
+     <loc>https://luismanuelalmeida.com/perfil.html</loc>
+     <lastmod>2026-09-20</lastmod>
+     <changefreq>monthly</changefreq>
+     <priority>0.85</priority>
+     <xhtml:link rel="alternate" hreflang="es" href="https://luismanuelalmeida.com/perfil.html" />
+     <xhtml:link rel="alternate" hreflang="en" href="https://luismanuelalmeida.com/perfil.html?lang=en" />
+   </url>
+   <url>
+     <loc>https://luismanuelalmeida.com/coleccionistas-particulares.html</loc>
     <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
