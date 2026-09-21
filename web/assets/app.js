@@ -490,4 +490,50 @@
     closeMobileMenu: closeMobileMenu
   };
 
+  // auto-scroll del slider "Cómo Trabajamos" — solo mobile/tablet (<1024px)
+(function () {
+  const grid = document.querySelector('.process-steps__grid');
+  if (!grid) return;
+
+  let autoTimer = null;
+  let userInteracting = false;
+
+  function isMobile() {
+    return window.innerWidth < 1024;
+  }
+
+  function scrollToNext() {
+    if (!isMobile() || userInteracting) return;
+    const stepWidth = grid.querySelector('.process-step').offsetWidth;
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    const next = grid.scrollLeft + stepWidth >= maxScroll - 10
+      ? 0 // vuelve al inicio
+      : grid.scrollLeft + stepWidth;
+    grid.scrollTo({ left: next, behavior: 'smooth' });
+  }
+
+  function startAuto() {
+    stopAuto();
+    if (isMobile()) autoTimer = setInterval(scrollToNext, 3000);
+  }
+
+  function stopAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+  }
+
+  // Pausa si el usuario toca/arrastra, reanuda 4s después de soltar
+  ['touchstart', 'mousedown'].forEach(evt =>
+    grid.addEventListener(evt, () => { userInteracting = true; stopAuto(); })
+  );
+  ['touchend', 'mouseup'].forEach(evt =>
+    grid.addEventListener(evt, () => {
+      userInteracting = false;
+      setTimeout(startAuto, 4000);
+    })
+  );
+
+  window.addEventListener('resize', startAuto);
+  startAuto();
+})();
+
 })();
