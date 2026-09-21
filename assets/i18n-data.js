@@ -24,6 +24,17 @@ const i18nData = {
     "generic.request.consultation": "Solicitar Consulta Confidencial",
     "generic.whatsapp.prefix": "Hola, ",
 
+    // === PROCESO (Común a los 6 nichos) ===
+    "process.title": "Cómo Trabajamos",
+    "process.step1.title": "Consulta Inicial",
+    "process.step1.desc": "Descripción confidencial del caso y las piezas por WhatsApp, correo o formulario.",
+    "process.step2.title": "Evaluación Técnica",
+    "process.step2.desc": "Revisión preliminar de la documentación o fotografías para determinar el alcance pericial.",
+    "process.step3.title": "Propuesta y Plazo",
+    "process.step3.desc": "Confirmación del alcance, honorarios y plazo de entrega antes de iniciar el dictamen.",
+    "process.step4.title": "Dictamen Pericial",
+    "process.step4.desc": "Entrega del informe técnico firmado, con la fundamentación metodológica requerida.",
+
     // === HOME (index.html) ===
     "home.h1": "Peritaje y Tasación de Obras de Arte y Patrimonio Cultural",
     "home.subtitle": "Dictámenes técnicos independientes respaldados por más de 40 años de trayectoria institucional en Cuba e Iberoamérica.",
@@ -193,6 +204,17 @@ const i18nData = {
     "generic.explore": "Explore Specialty →",
     "generic.request.consultation": "Request a Confidential Consultation",
     "generic.whatsapp.prefix": "Hello, ",
+
+    // === PROCESO (Common to all 6 niches) ===
+    "process.title": "How We Work",
+    "process.step1.title": "Initial Consultation",
+    "process.step1.desc": "Confidential description of the case and items via WhatsApp, email, or form.",
+    "process.step2.title": "Technical Evaluation",
+    "process.step2.desc": "Preliminary review of documentation or photographs to determine the scope of the appraisal.",
+    "process.step3.title": "Proposal & Timeline",
+    "process.step3.desc": "Confirmation of scope, fees, and delivery timeline before the appraisal begins.",
+    "process.step4.title": "Appraisal Report",
+    "process.step4.desc": "Delivery of the signed technical report, with the required methodological grounding.",
 
     // === HOME (index.html) ===
     "home.h1": "Fine Art & Cultural Heritage Appraisal",

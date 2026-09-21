@@ -157,3 +157,183 @@
     max-width: 32rem;
   }
 }
+
+/* =========================================================
+   PROCESS STEPS — Cómo Trabajamos (entre Servicios y Casos)
+   ========================================================= */
+
+.process-steps {
+  padding-block: 3rem;
+}
+
+.process-steps__title {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 400;
+  color: var(--color-brand-dark);
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.process-steps__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 80rem;
+  margin-inline: auto;
+  position: relative;
+}
+
+/* Conector vertical (mobile) */
+.process-steps__grid::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-brand-accent);
+  opacity: .35;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.process-step {
+  position: relative;
+  z-index: 1;
+  padding-top: 2.5rem;
+  text-align: center;
+}
+
+.process-step__number {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 600;
+  color: var(--color-brand-accent);
+  line-height: 1;
+  background: var(--color-brand-light);
+  padding-inline: .5rem;
+  z-index: 2;
+}
+
+.process-step__title {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(.9rem, 1.1vw, 1.05rem);
+  font-weight: 500;
+  color: var(--color-brand-dark);
+  margin-bottom: .4rem;
+  line-height: 1.3;
+}
+
+.process-step__desc {
+  font-size: clamp(.75rem, .9vw, .82rem);
+  color: color-mix(in srgb, var(--color-brand-dark) 100%, transparent 25%);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 16ch;
+  margin-inline: auto;
+}
+
+/* Tablet: 2 columnas (md ≥768px) — reusa breakpoint de Servicios */
+@media (min-width: 768px) {
+  .process-steps__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
+    padding-inline: 1rem;
+  }
+
+  .process-steps__grid::before {
+    left: 0;
+    right: 0;
+    top: 50%;
+    bottom: auto;
+    height: 1px;
+    width: auto;
+    transform: translateY(-50%);
+  }
+
+  .process-step {
+    padding-top: 3.5rem;
+    padding-inline: 1rem;
+  }
+
+  .process-step__number {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Conector horizontal entre pasos de la misma fila */
+  .process-step:nth-child(odd)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -50%;
+    width: 100%;
+    height: 1px;
+    background: var(--color-brand-accent);
+    opacity: .35;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+}
+
+/* Desktop: 4 columnas (lg ≥1024px) */
+@media (min-width: 1024px) {
+  .process-steps__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding-inline: 1rem;
+  }
+
+  .process-steps__grid::before {
+    left: 0;
+    right: 0;
+    top: 50%;
+    bottom: auto;
+    height: 1px;
+    width: auto;
+    transform: translateY(-50%);
+  }
+
+  .process-step {
+    padding-top: 3.5rem;
+    padding-inline: 1rem;
+  }
+
+  .process-step__number {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .process-step::after {
+    display: none;
+  }
+
+  .process-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -50%;
+    width: 100%;
+    height: 1px;
+    background: var(--color-brand-accent);
+    opacity: .35;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-step { transition: none; }
+}
