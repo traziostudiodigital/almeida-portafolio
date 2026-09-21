@@ -32,6 +32,7 @@ const i18nData = {
     "legal.notice": "Aviso Legal",
     "legal.privacy": "Privacidad",
     "footer.about": "Dictámenes técnicos independientes de autenticidad, catalogación y valoración económica respaldados por más de 40 años de trayectoria institucional en Cuba e Iberoamérica.",
+    "footer.credit": "Trazio Studio",
     "contact.info": "Información de Contacto",
     "contact.address": "La Habana, Cuba",
     "footer.analitica": "Ecosistema Cookieless · Independencia Garantizada",
@@ -86,6 +87,7 @@ const i18nData = {
     "n1.service.3.desc": "Tasación objetiva basada en la cotización real de mercado y subastas internacionales contrastadas.",
     "n1.service.4": "Informe de estado de conservación.",
     "n1.service.4.desc": "Diagnóstico descriptivo de la estabilidad física, daños y sugerencias técnicas de conservación preventiva.",
+    "n1.cta.main": "Solicitar Dictamen Pericial",
     "cta.whatsapp.n1": "Hola, soy coleccionista/propietario de obras de arte y deseo solicitar una consulta confidencial sobre peritaje y tasación.",
     "n1.cta.form": "Enviar Hoja de Encargo Confidencial",
 
@@ -108,6 +110,7 @@ const i18nData = {
     "n2.service.3.desc": "Disertaciones de alta especialización técnica para museos, asociaciones periciales, bienales y comités institucionales.",
     "n2.service.4": "Protocolos de tasación y reconocimiento de antigüedades.",
     "n2.service.4.desc": "Programas prácticos de autenticación y reconocimiento de piezas de alto valor para aduanas e inspectores policiales.",
+    "n2.cta.main": "Solicitar Propuesta Académica",
     "cta.whatsapp.n2": "Hola, represento a una universidad/institución cultural y deseo consultar disponibilidad para un módulo académico o conferencia sobre tasación de arte y patrimonio.",
     "n2.cta.form": "Enviar Solicitud de Colaboración Académica",
 
@@ -132,6 +135,7 @@ const i18nData = {
     "n3.service.3.desc": "Asignación técnica e imparcial de lotes homogéneos en valor para garantizar la satisfacción y concordia familiar.",
     "n3.service.4": "Mediación Pericial Confidencial.",
     "n3.service.4.desc": "Asesoría de arbitraje técnico neutral para evitar conflictos judiciales destructivos entre coherederos.",
+    "n3.cta.main": "Solicitar Tasación de Herencia",
     "cta.whatsapp.n3": "Hola, gestiono/soy heredero de un proceso de sucesión con obras de arte o bienes patrimoniales y necesito una tasación pericial confidencial.",
     "n3.cta.form": "Enviar Hoja de Encargo Confidencial",
 
@@ -154,6 +158,7 @@ const i18nData = {
     "n4.service.4": "Ratificación Pericial",
     "n4.service.4.desc": "Ratificación pericial de los dictámenes ante la autoridad competente.",
     "n4.phrase.1": "Un dictamen pericial emitido para el ámbito procesal debe resistir la impugnación más rigurosa: cada conclusión debe estar sustentada en el método científico y documental, nunca en la conjetura.",
+    "n4.cta.main": "Solicitar Auxilio Pericial",
     "cta.whatsapp.n4": "Hola, represento a una oficina legal/notaría y necesito auxilio pericial para un caso de tasación de arte o bienes patrimoniales.",
     "n4.cta.form": "Enviar Hoja de Encargo Judicial",
 
@@ -174,6 +179,7 @@ const i18nData = {
     "n5.service.3.desc": "Dictamen pericial sobre depreciación material, costes técnicos de restauración y pérdida de valor comercial post-daño.",
     "n5.service.4": "Informes Técnicos Bilingües",
     "n5.service.4.desc": "Documentación pericial homologada bilingüe (ES/EN) para comités de riesgo, reaseguro y brokers internacionales.",
+    "n5.cta.main": "Solicitar Auditoría Pericial",
     "cta.whatsapp.n5": "Hola, represento a una aseguradora/family office y necesito una valoración pericial de una colección de arte o bienes de alto valor.",
     "n5.cta.form": "Enviar Solicitud de Auditoría Confidencial",
     "n5.phrase.1": "En la gestión de grandes patrimonios, valorar no es especular con lo que alguien pagaría mañana, sino calcular con exactitud lo que cuesta restaurar o reponer un bien en su mercado legítimo.",
@@ -181,7 +187,7 @@ const i18nData = {
     // === NICHO 6: Patrimonio Subacuático (patrimonio-subacuatico.html) ===
     "n6.hero.h1": "Peritaje de Patrimonio Arqueológico Subacuático",
     "n6.hero.subtitle": "Catalogación, autenticación y tasación patrimonial de artefactos y evidencias de pecios coloniales y yacimientos arqueológicos marinos.",
-    "n6.value.text": "Luis Manuel Almeida Luis aplica a la evidencia sumergida los mismos protocolos periciales y catalográficos técnicos que rigen los bienes de contexto terrestre, ajustando la escala de valoración a la significación histrico-patrimonial y la singularidad de cada pieza recuperada.",
+    "n6.value.text": "Luis Manuel Almeida Luis aplica a la evidencia sumergida los mismos protocolos periciales y catalográficos técnicos que rigen los bienes de contexto terrestre, ajustando la escala de valoración a la significación histórico-patrimonial y la singularidad de cada pieza recuperada.",
     "n6.problem.text": "Los bienes rescatados de pecios marinos presentan alteraciones físicas severas y vacíos documentales extremos; sin peritaje arqueológico homologado, corren el riesgo de ser expoliados, descontextualizados o catalogados erróneamente.",
     "n6.cases.title": "Casos Documentados",
     "n6.case.1": "Peritaje, valoración técnica y catalogación de artefactos y evidencias arqueológicas del pecio colonial \"Palemón\" (2001–2004).",
@@ -196,6 +202,7 @@ const i18nData = {
     "n6.service.3.desc": "Estudio descriptivo de incrustaciones, corrosión galvánica y estabilidad material para el diseño de tratamientos de consolidación.",
     "n6.service.4": "Tasación de Significación Patrimonial",
     "n6.service.4.desc": "Valoración no comercial basada en la singularidad arqueológica, representatividad y relevancia documental del yacimiento sumergido.",
+    "n6.cta.main": "Solicitar Consulta Técnica",
     "cta.whatsapp.n6": "Hola, represento a una institución científica/museo y necesito peritaje de patrimonio arqueológico subacuático.",
     "n6.cta.form": "Enviar Solicitud de Peritaje Técnico",
     "n6.phrase.1": "Un objeto rescatado del mar no es un tesoro comercial; es un documento histórico sumergido que exige un rigor pericial quirúrgico para revelar su verdadera procedencia.",
@@ -316,6 +323,7 @@ const i18nData = {
     "legal.notice": "Legal Notice",
     "legal.privacy": "Privacy Policy",
     "footer.about": "Independent technical opinions on authenticity, cataloguing, and economic valuation backed by over 40 years of institutional experience in Cuba and Ibero-America.",
+    "footer.credit": "Trazio Studio",
     "contact.info": "Contact Information",
     "contact.address": "Havana, Cuba",
     "footer.analitica": "Cookieless Ecosystem · Guaranteed Independence",
@@ -370,6 +378,7 @@ const i18nData = {
     "n1.service.3.desc": "Objective appraisal based on real market quotation and verified international auction results.",
     "n1.service.4": "Condition Report.",
     "n1.service.4.desc": "Descriptive diagnosis of physical stability, damage, and technical conservation preventive suggestions.",
+    "n1.cta.main": "Request Confidential Consultation",
     "cta.whatsapp.n1": "Hello, I am a private collector/owner of works of art and would like to request a confidential consultation on appraisal and authentication.",
     "n1.cta.form": "Submit a Confidential Engagement Brief",
 
@@ -392,6 +401,7 @@ const i18nData = {
     "n2.service.3.desc": "High technical specialization dissertations for museums, appraisal associations, biennales and institutional committees.",
     "n2.service.4": "Appraisal protocols and antique-recognition training.",
     "n2.service.4.desc": "Practical programs for authentication and recognition of high-value pieces for customs and police inspectors.",
+    "n2.cta.main": "Request an Academic Proposal",
     "cta.whatsapp.n2": "Hello, I represent a university/cultural institution and would like to inquire about availability for an academic module or lecture on art and heritage appraisal.",
     "n2.cta.form": "Submit an Academic Collaboration Request",
 
@@ -416,6 +426,7 @@ const i18nData = {
     "n3.service.3.desc": "Technical and impartial assignment of homogeneous-value lots to ensure satisfaction and family concord.",
     "n3.service.4": "Confidential Judicial Mediation.",
     "n3.service.4.desc": "Neutral technical arbitration assistance to avoid destructive judicial conflicts among heirs.",
+    "n3.cta.main": "Request Estate Appraisal",
     "cta.whatsapp.n3": "Hello, I am managing/an heir in an estate process involving works of art or heritage assets and I need a confidential appraisal.",
     "n3.cta.form": "Submit a Confidential Engagement Brief",
 
@@ -438,6 +449,7 @@ const i18nData = {
     "n4.service.4": "Judicial Ratification",
     "n4.service.4.desc": "Appearance, defense and formal ratification of the technical report before competent courts or authorities.",
     "n4.phrase.1": "An expert opinion issued for the procedural arena must withstand the most rigorous impeachment: every conclusion must be grounded in scientific and documentary methodology, never in conjecture.",
+    "n4.cta.main": "Request Expert Technical Assistance",
     "cta.whatsapp.n4": "Hello, I represent a law firm/notary office and require expert technical assistance for an art or heritage asset appraisal case.",
     "n4.cta.form": "Submit a Judicial Engagement Brief",
 
@@ -458,6 +470,7 @@ const i18nData = {
     "n5.service.3.desc": "Expert appraisal on material depreciation, technical restoration costs and commercial value loss after damage.",
     "n5.service.4": "Bilingual Technical Reports",
     "n5.service.4.desc": "Bilingual certified appraisal documentation (ES/EN) for risk committees, reinsurance and international brokers.",
+    "n5.cta.main": "Request an Appraisal Audit",
     "cta.whatsapp.n5": "Hello, I represent an insurance company/family office and require an expert valuation of an art collection or high-value assets.",
     "n5.cta.form": "Submit a Confidential Audit Request",
     "n5.phrase.1": "In managing large estates, appraising is not speculating on what someone might pay tomorrow, but calculating with precision what it costs to restore or replace an asset in its legitimate market.",
@@ -480,6 +493,7 @@ const i18nData = {
     "n6.service.3.desc": "Descriptive study of incrustations, galvanic corrosion and material stability for the design of consolidation treatments.",
     "n6.service.4": "Heritage Significance Valuation",
     "n6.service.4.desc": "Non-commercial valuation based on archaeological singularity, representativeness and documentary relevance of the submerged site.",
+    "n6.cta.main": "Request a Technical Consultation",
     "cta.whatsapp.n6": "Hello, I represent a scientific institution/museum and require an appraisal of underwater archaeological heritage.",
     "n6.cta.form": "Submit a Technical Appraisal Request",
     "n6.phrase.1": "An object recovered from the sea is not a commercial treasure; it is a submerged historical document that demands a surgical expertise rigor to reveal its true provenance.",

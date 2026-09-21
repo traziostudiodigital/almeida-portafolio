@@ -37,7 +37,6 @@
     modal: '#contact-modal',
     modalContainer: '#modal-container',
     modalClose: '#modal-close',
-    modalWhatsApp: '#modal-whatsapp-btn',
     modalFormBtn: '#modal-form-btn',
 
     // Formulario Slide-over
@@ -49,11 +48,10 @@
     ctaHeaderBtn: '#cta-header-btn',
     ctaMobileBtn: '#mobile-overlay-cta-btn',
 
-    // Botones que abren el formulario slide-over (desde páginas de nicho)
+    // Botones que abren el formulario slide-over (desde páginas de nicho).
+    // Si llevan data-nicho="valor" (coleccionistas|docencia|herencias|abogados|aseguradoras|subacuatico),
+    // el chip correspondiente queda preseleccionado al abrir.
     openFormBtn: '#open-form-btn',
-
-    // Botones de WhatsApp en páginas de nicho
-    whatsappBtn: '.whatsapp-btn',
 
     // Para cerrar modales haciendo click fuera
     modalBackdrop: '#contact-modal',
@@ -102,34 +100,6 @@
   }
 
   // ==========================================
-  // WHATSAPP BUTTONS (DYNAMIC HREFS)
-  // ==========================================
-
-  function updateWhatsAppButtons() {
-    const buttons = document.querySelectorAll(SELECTORS.whatsappBtn);
-    // TODO: El número de teléfono de WhatsApp podría ser dinámico o configurable si se requiere.
-    const phoneNumber = '34666555444'; // Asumo un número de teléfono fijo, el problema no menciona que sea dinámico.
-
-    buttons.forEach(button => {
-      const i18nKey = button.getAttribute('data-i18n-whatsapp');
-      if (i18nKey && window.i18nCore && window.i18nData) {
-        const currentLang = window.i18nCore.currentLang;
-        // i18nData usa claves planas (ej. "n1.cta.whatsapp"), acceso directo sin anidación.
-        const dict = window.i18nData[currentLang];
-        const whatsappMessage = dict ? dict[i18nKey] : undefined;
-
-        if (whatsappMessage) {
-          const encodedMessage = encodeURIComponent(whatsappMessage);
-          button.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-        } else {
-          console.warn(`[WhatsApp] Mensaje no encontrado para la clave "${i18nKey}" en idioma "${currentLang}"`);
-          button.href = `https://wa.me/${phoneNumber}`; // Fallback a un enlace sin mensaje
-        }
-      }
-    });
-  }
-
-  // ==========================================
   // MENÚ MÓVIL
   // ==========================================
 
@@ -146,7 +116,6 @@
       trigger.setAttribute('aria-expanded', 'true');
     }
 
-    // Guardar elemento activo para restaurar foco al cerrar
     lastActiveElement = document.activeElement;
 
     toggleBodyScroll(true);
@@ -167,7 +136,6 @@
 
     toggleBodyScroll(false);
 
-    // Restaurar foco al trigger
     if (trigger) {
       trigger.focus();
     }
@@ -190,12 +158,10 @@
       container.classList.add('scale-100');
     }
 
-    // Guardar elemento activo
     lastActiveElement = document.activeElement;
 
     toggleBodyScroll(true);
 
-    // Mover foco al modal tras la transición
     setTimeout(function () {
       var firstFocusable = getFirstFocusableElement(modal);
       if (firstFocusable) firstFocusable.focus();
@@ -216,7 +182,6 @@
 
     toggleBodyScroll(false);
 
-    // Restaurar foco al elemento que abrió el modal
     if (restoreFocus !== false && lastActiveElement) {
       lastActiveElement.focus();
     }
@@ -227,26 +192,34 @@
   // FORMULARIO SLIDE-OVER
   // ==========================================
 
-  function openFormOverlay() {
+  /**
+   * Abre el formulario. Si se pasa `nicho` (valor de uno de los chips:
+   * coleccionistas|docencia|herencias|abogados|aseguradoras|subacuatico),
+   * preselecciona ese chip automáticamente.
+   */
+  function openFormOverlay(nicho) {
     // Cerrar modal primero si está abierto
     closeModal(false);
 
     var overlay = document.querySelector(SELECTORS.formOverlay);
     if (!overlay) return;
 
+    if (nicho) {
+      var chip = overlay.querySelector('input[name="nicho_interes"][value="' + nicho + '"]');
+      if (chip) chip.checked = true;
+    }
+
     overlay.classList.remove('translate-x-full');
     overlay.classList.add('translate-x-0');
 
-    // Guardar elemento activo
     lastActiveElement = document.activeElement;
 
     toggleBodyScroll(true);
 
-    // Mover foco al primer campo del formulario
     setTimeout(function () {
       var form = document.querySelector(SELECTORS.form);
       if (form) {
-        var firstInput = form.querySelector('input:not([type="hidden"]):not([type="checkbox"])');
+        var firstInput = form.querySelector('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"])');
         if (firstInput) firstInput.focus();
       }
     }, 350); // Después de la transición slide
@@ -261,7 +234,6 @@
 
     toggleBodyScroll(false);
 
-    // Restaurar foco
     if (lastActiveElement) {
       lastActiveElement.focus();
     }
@@ -277,7 +249,6 @@
 
     var form = e.target;
 
-    // Validación HTML5 nativa
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -293,7 +264,6 @@
     var formData = new FormData(form);
     var action = form.getAttribute('action');
 
-    // Envío mediante Fetch con fallback a mailto
     fetch(action, {
       method: 'POST',
       body: formData,
@@ -301,14 +271,12 @@
     })
     .then(function (response) {
       if (response.ok) {
-        // Redirigir a página de confirmación
         window.location.href = 'gracias.html';
       } else {
         throw new Error('Error de envío (código ' + response.status + ')');
       }
     })
     .catch(function () {
-      // Fallback: restaurar botón y abrir mailto con datos del formulario
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
 
@@ -328,7 +296,6 @@
       window.location.href = 'mailto:luisluisalmeida58@gmail.com?subject=' +
         encodeURIComponent(subject) + '&body=' + body;
 
-      // Mostrar notificación al usuario
       alert('El envío directo no pudo completarse. Se ha abierto su cliente de correo para que complete el envío manualmente.');
     });
   }
@@ -344,7 +311,6 @@
     var formOverlay = document.querySelector(SELECTORS.formOverlay);
     var mobileOverlay = document.querySelector(SELECTORS.mobileOverlay);
 
-    // Orden de cierre: modal -> form overlay -> menú móvil
     if (modal && !modal.classList.contains('opacity-0')) {
       closeModal(true);
       e.preventDefault();
@@ -364,71 +330,62 @@
   function handleDocumentClick(e) {
     var target = e.target;
 
-    // --- Mobile Menu Trigger ---
     if (target.closest(SELECTORS.mobileTrigger)) {
       e.preventDefault();
       openMobileMenu();
       return;
     }
 
-    // --- Mobile Menu Close ---
     if (target.closest(SELECTORS.mobileClose)) {
       e.preventDefault();
       closeMobileMenu();
       return;
     }
 
-    // --- CTA Header Button (abre modal) ---
     if (target.closest(SELECTORS.ctaHeaderBtn)) {
       e.preventDefault();
-      closeMobileMenu(); // Por si el menú móvil está abierto
+      closeMobileMenu();
       openModal();
       return;
     }
 
-    // --- CTA Mobile Overlay Button (abre modal) ---
     if (target.closest(SELECTORS.ctaMobileBtn)) {
       e.preventDefault();
-      closeMobileMenu(); // Cerrar menú primero
+      closeMobileMenu();
       openModal();
       return;
     }
 
-    // --- Modal Close ---
     if (target.closest(SELECTORS.modalClose)) {
       e.preventDefault();
       closeModal(true);
       return;
     }
 
-    // --- Modal: Click en botón "Enviar Formulario" ---
     if (target.closest(SELECTORS.modalFormBtn)) {
       e.preventDefault();
       openFormOverlay();
       return;
     }
 
-    // --- Open Form Button (desde nicho pages) ---
-    if (target.closest(SELECTORS.openFormBtn)) {
+    var openFormTrigger = target.closest(SELECTORS.openFormBtn);
+    if (openFormTrigger) {
       e.preventDefault();
-      openFormOverlay();
+      openFormOverlay(openFormTrigger.getAttribute('data-nicho'));
       return;
     }
 
-    // --- Form Overlay Close ---
     if (target.closest(SELECTORS.formClose)) {
       e.preventDefault();
       closeFormOverlay();
       return;
     }
 
-    // --- Click fuera del modal (backdrop) ---
     if (target.matches(SELECTORS.modalBackdrop)) {
       closeModal(true);
       return;
     }
 
-    // --- Click fuera del form overlay (backdrop) ---
     if (target.matches(SELECTORS.formBackdrop)) {
       closeFormOverlay();
       return;
@@ -460,34 +417,24 @@
   // NOTIFICACIÓN DE CAMBIO DE IDIOMA
   // ==========================================
 
-  /**
-   * Observa cambios en el atributo lang del <html> (modificado por i18n-core.js)
-   * y notifica a los otros módulos que exponen API pública.
-   */
   function setupLanguageObserver() {
     var target = document.documentElement;
 
     var observer = new MutationObserver(function () {
       var newLang = target.getAttribute('lang');
 
-      // Notificar a CursorHero si está presente
       if (window.CursorHero && typeof window.CursorHero.onLanguageChange === 'function') {
         window.CursorHero.onLanguageChange(newLang);
       }
 
-// Notificar a SelectorPaneles si está presente
-         if (window.SelectorPaneles && typeof window.SelectorPaneles.onLanguageChange === 'function') {
-           window.SelectorPaneles.onLanguageChange();
-         }
+      if (window.SelectorPaneles && typeof window.SelectorPaneles.onLanguageChange === 'function') {
+        window.SelectorPaneles.onLanguageChange();
+      }
 
-         // Notificar a HeroStagger si está presente
-         if (window.HeroStagger && typeof window.HeroStagger.reinit === 'function') {
-           window.HeroStagger.reinit();
-         }
-
-         // Actualizar los botones de WhatsApp
-        updateWhatsAppButtons();
-      });
+      if (window.HeroStagger && typeof window.HeroStagger.reinit === 'function') {
+        window.HeroStagger.reinit();
+      }
+    });
 
     observer.observe(target, { attributes: true, attributeFilter: ['lang'] });
   }
@@ -499,22 +446,12 @@
   function init() {
     if (isInitialized) return;
 
-    // Registrar event delegation global (un solo listener)
     document.addEventListener('click', handleDocumentClick, { passive: false });
-
-    // Keyboard handler global (Escape)
     document.addEventListener('keydown', handleKeydown, { passive: false });
 
-    // Efecto de scroll en el header
     initHeaderScrollEffect();
-
-    // Observar cambios de idioma para notificar a otros módulos
     setupLanguageObserver();
 
-    // Actualizar los href de los botones de WhatsApp
-    updateWhatsAppButtons();
-
-    // Vincular submit del formulario
     var form = document.querySelector(SELECTORS.form);
     if (form) {
       form.addEventListener('submit', handleFormSubmit, { passive: false });
@@ -535,8 +472,6 @@
     }
   }
 
-  // Delay para asegurar que i18n-core.js, cursor-hero.js y selector-paneles.js
-  // ya se inicializaron (todos usan setTimeout de 50-100ms en su ready)
   ready(function () {
     setTimeout(init, 250);
   });

@@ -295,15 +295,15 @@
        </cite>
      </section>
 
-    <!-- BLOQUE 6: CTA CONTEXTUAL + INTERLINKING -->
-    <section class="pt-8 pb-24 px-6 md:px-12 max-w-4xl mx-auto text-center opacity-0 transition-all duration-700 ease-out" data-reveal="right">
-      <h2 class="text-2xl font-base font-semibold text-brand-dark mb-4" data-i18n="cta.modal.title">
-        Consulta Confidencial
-      </h2>
-      <p class="text-sm font-base text-brand-dark/75 max-w-lg mx-auto mb-8 leading-relaxed" data-i18n="cta.support">
-        Estricto Secreto Profesional · Sin Compromiso
-      </p>
-      <img src="assets/img/Conferencia-Almeida-Carabinieri-Eusebio.webp" alt="Luis Manuel Almeida, Perito Tasador de Arte y Patrimonio Cultural" class="photo-duotone object-cover w-full h-[300px] mb-4" loading="lazy" decoding="async">
+<!-- BLOQUE 6: CTA CONTEXTUAL + INTERLINKING -->
+     <section class="pt-8 pb-24 px-6 md:px-12 max-w-4xl mx-auto text-center opacity-0 transition-all duration-700 ease-out" data-reveal="right">
+       <h2 class="text-2xl font-base font-semibold text-brand-dark mb-4" data-i18n="n3.cta.main">
+         Consulta Confidencial
+       </h2>
+       <p class="text-sm font-base text-brand-dark/75 max-w-lg mx-auto mb-8 leading-relaxed" data-i18n="cta.support">
+         Estricto Secreto Profesional · Sin Compromiso
+       </p>
+       <img src="assets/img/Conferencia-Almeida-Carabinieri-Eusebio.webp" alt="Luis Manuel Almeida, Perito Tasador de Arte y Patrimonio Cultural" class="photo-duotone object-cover w-full h-[300px] mb-4" loading="lazy" decoding="async">
       
       <!-- Acciones Primarias -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -339,8 +339,8 @@
 
   <!-- Contact Form Component (Will appear if user clicks open-form-btn) -->
   <!-- Sliding Contact Form Overlay (Initially Hidden) -->
-<div id="contact-form-overlay" class="fixed inset-y-0 right-0 z-50 w-full max-w-xl bg-brand-light border-l border-brand-dark/15 shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between" role="dialog" aria-labelledby="form-title">
-  
+<div id="contact-form-overlay" class="fixed inset-y-0 right-0 z-[60] w-full max-w-xl bg-brand-light border-l border-brand-dark/15 shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between" role="dialog" aria-labelledby="form-title">
+
   <!-- Header of Slide-over -->
   <div class="p-6 md:p-8 border-b border-brand-dark/10 flex items-center justify-between">
     <div class="flex flex-col">
@@ -360,58 +360,70 @@
     <!-- Nombre -->
     <div class="flex flex-col space-y-2">
       <label for="form-nombre" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.name">Nombre Completo *</label>
-      <input type="text" id="form-nombre" name="nombre" required 
+      <input type="text" id="form-nombre" name="nombre" required
              class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full">
     </div>
 
     <!-- Correo Electrónico -->
     <div class="flex flex-col space-y-2">
       <label for="form-email" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.email">Correo Electrónico *</label>
-      <input type="email" id="form-email" name="email" required 
+      <input type="email" id="form-email" name="email" required
              class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full">
     </div>
 
     <!-- Teléfono -->
     <div class="flex flex-col space-y-2">
       <label for="form-tel" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.phone">Teléfono de Contacto</label>
-      <input type="tel" id="form-tel" name="telefono" 
+      <input type="tel" id="form-tel" name="telefono"
              class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full">
     </div>
 
-    <!-- Nicho de Interés (Order strictly matching B2B taxonomy) -->
+    <!-- Área de Especialidad — chips (antes select nativo) -->
     <div class="flex flex-col space-y-2">
-      <label for="form-nicho" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.nicho">Área de Especialidad *</label>
-      <select id="form-nicho" name="nicho_interes" required 
-              class="bg-brand-light border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full uppercase tracking-wider text-[11px] font-light">
-        <option value="coleccionistas" data-i18n="home.panel2.title">Coleccionistas y Particulares</option>
-        <option value="docencia" data-i18n="home.panel3.title">Docencia y Conferencias</option>
-        <option value="herencias" data-i18n="home.panel4.title">Herencias y Sucesiones</option>
-        <option value="abogados" data-i18n="home.panel5.title">Abogados y Notarios</option>
-        <option value="aseguradoras" data-i18n="home.panel6.title">Aseguradoras y Family Offices</option>
-        <option value="subacuatico" data-i18n="home.panel7.title">Patrimonio Subacuático</option>
-      </select>
+      <span class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" id="nicho-legend" data-i18n="form.label.nicho">Área de Especialidad *</span>
+      <div class="nicho-chip-grupo" role="radiogroup" aria-labelledby="nicho-legend">
+
+        <input type="radio" id="nicho-coleccionistas" class="nicho-chip-input" name="nicho_interes" value="coleccionistas" required>
+        <label for="nicho-coleccionistas" class="nicho-chip-label" data-i18n="home.panel2.title">Coleccionistas y Particulares</label>
+
+        <input type="radio" id="nicho-docencia" class="nicho-chip-input" name="nicho_interes" value="docencia" required>
+        <label for="nicho-docencia" class="nicho-chip-label" data-i18n="home.panel3.title">Docencia y Conferencias</label>
+
+        <input type="radio" id="nicho-herencias" class="nicho-chip-input" name="nicho_interes" value="herencias" required>
+        <label for="nicho-herencias" class="nicho-chip-label" data-i18n="home.panel4.title">Herencias y Sucesiones</label>
+
+        <input type="radio" id="nicho-abogados" class="nicho-chip-input" name="nicho_interes" value="abogados" required>
+        <label for="nicho-abogados" class="nicho-chip-label" data-i18n="home.panel5.title">Abogados y Notarios</label>
+
+        <input type="radio" id="nicho-aseguradoras" class="nicho-chip-input" name="nicho_interes" value="aseguradoras" required>
+        <label for="nicho-aseguradoras" class="nicho-chip-label" data-i18n="home.panel6.title">Aseguradoras y Family Offices</label>
+
+        <input type="radio" id="nicho-subacuatico" class="nicho-chip-input" name="nicho_interes" value="subacuatico" required>
+        <label for="nicho-subacuatico" class="nicho-chip-label" data-i18n="home.panel7.title">Patrimonio Subacuático</label>
+
+      </div>
     </div>
 
     <!-- Descripción del Encargo -->
     <div class="flex flex-col space-y-2">
       <label for="form-mensaje" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.message">Descripción del Caso y Piezas *</label>
-      <textarea id="form-mensaje" name="mensaje" required rows="5" 
+      <textarea id="form-mensaje" name="mensaje" required rows="5"
                 class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full resize-none leading-relaxed"></textarea>
     </div>
 
     <!-- GDPR Checkbox -->
     <div class="flex items-start gap-3 pt-2">
-      <input type="checkbox" id="form-gdpr" required 
+      <input type="checkbox" id="form-gdpr" required
              class="mt-1 h-4 w-4 border-brand-dark/20 text-brand-accent focus:ring-brand-accent rounded-none bg-transparent">
       <label for="form-gdpr" class="text-[11px] text-brand-dark/70 leading-relaxed font-light">
-        <span data-i18n="form.gdpr.text">Acepto el tratamiento confidencial de mis datos según la</span> 
+        <span data-i18n="form.gdpr.text">Acepto el tratamiento confidencial de mis datos según la</span>
         <a href="privacidad.html" class="text-[#B08D57] hover:underline" data-i18n="legal.privacy">Política de Privacidad</a>.
       </label>
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" 
-            class="w-full text-center border border-brand-dark bg-brand-dark text-brand-light py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#B08D57] hover:border-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]" 
+    <button type="submit"
+            class="w-full text-center border border-brand-dark bg-brand-dark text-brand-light py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#B08D57] hover:border-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]"
             data-i18n="form.submit">
       Enviar Hoja de Encargo
     </button>
@@ -425,49 +437,49 @@
   </div>
 </div>
 
-
   <!-- Contact Modal -->
   <!-- Contact Modal (Initially Hidden) -->
-<div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2E3238]/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-text">
-  <div class="bg-[#EAE7E2] border border-[#2E3238]/20 shadow-2xl w-full max-w-lg p-8 md:p-10 relative rounded-none transition-transform duration-300 scale-95" id="modal-container">
-    <!-- Close button -->
-    <button class="absolute top-4 right-4 text-[#2E3238] hover:text-[#B08D57] transition-colors p-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]" id="modal-close" aria-label="Cerrar modal" data-i18n="nav.close">
+<div id="contact-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#2E3238]/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-text">
+  <div class="textura-papel bg-[#EAE7E2] border border-[#2E3238]/15 shadow-2xl w-full max-w-lg p-8 md:p-10 relative rounded-none transition-transform duration-300 scale-95" id="modal-container">
+
+    <button class="absolute top-4 right-4 z-10 text-[#2E3238]/60 hover:text-[#B08D57] transition-colors p-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]" id="modal-close" aria-label="Cerrar modal" data-i18n="nav.close">
       Cerrar (✕)
     </button>
 
-    <h2 id="modal-title" class="font-heading text-4xl text-[#2E3238] mb-2" data-i18n="cta.modal.title">Consulta Confidencial</h2>
-    <p id="modal-text" class="text-xs tracking-wider uppercase text-[#B08D57] mb-6" data-i18n="cta.modal.text">
-      Escríbanos directamente para iniciar una consulta confidencial sobre su caso.
-    </p>
+    <div class="relative z-10">
+      <span class="block w-10 h-px bg-[#B08D57] mb-5" aria-hidden="true"></span>
 
-    <div class="flex flex-col space-y-4">
-      <!-- WhatsApp CTA button -->
-      <a href="https://wa.me/5352493677" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 w-full border border-[#2E3238] bg-[#2E3238] text-[#EAE7E2] py-4 text-xs uppercase tracking-widest font-light hover:bg-[#B08D57] hover:border-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]" id="modal-whatsapp-btn">
-        <svg class="w-4 h-4 text-emerald-400 fill-current" viewBox="0 0 24 24">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.967C16.526 2.012 14.056.99 11.433.99c-5.436 0-9.86 4.37-9.864 9.8 0 1.737.47 3.427 1.356 4.93L1.83 20.35l4.817-1.196z"/>
-        </svg>
-        <span data-i18n="cta.modal.whatsapp">Escribir por WhatsApp</span>
-      </a>
+      <h2 id="modal-title" class="font-heading text-4xl text-[#2E3238] mb-2" data-i18n="cta.modal.title">Consulta Confidencial</h2>
+      <p id="modal-text" class="text-xs tracking-wider uppercase text-[#B08D57] mb-8" data-i18n="cta.modal.text">
+        Escríbanos directamente para iniciar una consulta confidencial sobre su caso.
+      </p>
 
-      <!-- Form Direct CTA button (Scroll to footer form or redirect) -->
-      <button class="w-full text-center border border-[#2E3238]/30 bg-transparent text-[#2E3238] py-4 text-xs uppercase tracking-widest font-light hover:border-[#B08D57] hover:text-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]" id="modal-form-btn" data-i18n="cta.modal.form">
-        Enviar Formulario
-      </button>
-    </div>
+      <div class="flex flex-col space-y-4">
+        <button class="w-full text-center border border-[#2E3238] bg-[#2E3238] text-[#EAE7E2] py-4 text-xs uppercase tracking-widest font-light hover:bg-[#B08D57] hover:border-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]" id="modal-form-btn" data-i18n="cta.modal.form">
+          Enviar Formulario
+        </button>
 
-    <div class="mt-8 pt-6 border-t border-[#2E3238]/10 text-[9px] uppercase tracking-widest text-[#2E3238]/50 text-center">
-      <p data-i18n="modal.confidentiality">Estricto Secreto Profesional · Sin Compromiso</p>
+        <a href="mailto:luisluisalmeida58@gmail.com" class="flex items-center justify-center gap-2 w-full border border-[#2E3238]/25 bg-transparent text-[#2E3238] py-4 text-xs uppercase tracking-widest font-light hover:border-[#B08D57] hover:text-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]">
+          <svg class="w-4 h-4 text-[#B08D57]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+          <span data-i18n="cta.modal.correo">Escribir por Correo</span>
+        </a>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-[#2E3238]/10 text-[9px] uppercase tracking-widest text-[#2E3238]/50 text-center">
+        <p data-i18n="modal.confidentiality">Estricto Secreto Profesional · Sin Compromiso</p>
+      </div>
     </div>
   </div>
 </div>
 
-
   <!-- Footer -->
-  <footer class="bg-[#2E3238] text-[#EAE7E2]/80 border-t border-[#B08D57]/20 pt-16 pb-12 px-6 md:px-12">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-sm font-base">
+  <footer class="bg-[#2E3238] text-[#EAE7E2]/80 border-t-2 border-[#B08D57] pt-10 lg:pt-16 pb-8 lg:pb-10 px-6 md:px-12">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12 text-sm font-base">
     <!-- Brand / Column 1 -->
-    <div class="flex flex-col items-start space-y-4">
-      <a href="index.html" class="flex flex-col items-start select-none">
+    <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
+      <a href="index.html" class="flex flex-col items-center lg:items-start select-none">
         <span class="font-heading text-4xl text-[#EAE7E2] leading-none">Almeida</span>
         <span class="text-[9px] uppercase tracking-[0.25em] text-[#B08D57] -mt-1 font-light">Perito Tasador</span>
       </a>
@@ -476,38 +488,22 @@
       </p>
     </div>
 
-    <!-- Navigation / Column 2 (Strict B2B Priority) -->
-    <div class="flex flex-col space-y-4">
+    <!-- Navigation / Column 2 -->
+    <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
       <span class="text-xs uppercase tracking-widest text-[#B08D57] font-semibold" data-i18n="nav.specialties">Especialidades</span>
-<ul class="space-y-2 text-xs uppercase tracking-wider font-light flex flex-col">
-         <li>
-           <a href="coleccionistas-particulares.html" class="link-underline-draw font-semibold" data-i18n="home.panel2.title">Coleccionistas y Particulares</a>
-         </li>
-         <li>
-           <a href="docencia-conferencias.html" class="link-underline-draw" data-i18n="home.panel3.title">Docencia y Conferencias</a>
-         </li>
-         <li>
-           <a href="herencias-sucesiones.html" class="link-underline-draw" data-i18n="home.panel4.title">Herencias y Sucesiones</a>
-         </li>
-         <li>
-           <a href="abogados-notarios.html" class="link-underline-draw" data-i18n="home.panel5.title">Abogados y Notarios</a>
-         </li>
-         <li>
-           <a href="aseguradoras-family-offices.html" class="link-underline-draw" data-i18n="home.panel6.title">Aseguradoras y Family Offices</a>
-         </li>
-         <li>
-           <a href="patrimonio-subacuatico.html" class="link-underline-draw" data-i18n="home.panel7.title">Patrimonio Subacuático</a>
-</li>
-          <li>
-            <a href="perfil.html" class="link-underline-draw font-medium" data-i18n="perfil.breadcrumb">
-              Mi Perfil
-            </a>
-          </li>
-       </ul>
+      <ul class="grid grid-cols-2 lg:flex lg:flex-col gap-x-4 gap-y-2 text-xs uppercase tracking-wider font-light w-full lg:w-auto">
+        <li><a href="coleccionistas-particulares.html" class="link-underline-draw font-semibold" data-i18n="home.panel2.title">Coleccionistas y Particulares</a></li>
+        <li><a href="docencia-conferencias.html" class="link-underline-draw" data-i18n="home.panel3.title">Docencia y Conferencias</a></li>
+        <li><a href="herencias-sucesiones.html" class="link-underline-draw" data-i18n="home.panel4.title">Herencias y Sucesiones</a></li>
+        <li><a href="abogados-notarios.html" class="link-underline-draw" data-i18n="home.panel5.title">Abogados y Notarios</a></li>
+        <li><a href="aseguradoras-family-offices.html" class="link-underline-draw" data-i18n="home.panel6.title">Aseguradoras y Family Offices</a></li>
+        <li><a href="patrimonio-subacuatico.html" class="link-underline-draw" data-i18n="home.panel7.title">Patrimonio Subacuático</a></li>
+        <li class="col-span-2 lg:col-span-1"><a href="perfil.html" class="link-underline-draw font-medium" data-i18n="perfil.breadcrumb">Mi Perfil</a></li>
+      </ul>
     </div>
 
     <!-- Contact & Legal / Column 3 -->
-    <div class="flex flex-col space-y-4">
+    <div class="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
       <span class="text-xs uppercase tracking-widest text-[#B08D57] font-semibold" data-i18n="contact.info">Información de Contacto</span>
       <ul class="space-y-3 text-xs leading-relaxed font-light">
         <li class="flex items-center gap-2">
@@ -530,23 +526,21 @@
           <span data-i18n="contact.address">La Habana, Cuba</span>
         </li>
       </ul>
-      <div class="flex items-center space-x-4 pt-4 border-t border-[#EAE7E2]/10 text-[10px] uppercase tracking-widest">
+      <div class="flex items-center gap-4 pt-4 border-t border-[#EAE7E2]/10 text-[10px] uppercase tracking-widest">
         <a href="aviso-legal.html" class="hover:text-[#B08D57] transition-colors" data-i18n="legal.notice">Aviso Legal</a>
         <a href="privacidad.html" class="hover:text-[#B08D57] transition-colors" data-i18n="legal.privacy">Privacidad</a>
       </div>
     </div>
   </div>
 
-  <div class="max-w-6xl mx-auto mt-16 pt-8 border-t border-[#EAE7E2]/10 flex flex-col sm:flex-row items-center justify-between text-[10px] uppercase tracking-widest text-[#EAE7E2]/40">
-    <div>
-      <span data-i18n="footer.rights">© 2026 Luis Manuel Almeida Luis. Todos los derechos reservados.</span>
-    </div>
-    <div class="mt-2 sm:mt-0">
-      <span data-i18n="footer.analitica">Ecosistema Cookieless · Independencia Garantizada</span>
-    </div>
+  <div class="max-w-6xl mx-auto mt-10 lg:mt-14 pt-6 border-t border-[#EAE7E2]/10 flex flex-col items-center gap-2 text-[10px] uppercase tracking-widest text-[#EAE7E2]/40">
+    <span data-i18n="footer.rights">© 2026 Luis Manuel Almeida Luis. Todos los derechos reservados.</span>
+    <a href="https://www.traziostudio.com" target="_blank" rel="noopener" class="text-[11px] normal-case tracking-normal text-[#B08D57] hover:text-[#EAE7E2] transition-colors" data-i18n="footer.credit">
+      Sitio web desarrollado por Trazio Studio
+    </a>
+    <span class="mt-1" data-i18n="footer.analitica">Ecosistema Cookieless · Independencia Garantizada</span>
   </div>
 </footer>
-
 
   <!-- JS Scripts -->
   <script src="assets/i18n-data.js"></script>

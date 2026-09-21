@@ -1,6 +1,6 @@
 <!-- Sliding Contact Form Overlay (Initially Hidden) -->
-<div id="contact-form-overlay" class="fixed inset-y-0 right-0 z-50 w-full max-w-xl bg-brand-light border-l border-brand-dark/15 shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between" role="dialog" aria-labelledby="form-title">
-  
+<div id="contact-form-overlay" class="fixed inset-y-0 right-0 z-[60] w-full max-w-xl bg-brand-light border-l border-brand-dark/15 shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between" role="dialog" aria-labelledby="form-title">
+
   <!-- Header of Slide-over -->
   <div class="p-6 md:p-8 border-b border-brand-dark/10 flex items-center justify-between">
     <div class="flex flex-col">
@@ -20,58 +20,70 @@
     <!-- Nombre -->
     <div class="flex flex-col space-y-2">
       <label for="form-nombre" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.name">Nombre Completo *</label>
-      <input type="text" id="form-nombre" name="nombre" required 
+      <input type="text" id="form-nombre" name="nombre" required
              class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full">
     </div>
 
     <!-- Correo Electrónico -->
     <div class="flex flex-col space-y-2">
       <label for="form-email" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.email">Correo Electrónico *</label>
-      <input type="email" id="form-email" name="email" required 
+      <input type="email" id="form-email" name="email" required
              class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full">
     </div>
 
     <!-- Teléfono -->
     <div class="flex flex-col space-y-2">
       <label for="form-tel" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.phone">Teléfono de Contacto</label>
-      <input type="tel" id="form-tel" name="telefono" 
+      <input type="tel" id="form-tel" name="telefono"
              class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full">
     </div>
 
-    <!-- Nicho de Interés (Order strictly matching B2B taxonomy) -->
+    <!-- Área de Especialidad — chips (antes select nativo) -->
     <div class="flex flex-col space-y-2">
-      <label for="form-nicho" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.nicho">Área de Especialidad *</label>
-      <select id="form-nicho" name="nicho_interes" required 
-              class="bg-brand-light border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full uppercase tracking-wider text-[11px] font-light">
-        <option value="coleccionistas" data-i18n="home.panel2.title">Coleccionistas y Particulares</option>
-        <option value="docencia" data-i18n="home.panel3.title">Docencia y Conferencias</option>
-        <option value="herencias" data-i18n="home.panel4.title">Herencias y Sucesiones</option>
-        <option value="abogados" data-i18n="home.panel5.title">Abogados y Notarios</option>
-        <option value="aseguradoras" data-i18n="home.panel6.title">Aseguradoras y Family Offices</option>
-        <option value="subacuatico" data-i18n="home.panel7.title">Patrimonio Subacuático</option>
-      </select>
+      <span class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" id="nicho-legend" data-i18n="form.label.nicho">Área de Especialidad *</span>
+      <div class="nicho-chip-grupo" role="radiogroup" aria-labelledby="nicho-legend">
+
+        <input type="radio" id="nicho-coleccionistas" class="nicho-chip-input" name="nicho_interes" value="coleccionistas" required>
+        <label for="nicho-coleccionistas" class="nicho-chip-label" data-i18n="home.panel2.title">Coleccionistas y Particulares</label>
+
+        <input type="radio" id="nicho-docencia" class="nicho-chip-input" name="nicho_interes" value="docencia" required>
+        <label for="nicho-docencia" class="nicho-chip-label" data-i18n="home.panel3.title">Docencia y Conferencias</label>
+
+        <input type="radio" id="nicho-herencias" class="nicho-chip-input" name="nicho_interes" value="herencias" required>
+        <label for="nicho-herencias" class="nicho-chip-label" data-i18n="home.panel4.title">Herencias y Sucesiones</label>
+
+        <input type="radio" id="nicho-abogados" class="nicho-chip-input" name="nicho_interes" value="abogados" required>
+        <label for="nicho-abogados" class="nicho-chip-label" data-i18n="home.panel5.title">Abogados y Notarios</label>
+
+        <input type="radio" id="nicho-aseguradoras" class="nicho-chip-input" name="nicho_interes" value="aseguradoras" required>
+        <label for="nicho-aseguradoras" class="nicho-chip-label" data-i18n="home.panel6.title">Aseguradoras y Family Offices</label>
+
+        <input type="radio" id="nicho-subacuatico" class="nicho-chip-input" name="nicho_interes" value="subacuatico" required>
+        <label for="nicho-subacuatico" class="nicho-chip-label" data-i18n="home.panel7.title">Patrimonio Subacuático</label>
+
+      </div>
     </div>
 
     <!-- Descripción del Encargo -->
     <div class="flex flex-col space-y-2">
       <label for="form-mensaje" class="uppercase tracking-widest font-semibold text-brand-dark/70 text-[10px]" data-i18n="form.label.message">Descripción del Caso y Piezas *</label>
-      <textarea id="form-mensaje" name="mensaje" required rows="5" 
+      <textarea id="form-mensaje" name="mensaje" required rows="5"
                 class="bg-transparent border border-brand-dark/20 px-4 py-3 text-brand-dark focus:border-brand-accent focus:outline-none transition-colors duration-200 rounded-none w-full resize-none leading-relaxed"></textarea>
     </div>
 
     <!-- GDPR Checkbox -->
     <div class="flex items-start gap-3 pt-2">
-      <input type="checkbox" id="form-gdpr" required 
+      <input type="checkbox" id="form-gdpr" required
              class="mt-1 h-4 w-4 border-brand-dark/20 text-brand-accent focus:ring-brand-accent rounded-none bg-transparent">
       <label for="form-gdpr" class="text-[11px] text-brand-dark/70 leading-relaxed font-light">
-        <span data-i18n="form.gdpr.text">Acepto el tratamiento confidencial de mis datos según la</span> 
+        <span data-i18n="form.gdpr.text">Acepto el tratamiento confidencial de mis datos según la</span>
         <a href="privacidad.html" class="text-[#B08D57] hover:underline" data-i18n="legal.privacy">Política de Privacidad</a>.
       </label>
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" 
-            class="w-full text-center border border-brand-dark bg-brand-dark text-brand-light py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#B08D57] hover:border-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]" 
+    <button type="submit"
+            class="w-full text-center border border-brand-dark bg-brand-dark text-brand-light py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#B08D57] hover:border-[#B08D57] transition-all duration-300 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B08D57]"
             data-i18n="form.submit">
       Enviar Hoja de Encargo
     </button>
