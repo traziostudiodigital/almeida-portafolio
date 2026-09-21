@@ -101,16 +101,59 @@
 }
 
 /* ==========================================
-   FASE F: Contenedores de imagen listos para recepción futura
-   ========================================== */
+    FASE F: Contenedores de imagen listos para recepción futura
+    ========================================== */
 .photo-duotone {
-  filter: grayscale(15%) sepia(8%) contrast(1.05);
+  filter: grayscale(80%) sepia(12%) contrast(1.06) brightness(0.96);
   opacity: 0;
   transform: scale(1.04);
-  transition: opacity 700ms ease-out, transform 700ms ease-out;
+  transition: opacity 700ms ease-out, transform 700ms ease-out, filter 0.5s ease;
   display: block;
 }
 .photo-duotone.is-revealed {
   opacity: 1;
   transform: scale(1);
+}
+.photo-duotone:hover,
+.photo-duotone:focus-visible {
+  filter: grayscale(0%) sepia(0%) contrast(1.0) brightness(1.0);
+}
+
+/* ==========================================
+    IMAGE SLIDER (simple CSS scroll snap)
+    ========================================== */
+.image-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin: 0 -1rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.image-slider::-webkit-scrollbar {
+  display: none;
+}
+.image-slider .slide {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 20rem; /* limit width for large screens */
+  scroll-snap-align: start;
+}
+.image-slider .slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.5rem;
+}
+@media (min-width: 640px) {
+  .image-slider .slide {
+    max-width: 28rem;
+  }
+}
+@media (min-width: 768px) {
+  .image-slider .slide {
+    max-width: 32rem;
+  }
 }
