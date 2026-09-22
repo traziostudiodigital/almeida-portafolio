@@ -24,12 +24,24 @@ function readComponent(componentPath) {
 }
 
 function processIncludes(content) {
-  const includeRegex = /<!-- @@include\(([^\)]+)\) -->/g;
+  const includeRegex = /<!-- @@include\(\s*([^\s,\)]+)(?:\s*,\s*(\{[\s\S]*?\}))?\s*\) -->/g;
   
   // Procesamiento recursivo mediante replace con callback
-  return content.replace(includeRegex, (match, filePath) => {
-    const componentPath = path.join(COMPONENTES_DIR, filePath);
-    const componentContent = readComponent(componentPath);
+  return content.replace(includeRegex, (match, filePath, jsonArgs) => {
+    const componentPath = path.join(COMPONENTES_DIR, filePath.trim());
+    let componentContent = readComponent(componentPath);
+    
+    if (jsonArgs) {
+      try {
+        const params = JSON.parse(jsonArgs);
+        for (const [key, val] of Object.entries(params)) {
+          const varRegex = new RegExp(`@@${key}`, 'g');
+          componentContent = componentContent.replace(varRegex, val);
+        }
+      } catch (e) {
+        console.warn(`Error parseando argumentos para ${filePath}:`, e.message);
+      }
+    }
     
     // Si el componente tiene sus propios includes, los procesamos recursivamente
     return processIncludes(componentContent);

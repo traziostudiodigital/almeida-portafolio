@@ -168,3 +168,98 @@ input, button, textarea, select {
   border-color: #2E3238;
   color: #EAE7E2;
 }
+
+/* =========================================================
+   FAQ BLOCK — Preguntas Frecuentes por Nicho
+   ========================================================= */
+.faq-block {
+  margin-block: 2.5rem;
+}
+
+.faq-block__title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-brand-accent);
+  margin-bottom: 1.5rem;
+}
+
+.faq-block__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-block__item {
+  border-top: 1px solid color-mix(in srgb, var(--color-brand-dark) 100%, transparent 85%);
+}
+
+.faq-block__item:last-child {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-brand-dark) 100%, transparent 85%);
+}
+
+.faq-block details {
+  background: transparent;
+}
+
+.faq-block summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1.25rem;
+  cursor: pointer;
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  font-weight: 600;
+  color: var(--color-brand-dark);
+  line-height: 1.4;
+  user-select: none;
+  transition: color 200ms ease;
+}
+
+.faq-block summary:hover {
+  color: var(--color-brand-accent);
+}
+
+.faq-block summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-block summary::marker {
+  display: none;
+}
+
+.faq-block summary::after {
+  content: "▸";
+  color: var(--color-brand-accent);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.faq-block details[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.faq-block summary:focus-visible {
+  outline: 2px solid var(--color-brand-accent);
+  outline-offset: 4px;
+}
+
+.faq-block__answer {
+  margin: 0;
+  padding-bottom: 1.25rem;
+  font-size: clamp(0.875rem, 1vw, 0.95rem);
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--color-brand-dark) 100%, transparent 15%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-block summary::after {
+    transition: none;
+  }
+}
