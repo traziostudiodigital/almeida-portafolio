@@ -43,7 +43,8 @@ const i18nData = {
     "legal.notice": "Aviso Legal",
     "legal.privacy": "Privacidad",
     "footer.about": "Dictámenes técnicos independientes de autenticidad, catalogación y valoración económica respaldados por más de 40 años de trayectoria institucional en Cuba e Iberoamérica.",
-    "footer.credit": "Trazio Studio",
+    "footer.credit": "Desarrollado por Trazio Studio",
+    "footer.contact": "Contactar",
     "contact.info": "Información de Contacto",
     "contact.address": "La Habana, Cuba",
     "footer.analitica": "Ecosistema Cookieless · Independencia Garantizada",
@@ -101,6 +102,7 @@ const i18nData = {
     "n1.cta.main": "Solicitar Dictamen Pericial",
     "cta.whatsapp.n1": "Hola, soy coleccionista/propietario de obras de arte y deseo solicitar una consulta confidencial sobre peritaje y tasación.",
     "n1.cta.form": "Enviar Hoja de Encargo Confidencial",
+    "n1.phrase.1": "«En el peritaje de arte, la independencia no es una postura ética negociable; es la única garantía de que el dictamen no responda al interés de quien compra ni de quien vende.»",
 
     // === NICHO 2: Docencia (docencia-conferencias.html) ===
     "n2.hero.h1": "Docencia, Conferencias y Formación en Tasación de Arte y Patrimonio",
@@ -124,6 +126,7 @@ const i18nData = {
     "n2.cta.main": "Solicitar Propuesta Académica",
     "cta.whatsapp.n2": "Hola, represento a una universidad/institución cultural y deseo consultar disponibilidad para un módulo académico o conferencia sobre tasación de arte y patrimonio.",
     "n2.cta.form": "Enviar Solicitud de Colaboración Académica",
+    "n2.phrase.1": "«El conocimiento pericial solo adquiere su verdadero sentido cuando se transmite; enseñar a mirar una obra es la primera trinchera contra la pérdida del patrimonio.»",
 
     // === NICHO 3: Herencias (herencias-sucesiones.html) ===
     "n3.hero.h1": "Tasación Pericial de Arte para Herencias y Sucesiones",
@@ -149,6 +152,7 @@ const i18nData = {
     "n3.cta.main": "Solicitar Tasación de Herencia",
     "cta.whatsapp.n3": "Hola, gestiono/soy heredero de un proceso de sucesión con obras de arte o bienes patrimoniales y necesito una tasación pericial confidencial.",
     "n3.cta.form": "Enviar Hoja de Encargo Confidencial",
+    "n3.phrase.1": "«En una sucesión, el perito no solo tasa objetos materiales; establece un terreno de certidumbre indiscutible donde la equidad familiar prevalece sobre el conflicto.»",
 
     // === NICHO 4: Abogados (abogados-notarios.html) ===
     "n4.hero.h1": "Perito Tasador de Arte para Litigios, Sucesiones y Notarías",
@@ -442,7 +446,8 @@ const i18nData = {
     "legal.notice": "Legal Notice",
     "legal.privacy": "Privacy Policy",
     "footer.about": "Independent technical opinions on authenticity, cataloguing, and economic valuation backed by over 40 years of institutional experience in Cuba and Ibero-America.",
-    "footer.credit": "Trazio Studio",
+    "footer.credit": "Developed by Trazio Studio",
+    "footer.contact": "Contact",
     "contact.info": "Contact Information",
     "contact.address": "Havana, Cuba",
     "footer.analitica": "Cookieless Ecosystem · Guaranteed Independence",
@@ -500,6 +505,7 @@ const i18nData = {
     "n1.cta.main": "Request Confidential Consultation",
     "cta.whatsapp.n1": "Hello, I am a private collector/owner of works of art and would like to request a confidential consultation on appraisal and authentication.",
     "n1.cta.form": "Submit a Confidential Engagement Brief",
+    "n1.phrase.1": "In fine art appraisal, independence is not a negotiable ethical stance; it is the only guarantee that the opinion does not serve the interest of either the buyer or the seller.",
 
     // === NICHO 2: Teaching (docencia-conferencias.html) ===
     "n2.hero.h1": "Teaching, Lectures & Training in Fine Art & Heritage Appraisal",
@@ -523,6 +529,7 @@ const i18nData = {
     "n2.cta.main": "Request an Academic Proposal",
     "cta.whatsapp.n2": "Hello, I represent a university/cultural institution and would like to inquire about availability for an academic module or lecture on art and heritage appraisal.",
     "n2.cta.form": "Submit an Academic Collaboration Request",
+    "n2.phrase.1": "\"Expert knowledge only acquires its true meaning when transmitted; teaching how to look at a work is the first line of defense against heritage loss.\"",
 
     // === NICHO 3: Estates (herencias-sucesiones.html) ===
     "n3.hero.h1": "Estate & Inheritance Art Appraisal Services",
@@ -548,6 +555,7 @@ const i18nData = {
     "n3.cta.main": "Request Estate Appraisal",
     "cta.whatsapp.n3": "Hello, I am managing/an heir in an estate process involving works of art or heritage assets and I need a confidential appraisal.",
     "n3.cta.form": "Submit a Confidential Engagement Brief",
+    "n3.phrase.1": "In an estate, the appraiser does not merely value material objects; they establish a field of undisputed certainty where family equity prevails over conflict.",
 
     // === NICHO 4: Lawyers (abogados-notarios.html) ===
     "n4.hero.h1": "Forensic Art Appraiser for Litigation, Probate & Notarial Proceedings",

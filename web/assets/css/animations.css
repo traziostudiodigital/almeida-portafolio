@@ -120,8 +120,87 @@
 }
 
 /* ==========================================
-    IMAGE SLIDER (simple CSS scroll snap)
-    ========================================== */
+   CONTENEDORES DE IMAGEN CON LETTERBOXING
+   Mantienen grid/tarjetas iguales; imagen hace fit interno
+   Variante fluida: altura mínima para adaptarse a distintos aspect-ratios
+   ========================================== */
+.photo-duotone {
+  /* Base: contenedor con min-height, fondo brand-light para letterbox */
+  background-color: var(--color-brand-light); /* #F5F0E8 o similar */
+  width: 100%;
+  min-height: 280px;         /* desktop fluid height (aumentado de 300px) */
+  height: auto;              /* IMPORTANTE: altura fluida */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.photo-duotone img {
+  /* La imagen real: max 100% tanto en ancho como alto → fit (contain) */
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;     /* ¡Clave! No recorta, hace letterbox */
+  filter: grayscale(80%) sepia(12%) contrast(1.06) brightness(0.96);
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 700ms ease-out, transform 700ms ease-out, filter 0.5s ease;
+}
+.photo-duotone.is-revealed img {
+  opacity: 1;
+  transform: scale(1);
+}
+.photo-duotone:hover img,
+.photo-duotone:focus-visible img {
+  filter: grayscale(0%) sepia(0%) contrast(1.0) brightness(1.0);
+}
+
+/* Responsive height fluid */
+@media (max-width: 767px) {
+  .photo-duotone { min-height: 200px; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .photo-duotone { min-height: 240px; }
+}
+@media (min-width: 1024px) {
+  .photo-duotone { min-height: 280px; }
+}
+
+/* Variante CTA - altura mínima fluida, más alta que hero */
+.photo-duotone--cta {
+  min-height: 340px;      /* fluid height, mucho mayor que hero */
+  height: auto;
+}
+@media (max-width: 767px) {
+  .photo-duotone--cta { min-height: 220px; }
+}
+
+/* Espacio adicional entre texto y imagen en Hero (Block 1) */
+section[data-reveal="left"] .photo-duotone,
+section[data-reveal="left"] > .photo-duotone {
+  margin-top: 2.5rem;   /* 40px - aire entre título y foto */
+}
+@media (min-width: 768px) {
+  section[data-reveal="left"] .photo-duotone,
+  section[data-reveal="left"] > .photo-duotone {
+    margin-top: 3.5rem;   /* 56px - más espacio en desktop */
+  }
+}
+
+/* Grid CTA para 2 imágenes - asegura alineación consistente */
+.photo-duotone--cta.grid-cta {
+  min-height: 300px;
+  height: auto;
+}
+@media (max-width: 767px) {
+  .photo-duotone--cta.grid-cta { min-height: 200px; }
+}
+
+/* ==========================================
+     IMAGE SLIDER (simple CSS scroll snap)
+     ========================================== */
 .image-slider {
   display: flex;
   overflow-x: auto;
