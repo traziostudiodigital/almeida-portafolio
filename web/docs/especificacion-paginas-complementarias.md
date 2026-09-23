@@ -56,7 +56,7 @@ Cualquier menú, listado o bloque de navegación que enumere los nichos de espec
   - **Título / Rol:** Especialista en Patrimonio Cultural y Tasación de Obras de Arte.
   - **Ubicación / Domicilio:** La Habana, Cuba.
   - **Correo electrónico de contacto:** `luisluisalmeida58@gmail.com`.
-  - **Teléfono de contacto:** `+53 52493677`.
+  - **Nota:** El contacto se realiza principalmente por correo electrónico.
 - **Cláusulas Principales:**
   1. *Propiedad Intelectual:* Los textos, metodologías y contenidos de este sitio son propiedad exclusiva de Luis Manuel Almeida Luis. Prohibida la reproducción total o parcial sin autorización.
   2. *Naturaleza Informativa de la Web:* Los contenidos presentados revisten carácter informativo sobre los servicios de tasación y peritaje. Ningún contenido web constituye por sí solo un dictamen formal.
@@ -99,8 +99,8 @@ Cualquier menú, listado o bloque de navegación que enumere los nichos de espec
   - Titular ES: *"Consulta Recibida con Éxito"* / EN: *"Inquiry Received Successfully"*.
   - Subtítulo ES: *"Gracias por contactar. Su solicitud será evaluada con la más absoluta confidencialidad pericial en un plazo máximo de 24-48 horas hábiles."* / EN: *"Thank you for reaching out. Your request will be evaluated under strict appraisal confidentiality within 24-48 business hours."*
 - **Acciones Post-Envío:**
-  - Botón principal: Regresar al Inicio (`index.html`).
-  - Botón secundario: Contacto urgente por WhatsApp (+53 52493677).
+   - Botón principal: Regresar al Inicio (`index.html`).
+   - Botón secundario: Contacto urgente mediante correo electrónico (luisluisalmeida58@gmail.com).
 
 ---
 

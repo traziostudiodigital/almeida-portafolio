@@ -64,12 +64,7 @@
             var dict = i18nData[this.currentLang];
             var content = dict ? dict[key] : undefined;
 
-            // Matiz para Nicho #5: Si estamos en EN y es una clave específica de ese nicho
-            // que requiere un tono comercial más directo.
-            if (this.currentLang === 'en' && key === 'n5.cta.whatsapp') {
-                // Aquí aplicamos el matiz solicitado: énfasis comercial en EN
-                return "Hello, I represent an insurance company/family office and require an expert valuation of an art collection or high-value assets.";
-            }
+            
 
             return content;
         },

@@ -34,8 +34,8 @@
       'chat.welcome_msg': 'Consulte información sobre metodologías de tasación, nichos de mercado o legislación patrimonial. Asistente técnico del ecosistema Almeida.',
       'chat.analyzing': 'Consultando dictámenes y archivo pericial...',
       'chat.input_placeholder': 'Escriba su consulta pericial...',
-      'chat.footer_notice': 'Atención confidencial · WhatsApp: +53 52493677',
-      'chat.error_msg': 'No se pudo conectar con el archivo pericial. Inténtelo de nuevo o contacte por WhatsApp.',
+'chat.footer_notice': 'Atención confidencial · Contacte por correo electrónico',
+       'chat.error_msg': 'No se pudo conectar con el archivo pericial. Inténtelo de nuevo o contacte por correo electrónico.',
       'chat.empty_warning': 'Por favor, escriba una consulta.'
     };
     return fallback[key] || key;

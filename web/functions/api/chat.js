@@ -9,7 +9,7 @@ TU IDENTIDAD Y OBJETIVO:
 - Eres una herramienta de consulta sobria, institucional y de alta precisión técnica pericial.
 - No eres un bot de atención al cliente ni una "burbuja de chat" genérica. Eres la extensión digital del archivo profesional de Almeida.
 - Tu objetivo es responder preguntas sobre metodologías de peritaje, valuación, certificación de autenticidad, patrimonio histórico-artístico, legislación de bienes culturales y orientar sobre los 6 nichos de especialización de la firma.
-- Debes conducir al usuario interesado hacia una consulta formal mediante WhatsApp (+53 52493677) o el Formulario Confidencial del sitio.
+- Debes conducir al usuario interesado hacia una consulta formal mediante correo electrónico (luisluisalmeida58@gmail.com) o el Formulario Confidencial del sitio.
 
 REGLAS DE CERO INVENCIÓN Y ÉTICA PERICIAL (ESTRICTO):
 1. SOLO afirma datos explícitamente contenidos en este contexto. Si se te pregunta por una obra, artista, año o valoración específica que no esté en la base de datos, indica con elegancia que la evaluación de piezas únicas requiere una inspección ocular y pericial directa.
@@ -34,7 +34,7 @@ SÍNTESIS DEL PERFIL PROFESIONAL DE LUIS MANUEL ALMEIDA LUIS:
 - Vínculos Actuales: Especialista en Patrimonio Fílmico en ICAIC; Asesor/Especialista en CODEMA/CNAP.
 
 CANALES DE CONTACTO OFICIALES:
-- WhatsApp Directo: +53 52493677
+- Correo Electrónico: luisluisalmeida58@gmail.com
 - Correo Electrónico: luisluisalmeida58@gmail.com
 - Formulario Web: Anclado en el modal de Consulta Confidencial de la web.
 
@@ -180,14 +180,14 @@ export async function onRequestPost(context) {
 
     // Fallback asistido en caso de entorno local sin claves o bindings
     const userQuery = recentMessages[recentMessages.length - 1]?.content.toLowerCase() || "";
-    let fallbackText = "Consulte información sobre metodologías de tasación, nichos de mercado o historia del arte. Para una evaluación pericial directa o presupuesto formal de su colección, le sugerimos contactar vía WhatsApp (+53 52493677) o mediante el Formulario Confidencial del sitio.";
+    let fallbackText = "Consulte información sobre metodologías de tasación, nichos de mercado o historia del arte. Para una evaluación pericial directa o presupuesto formal de su colección, le sugerimos contactar mediante correo electrónico (luisluisalmeida58@gmail.com) o el Formulario Confidencial del sitio.";
 
     if (userQuery.includes("tarifa") || userQuery.includes("precio") || userQuery.includes("costo") || userQuery.includes("cobras")) {
-      fallbackText = "Los honorarios profesionales del especialista se basan en el tiempo de investigación e inspección técnica (tarifa base orientativa de 125 EUR/h para dictámenes y 50 USD para consultas puntuales). Cada encargo se cotiza formalmente previa evaluación del volumen documental. Puede solicitar un presupuesto personalizado por WhatsApp (+53 52493677).";
+      fallbackText = "Los honorarios profesionales del especialista se basan en el tiempo de investigación e inspección técnica (tarifa base orientativa de 125 EUR/h para dictámenes y 50 USD para consultas puntuales). Cada encargo se cotiza formalmente previa evaluación del volumen documental. Puede solicitar un presupuesto personalizado mediante correo electrónico (luisluisalmeida58@gmail.com).";
     } else if (userQuery.includes("herencia") || userQuery.includes("sucesi")) {
       fallbackText = "El servicio de tasación para herencias y sucesiones patrimoniales ofrece valuación objetiva e imparcial para el reparto equitativo de hijuelas y prevención de litigios familiares. Contacte directamente para coordinar una inspección confidencial.";
     } else if (userQuery.includes("contacto") || userQuery.includes("telefono") || userQuery.includes("whatsapp")) {
-      fallbackText = "Puede contactar con la firma directamente a través de WhatsApp en el +53 52493677 o enviando una solicitud mediante el Formulario de Consulta Confidencial de este sitio web.";
+      fallbackText = "Puede contactar con la firma directamente mediante correo electrónico (luisluisalmeida58@gmail.com) o enviando una solicitud mediante el Formulario de Consulta Confidencial de este sitio web.";;
     }
 
     return new Response(
