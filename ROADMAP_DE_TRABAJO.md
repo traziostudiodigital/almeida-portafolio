@@ -236,7 +236,7 @@ Para optimizar el desarrollo y la gestión de recursos, el ecosistema se divide 
     - **Build Output Directory:** `.` (o la raíz del módulo `/web/`)
   - `[IA / Usuario]`: Desplegar la primera build y verificar la URL de vista previa asignada (`almeida-portafolio.pages.dev`).
 
-- [ ] **5.5.3 — Depuración Visual, Ajustes de CSS y Nueva Página de Perfil:**
+- [x] **5.5.3 — Depuración Visual, Ajustes de CSS y Nueva Página de Perfil:**
   - `[IA]`: **Optimización de Tarjetas (Bolas) del Home:**
     - Corregir el recorte y centrado del texto en las 6 tarjetas orgánicas del Home. Solucionar el problema de que el texto de la primera tarjeta ("Coleccionistas y Particulares") se vea cortado o apretado en ciertas resoluciones, y asegurar que el resto de las tarjetas (que muestran solo un fragmento corto e invitan a pasar el cursor) tengan un ritmo visual perfecto y armónico.
   - `[IA]`: **Micro-mejoras Estéticas en Móvil:**
@@ -256,7 +256,7 @@ Para optimizar el desarrollo y la gestión de recursos, el ecosistema se divide 
       - Actualizar `nav-mobile-overlay.html`, `footer-home.html`, `footer-nicho.html` y el `sitemap.xml` / `robots.txt` para incluir la nueva URL de perfil.
   - `[IA + Usuario]`: Cada cambio subido a GitHub con `git push` compilará automáticamente en Cloudflare Pages en ~15 segundos.
 
-- [ ] **5.5.4 — Vinculación del Dominio Definitivo (`almeidatasacion.com`) y DNS:**
+- [x] **5.5.4 — Vinculación del Dominio Definitivo (`almeidatasacion.com`) y DNS:**
   - `[Usuario]`: En Cloudflare Pages, ir a **Custom Domains > Set up a custom domain** e ingresar `almeidatasacion.com`.
   - `[Usuario]`: En el panel del registrador (Hostinger), cambiar los NameServers (servidores de nombres) por los dos indicados por Cloudflare.
   - `[IA / Usuario]`: Verificación del estado SSL/TLS (Certificado Universal HTTPS activo), purga inicial de caché y confirmación de redirecciones relativas/absolutas del sitio.
