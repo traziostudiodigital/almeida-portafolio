@@ -27,6 +27,20 @@ const i18nData = {
     "interlinking.label": "Especialidades Relacionadas",
     "cta.support": "Estricto Secreto Profesional · Sin Compromiso",
 
+    // === CHAT IA PERICIAL ===
+    "chat.header_title": "Consulta Pericial IA",
+    "chat.header_subtitle": "Asistencia técnica basada en el archivo pericial de Almeida",
+    "chat.bot_label": "Archivo Almeida · Asistente",
+    "chat.user_label": "Usted",
+    "chat.welcome_msg": "Consulte información sobre metodologías de tasación, catalogación patrimonial o alcance pericial en los 6 nichos de especialización. Asistente técnico del ecosistema Almeida.",
+    "chat.analyzing": "Consultando dictámenes y archivo pericial...",
+    "chat.input_placeholder": "Escriba su consulta pericial...",
+    "chat.footer_notice": "Atención confidencial · Dictámenes bajo estricto secreto profesional",
+    "chat.error_msg": "No se pudo conectar con el servicio pericial. Inténtelo nuevamente o contacte directamente por los canales oficiales.",
+    "chat.empty_warning": "Por favor, formule una consulta pericial.",
+    "chat.session_limit_msg": "Para profundizar en su consulta, le invitamos a escribir directamente a luisluisalmeida58@gmail.com para una evaluación confidencial.",
+    "chat.daily_limit_msg": "El asistente ha alcanzado su capacidad de consulta por hoy. Para atención inmediata, escriba a luisluisalmeida58@gmail.com.",
+
     // === PROCESO (Común a los 6 nichos) ===
     "process.title": "Cómo Trabajamos",
     "process.step1.title": "Consulta Inicial",
@@ -429,6 +443,20 @@ const i18nData = {
     "label.problem": "The Problem",
     "interlinking.label": "Related Specialties",
     "cta.support": "Strict Professional Confidentiality · No Obligation",
+
+    // === CHAT IA PERICIAL ===
+    "chat.header_title": "AI Appraisal Advisory",
+    "chat.header_subtitle": "Technical assistance based on Almeida's appraisal archive",
+    "chat.bot_label": "Almeida Archive · Assistant",
+    "chat.user_label": "You",
+    "chat.welcome_msg": "Inquire about appraisal methodologies, heritage cataloging, or technical scope across our 6 areas of expertise. Technical assistant of the Almeida ecosystem.",
+    "chat.analyzing": "Consulting appraisal records and archive...",
+    "chat.input_placeholder": "Enter your appraisal inquiry...",
+    "chat.footer_notice": "Confidential service · Reports under strict professional secrecy",
+    "chat.error_msg": "Could not connect to the appraisal service. Please try again or reach out directly through official channels.",
+    "chat.empty_warning": "Please enter an appraisal inquiry.",
+    "chat.session_limit_msg": "To explore your inquiry further, we invite you to write directly to luisluisalmeida58@gmail.com for a confidential evaluation.",
+    "chat.daily_limit_msg": "The assistant has reached its daily consultation capacity. For immediate assistance, write to luisluisalmeida58@gmail.com.",
 
     // === PROCESO (Common to all 6 niches) ===
     "process.title": "How We Work",

@@ -263,3 +263,55 @@ input, button, textarea, select {
     transition: none;
   }
 }
+/* Añadir a web/assets/css o al bloque de estilos del componente */
+
+/* Nodo central: pulso muy sutil */
+.chat-node-core {
+  animation: chat-core-pulse 3s ease-in-out infinite;
+}
+@keyframes chat-core-pulse {
+  0%, 100% { r: 2.5; opacity: 1; }
+  50% { r: 3; opacity: 0.85; }
+}
+
+/* Líneas: trazado tipo constelación en loop, desfasadas entre sí */
+.chat-line {
+  stroke-dasharray: 14;
+  stroke-dashoffset: 14;
+  opacity: 0.5;
+  animation: chat-line-draw 9s ease-in-out infinite;
+}
+.chat-line-1 { animation-delay: 0s; }
+.chat-line-2 { animation-delay: 1.8s; }
+.chat-line-3 { animation-delay: 3.6s; }
+.chat-line-4 { animation-delay: 5.4s; }
+
+@keyframes chat-line-draw {
+  0%   { stroke-dashoffset: 14; opacity: 0.3; }
+  40%  { stroke-dashoffset: 0;  opacity: 0.75; }
+  60%  { stroke-dashoffset: 0;  opacity: 0.75; }
+  100% { stroke-dashoffset: -14; opacity: 0.3; }
+}
+
+/* Hover: intensifica y acelera todo el conjunto */
+#chat-ia-trigger:hover .chat-line {
+  animation-duration: 3.5s;
+  opacity: 0.9;
+}
+#chat-ia-trigger:hover .chat-node-core {
+  animation-duration: 1.2s;
+}
+
+/* Ventana: entrada suave */
+#chat-ia-window {
+  animation: chat-window-in 0.25s ease-out;
+}
+@keyframes chat-window-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar discreto en mensajes (opcional, mejora percepción premium) */
+#chat-ia-messages::-webkit-scrollbar { width: 3px; }
+#chat-ia-messages::-webkit-scrollbar-thumb { background: rgba(176,141,87,0.3); 
+}

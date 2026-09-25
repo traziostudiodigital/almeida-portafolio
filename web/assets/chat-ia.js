@@ -8,61 +8,43 @@
   'use strict';
 
   const API_ENDPOINT = '/api/chat';
-  const STORAGE_KEY = 'almeida_chat_history';
 
   // Estado del Widget
   let state = {
     isOpen: false,
     isLoading: false,
     history: [],
-    language: 'es'
+    language: 'es',
+    sessionId: Math.random().toString(36).substr(2, 9), // Session ID efímero
+    turnCount: 0 // Contador de turnos efímero
   };
 
   // Referencias DOM
   const els = {};
 
-  // Utilidad i18n ligera (usa window.i18n si existe, sino keys directas)
+// Utilidad i18n ligera (usa window.i18nData si existe, sino keys directas)
   function t(key) {
+    const lang = (window.i18nCore && window.i18nCore.currentLang) || document.documentElement.lang || state.language || 'es';
+    if (window.i18nData && window.i18nData[lang] && window.i18nData[lang][key]) {
+      return window.i18nData[lang][key];
+    }
     if (window.i18n && typeof window.i18n.t === 'function') {
       return window.i18n.t(key);
     }
-    // Fallback hardcoded solo para claves del chat (evita flicker si i18n tarda)
+    // Fallback hardcoded de seguridad
     const fallback = {
       'chat.header_title': 'Consulta Pericial IA',
-      'chat.header_subtitle': 'IA entrenada con el archivo profesional de Almeida',
+      'chat.header_subtitle': 'Asistencia técnica basada en el archivo pericial de Almeida',
       'chat.bot_label': 'Archivo Almeida · Asistente',
-      'chat.welcome_msg': 'Consulte información sobre metodologías de tasación, nichos de mercado o legislación patrimonial. Asistente técnico del ecosistema Almeida.',
+      'chat.user_label': 'Usted',
+      'chat.welcome_msg': 'Consulte información sobre metodologías de tasación, catalogación patrimonial o alcance pericial en los 6 nichos de especialización. Asistente técnico del ecosistema Almeida.',
       'chat.analyzing': 'Consultando dictámenes y archivo pericial...',
       'chat.input_placeholder': 'Escriba su consulta pericial...',
-'chat.footer_notice': 'Atención confidencial · Contacte por correo electrónico',
-       'chat.error_msg': 'No se pudo conectar con el archivo pericial. Inténtelo de nuevo o contacte por correo electrónico.',
-      'chat.empty_warning': 'Por favor, escriba una consulta.'
+      'chat.footer_notice': 'Atención confidencial · Dictámenes bajo estricto secreto profesional',
+      'chat.error_msg': 'No se pudo conectar con el servicio pericial. Inténtelo nuevamente o contacte directamente por los canales oficiales.',
+      'chat.empty_warning': 'Por favor, formule una consulta pericial.'
     };
     return fallback[key] || key;
-  }
-
-  // Cargar historial desde localStorage (persistencia ligera entre recargas)
-  function loadHistory() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          state.history = parsed.slice(-12); // límite de 12 mensajes guardados
-        }
-      }
-    } catch (e) {
-      console.warn('[Chat IA] Error cargando historial:', e);
-    }
-  }
-
-  // Guardar historial
-  function saveHistory() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.history));
-    } catch (e) {
-      console.warn('[Chat IA] Error guardando historial:', e);
-    }
   }
 
   // Renderizar un mensaje en el DOM
@@ -85,14 +67,14 @@
     container.scrollTop = container.scrollHeight;
   }
 
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&')
-      .replace(/</g, '<')
-      .replace(/>/g, '>')
-      .replace(/"/g, '"')
-      .replace(/'/g, ''');
-  }
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&')
+    .replace(/</g, '<')
+    .replace(/>/g, '>')
+    .replace(/"/g, '"')
+    .replace(/'/g, ''');
+}
 
   // Renderizar historial completo (al abrir)
   function renderHistory() {
@@ -115,39 +97,48 @@
   }
 
   // Enviar mensaje al backend
-  async function sendMessage(text) {
-    if (state.isLoading || !text.trim()) return;
+async function sendMessage(text) {
+     if (state.isLoading || !text.trim()) return;
 
-    const userText = text.trim();
-    renderMessage('user', userText);
-    state.history.push({ role: 'user', content: userText });
-    saveHistory();
+     const userText = text.trim();
+     renderMessage('user', userText);
+     state.history.push({ role: 'user', content: userText });
+     state.turnCount++;
 
-    setLoading(true);
+     // LÍMITE DE SESIÓN: 8 turnos totales (user+assistant = 4 intercambios completos)
+     const SESSION_TURN_LIMIT = 8;
+     if (state.turnCount >= SESSION_TURN_LIMIT) {
+       renderMessage('bot', t('chat.session_limit_msg'));
+       if (els.input) els.input.disabled = true;
+       if (els.submitBtn) els.submitBtn.disabled = true;
+       return;
+     }
 
-    try {
-      const res = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: state.history })
-      });
+     setLoading(true);
 
-      const data = await res.json();
+     try {
+       const res = await fetch(API_ENDPOINT, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ messages: state.history, lang: state.language })
+       });
 
-      if (data.success && data.response) {
-        renderMessage('bot', data.response);
-        state.history.push({ role: 'assistant', content: data.response });
-        saveHistory();
-      } else {
-        throw new Error(data.error || 'Respuesta inválida del servidor');
-      }
-    } catch (err) {
-      console.error('[Chat IA] Error:', err);
-      renderMessage('bot', t('chat.error_msg'));
-    } finally {
-      setLoading(false);
-    }
-  }
+       const data = await res.json();
+
+       if (data.success && data.response) {
+         renderMessage('bot', data.response);
+         state.history.push({ role: 'assistant', content: data.response });
+         state.turnCount++;
+       } else {
+         throw new Error(data.error || 'Respuesta inválida del servidor');
+       }
+     } catch (err) {
+       console.error('[Chat IA] Error:', err);
+       renderMessage('bot', t('chat.error_msg'));
+     } finally {
+       setLoading(false);
+     }
+   }
 
   // Toggle ventana
   function toggleWindow(open) {
@@ -210,14 +201,16 @@
 
   // Sincronizar idioma con i18n global
   function syncLanguage() {
-    if (window.i18n && typeof window.i18n.getLang === 'function') {
-      state.language = window.i18n.getLang();
+    if (window.i18nCore && window.i18nCore.currentLang) {
+      state.language = window.i18nCore.currentLang;
+    } else if (document.documentElement.lang) {
+      state.language = document.documentElement.lang;
     }
     // Actualizar placeholders y textos estáticos si el widget está abierto
     if (els.input) els.input.placeholder = t('chat.input_placeholder');
-    // Re-renderizar textos con data-i18n si el motor global no lo hace automáticamente
-    if (window.i18n && typeof window.i18n.translatePage === 'function') {
-      window.i18n.translatePage(state.language);
+    // Re-renderizar textos con data-i18n
+    if (window.i18nCore && typeof window.i18nCore.translateAll === 'function') {
+      window.i18nCore.translateAll();
     }
   }
 
@@ -229,24 +222,23 @@
     send: (text) => sendMessage(text)
   };
 
-  // Inicialización
-  function init() {
-    cacheElements();
-    if (!els.widget) {
-      console.warn('[Chat IA] Componente no encontrado en el DOM');
-      return;
-    }
-    loadHistory();
-    bindEvents();
-    syncLanguage();
-
-    // Escuchar cambios de idioma globales
-    if (window.i18n && typeof window.i18n.onLangChange === 'function') {
-      window.i18n.onLangChange(syncLanguage);
-    }
-
-    console.log('[Chat IA] Widget inicializado correctamente');
-  }
+// Inicialización
+   function init() {
+     cacheElements();
+     if (!els.widget) {
+       console.warn('[Chat IA] Componente no encontrado en el DOM');
+       return;
+     }
+     bindEvents();
+     syncLanguage();
+ 
+     // Escuchar cambios de idioma globales
+     if (window.i18n && typeof window.i18n.onLangChange === 'function') {
+       window.i18n.onLangChange(syncLanguage);
+     }
+ 
+     console.log('[Chat IA] Widget inicializado correctamente');
+   }
 
   // Arranque seguro (DOMContentLoaded o inmediato si ya cargó)
   if (document.readyState === 'loading') {

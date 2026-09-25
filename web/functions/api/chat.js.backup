@@ -1,0 +1,273 @@
+/**
+ * Cloudflare Pages Function: /api/chat
+ * Asistente Virtual Pericial - Ecosistema Luis Manuel Almeida Luis
+ * Implementación real con Groq + KV + Detección de Nicho
+ */
+
+const ALLOWED_ORIGINS = [
+  'https://almeidatasacion.com',
+  'https://www.almeidatasacion.com'
+];
+
+const DAILY_CAP = 600;
+const KV_KEY_PREFIX = 'chat_count:';
+const KV_TTL_SECONDS = 90000; // ~25 hours
+const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_MODEL = 'llama-3.1-8b-instant';
+const MAX_TOKENS = 400;
+const TEMPERATURE = 0.3;
+
+function getCorsHeaders(origin) {
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    "Access-Control-Allow-Origin": allowOrigin,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Content-Type": "application/json; charset=utf-8",
+    "Vary": "Origin"
+  };
+}
+
+function getI18nMessage(key, lang) {
+  const messages = {
+    es: {
+      'chat.daily_limit_msg': 'El asistente ha alcanzado su capacidad de consulta por hoy. Para atención inmediata, escriba a luisluisalmeida58@gmail.com.',
+      'chat.error_msg': 'No se pudo conectar con el servicio pericial. Inténtelo nuevamente o contacte directamente por los canales oficiales.',
+      'chat.session_limit_msg': 'Para profundizar en su consulta, le invitamos a escribir directamente a luisluisalmeida58@gmail.com para una evaluación confidencial.'
+    },
+    en: {
+      'chat.daily_limit_msg': 'The assistant has reached its daily consultation capacity. For immediate assistance, write to luisluisalmeida58@gmail.com.',
+      'chat.error_msg': 'Could not connect to the appraisal service. Please try again or reach out directly through official channels.',
+      'chat.session_limit_msg': 'To explore your inquiry further, we invite you to write directly to luisluisalmeida58@gmail.com for a confidential evaluation.'
+    }
+  };
+  return messages[lang]?.[key] || messages.es[key] || key;
+}
+
+// CONTEXT_BLOCKS - Placeholders vacíos (se llenarán posteriormente según indicaciones)
+const CONTEXT_BLOCKS = {
+  perfil: { es: '', en: '' },
+  n1: { es: '', en: '' },      // Coleccionistas
+  n2: { es: '', en: '' },      // Docencia
+  n3: { es: '', en: '' },      // Herencias
+  n4: { es: '', en: '' },      // Abogados
+  n5: { es: '', en: '' },      // Aseguradoras
+  n6: { es: '', en: '' }       // Patrimonio Subacuático
+};
+
+const NICHE_KEYWORDS = {
+  n1: {
+    es: ['coleccionista', 'particular', 'autenticidad', 'catalogación', 'valoración', 'obra', 'pintura', 'escultura', 'inversión', 'adquirir', 'comprar', 'vender', 'certificado'],
+    en: ['collector', 'private', 'authentication', 'cataloguing', 'valuation', 'artwork', 'painting', 'sculpture', 'investment', 'acquire', 'buy', 'sell', 'certificate']
+  },
+  n2: {
+    es: ['docencia', 'conferencia', 'formación', 'universidad', 'museo', 'académico', 'curso', 'diplomado', 'taller', 'enseñanza', 'capacitación', 'estudiante', 'profesor'],
+    en: ['teaching', 'lecture', 'training', 'university', 'museum', 'academic', 'course', 'diploma', 'workshop', 'education', 'student', 'professor']
+  },
+  n3: {
+    es: ['herencia', 'sucesión', 'heredero', 'partición', 'testamento', 'caudal relicto', 'notaría', 'hacienda', 'fiscal', 'liquidación', 'reparto', 'legítima'],
+    en: ['inheritance', 'estate', 'heir', 'partition', 'will', 'probate', 'notary', 'tax', 'liquidation', 'distribution', 'legacy']
+  },
+  n4: {
+    es: ['abogado', 'notario', 'litigio', 'judicial', 'procesal', 'perito partidor', 'auxilio judicial', 'impugnación', 'demanda', 'juicio', 'sede judicial', 'ratificación'],
+    en: ['lawyer', 'notary', 'litigation', 'judicial', 'procedural', 'expert', 'judicial assistance', 'impeachment', 'lawsuit', 'trial', 'ratification']
+  },
+  n5: {
+    es: ['aseguradora', 'family office', 'póliza', 'seguro', 'siniestro', 'valor asegurable', 'reposición', 'auditoría', 'colección corporativa', 'broker', 'reaseguro', 'comité de riesgo'],
+    en: ['insurer', 'family office', 'policy', 'insurance', 'claim', 'insurable value', 'replacement', 'audit', 'corporate collection', 'broker', 'reinsurance', 'risk committee']
+  },
+  n6: {
+    es: ['subacuático', 'pecio', 'arqueología', 'sumergido', 'mercedes', 'palemón', 'yacimientos', 'marino', 'bajo agua', 'naufragio', 'artefacto', 'arqueológico'],
+    en: ['underwater', 'shipwreck', 'archaeology', 'submerged', 'mercedes', 'palemon', 'sites', 'marine', 'underwater', 'wreck', 'artifact', 'archaeological']
+  }
+};
+
+function detectNiche(lastUserMessage, lang = 'es') {
+  const text = (lastUserMessage || '').toLowerCase();
+  const scores = {};
+
+  for (const [niche, keywords] of Object.entries(NICHE_KEYWORDS)) {
+    const langKeywords = keywords[lang] || keywords.es;
+    let count = 0;
+    for (const kw of langKeywords) {
+      if (text.includes(kw.toLowerCase())) count++;
+    }
+    if (count > 0) scores[niche] = count;
+  }
+
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+
+  if (sorted.length >= 2 && sorted[0][1] > 0 && sorted[1][1] > 0) {
+    return [sorted[0][0], sorted[1][0]];
+  }
+  if (sorted.length >= 1 && sorted[0][1] > 0) {
+    return [sorted[0][0]];
+  }
+  return ['perfil'];
+}
+
+function buildSystemPrompt(detectedNiches, lang) {
+  const isEn = lang === 'en';
+
+  const toneInstruction = isEn
+    ? 'You are a senior art appraisal expert. Tone: formal, clinical, sober. No marketing adjectives. Neutral English (no regionalisms).'
+    : 'Eres un perito tasador senior de arte. Tono: formal, clínico, sobrio. Sin adjetivos de marketing. Español neutro sin argentinismos.';
+
+  const zeroInventionRule = isEn
+    ? 'ZERO INVENTION RULE: Never invent data outside the provided CONTEXT. If information is not in the context, state that it is not available in the technical archive.'
+    : 'REGLA DE CERO INVENCIÓN: Nunca inventes datos fuera del CONTEXTO proporcionado. Si la información no está en el contexto, indica que no consta en el archivo técnico.';
+
+  const closingRule = isEn
+    ? 'CLOSING RULE: Naturally invite the user to write by email for a confidential evaluation. Never sound like a marketing CTA or tech support. Never mention WhatsApp.'
+    : 'REGLA DE CIERRE: Invita naturalmente a escribir por correo para evaluación confidencial. Nunca suenes a CTA de marketing ni soporte técnico. Nunca menciones WhatsApp.';
+
+  const contextBlocks = detectedNiches
+    .map(n => CONTEXT_BLOCKS[n]?.[lang] || '')
+    .filter(Boolean)
+    .join('\n\n---\n\n');
+
+  return `${toneInstruction}\n\n${zeroInventionRule}\n\n${closingRule}\n\n=== CONTEXTO TÉCNICO ===\n${contextBlocks}`;
+}
+
+async function callGroq(messages, systemPrompt, apiKey) {
+  const payload = {
+    model: GROQ_MODEL,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      ...messages
+    ],
+    max_tokens: MAX_TOKENS,
+    temperature: TEMPERATURE
+  };
+
+  const response = await fetch(GROQ_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    if (response.status === 429) {
+      throw { status: 429, message: 'Rate limited', data: errorData };
+    }
+    throw { status: response.status, message: errorData.error?.message || 'Groq API error', data: errorData };
+  }
+
+  const data = await response.json();
+  return data.choices?.[0]?.message?.content?.trim() || '';
+}
+
+async function checkDailyCounter(env, lang) {
+  const today = new Date().toISOString().split('T')[0];
+  const key = `${KV_KEY_PREFIX}${today}`;
+  const count = parseInt(await env.CHAT_KV.get(key) || '0', 10);
+
+  if (count >= DAILY_CAP) {
+    const msg = getI18nMessage('chat.daily_limit_msg', lang);
+    return { limitReached: true, response: msg, key, count };
+  }
+  return { limitReached: false, key, count };
+}
+
+async function incrementDailyCounter(env, key) {
+  const newCount = parseInt(await env.CHAT_KV.get(key) || '0', 10) + 1;
+  await env.CHAT_KV.put(key, String(newCount), { expirationTtl: KV_TTL_SECONDS });
+  return newCount;
+}
+
+export async function onRequestOptions(context) {
+  const origin = context.request.headers.get('Origin') || '';
+  return new Response(null, {
+    status: 204,
+    headers: getCorsHeaders(origin)
+  });
+}
+
+export async function onRequestPost(context) {
+  const { request, env } = context;
+  const origin = request.headers.get('Origin') || '';
+  const corsHeaders = getCorsHeaders(origin);
+
+  try {
+    const body = await request.json().catch(() => ({}));
+    const messages = body.messages || [];
+    const lang = (body.lang || 'es').toLowerCase();
+    const validLang = ['es', 'en'].includes(lang) ? lang : 'es';
+
+    if (!messages.length) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Mensaje requerido' }),
+        { status: 400, headers: corsHeaders }
+      );
+    }
+
+    // Último mensaje del usuario
+    const lastUserMessage = messages.filter(m => m.role === 'user').pop();
+    if (!lastUserMessage) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'No se encontró mensaje de usuario' }),
+        { status: 400, headers: corsHeaders }
+      );
+    }
+
+    // 1. Verificar límite diario ANTES de llamar a Groq
+    const dailyCheck = await checkDailyCounter(env, validLang);
+    if (dailyCheck.limitReached) {
+      return new Response(
+        JSON.stringify({ success: true, response: dailyCheck.response, limitReached: true }),
+        { status: 200, headers: corsHeaders }
+      );
+    }
+
+    // 2. Detectar nicho(s) por keywords en último mensaje user
+    const detectedNiches = detectNiche(lastUserMessage.content, validLang);
+
+    // 3. Construir system prompt dinámico
+    const systemPrompt = buildSystemPrompt(detectedNiches, validLang);
+
+    // 4. Llamar a Groq
+    const apiKey = env.GROQ_API_KEY;
+    if (!apiKey) {
+      console.error('[Chat API] GROQ_API_KEY no configurada');
+      return new Response(
+        JSON.stringify({ success: false, error: 'Configuración de servidor incompleta' }),
+        { status: 500, headers: corsHeaders }
+      );
+    }
+
+    let groqResponse;
+    try {
+      groqResponse = await callGroq(messages, systemPrompt, apiKey);
+    } catch (groqErr) {
+      if (groqErr.status === 429) {
+        const msg = getI18nMessage('chat.error_msg', validLang);
+        return new Response(
+          JSON.stringify({ success: true, response: msg, limitReached: true }),
+          { status: 200, headers: corsHeaders }
+        );
+      }
+      console.error('[Chat API] Error Groq:', groqErr);
+      throw groqErr;
+    }
+
+    // 5. Incrementar contador KV SOLO tras éxito
+    await incrementDailyCounter(env, dailyCheck.key);
+
+    // 6. Respuesta exitosa
+    return new Response(
+      JSON.stringify({ success: true, response: groqResponse }),
+      { status: 200, headers: corsHeaders }
+    );
+
+  } catch (error) {
+    console.error('[Chat API] Error interno:', error);
+    return new Response(
+      JSON.stringify({ success: false, error: 'Error interno al procesar la solicitud.' }),
+      { status: 500, headers: corsHeaders }
+    );
+  }
+}
