@@ -385,3 +385,28 @@
     background: color-mix(in srgb, #2E3238 100%, transparent 85%);
   }
 }
+/* =========================================================
+   AÑADIR AL FINAL DE home.css — 100% aditivo, no reemplaza nada
+   Fix: número-ficha grande en mobile (evita sensación de "cargando")
+   ========================================================= */
+@media (max-width: 1023px) {
+
+  .tarjeta-nicho__indice {
+    position: absolute;
+    top: .5rem;
+    right: .75rem;
+    margin-bottom: 0;
+    font-size: clamp(3.25rem, 17vw, 4.25rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0;
+    color: #B08D57;
+    opacity: .22;
+  }
+
+  /* Ajuste secundario opcional: tarjeta un poco menos alargada,
+     reduce el peso visual del vacío restante. Prueba primero solo
+     el número de arriba — si ya te convence, puedes omitir esto. */
+  .tarjeta-nicho { aspect-ratio: 4 / 4.6; }
+
+}
