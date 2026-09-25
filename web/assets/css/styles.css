@@ -1,9 +1,9 @@
-/* Tipografía Local Alex Brush (Cero FOUT/FOIT con font-display: block) */
+/* Tipografía Local Alex Brush (Optimizado para FCP/LCP con font-display: swap) */
 @font-face {
   font-family: 'Alex Brush';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url('./assets/fonts/alex-brush.woff2') format('woff2');
 }
 

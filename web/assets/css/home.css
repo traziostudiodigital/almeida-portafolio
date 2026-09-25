@@ -79,7 +79,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   overflow: hidden; /* clave: recorta cualquier texto que se salga de la curva */
   padding: clamp(1.1rem, 2vw, 1.75rem);
   text-decoration: none;
