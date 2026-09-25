@@ -262,6 +262,7 @@
     flex: initial;
     aspect-ratio: auto;
     scroll-snap-align: none;
+    justify-content: center; /* Centrado vertical manteniendo inclinación */
     animation: respirar-tarjeta 5.5s ease-in-out infinite;
     animation-delay: var(--stagger, 0s);
   }
@@ -273,11 +274,52 @@
     --stagger: 0s; 
     padding: clamp(1.75rem, 3vw, 2.75rem); 
   }
-  .tarjeta-nicho--02 { grid-area: n2; rotate: 1.2deg;  border-radius: 44% 56% 46% 54% / 54% 44% 56% 46%; --stagger: .6s; }
-  .tarjeta-nicho--03 { grid-area: n3; rotate: -1.4deg; border-radius: 50% 50% 58% 42% / 42% 58% 50% 50%; --stagger: 1.1s; }
-  .tarjeta-nicho--04 { grid-area: n4; rotate: 1deg;    border-radius: 46% 54% 42% 58% / 58% 42% 54% 46%; --stagger: 1.7s; }
-  .tarjeta-nicho--05 { grid-area: n5; rotate: -1.2deg; border-radius: 58% 42% 50% 50% / 50% 54% 46% 50%; --stagger: 2.3s; }
-  .tarjeta-nicho--06 { grid-area: n6; rotate: 1.4deg;  border-radius: 42% 58% 54% 46% / 54% 46% 42% 58%; --stagger: 2.9s; }
+  .tarjeta-nicho--02 { 
+    grid-area: n2; 
+    rotate: 1.2deg;  
+    border-radius: 44% 56% 46% 54% / 54% 44% 56% 46%; 
+    --stagger: .6s; 
+    padding: clamp(1rem, 2vw, 1.5rem); 
+  }
+  .tarjeta-nicho--03 { 
+    grid-area: n3; 
+    rotate: -1.4deg; 
+    border-radius: 50% 50% 58% 42% / 42% 58% 50% 50%; 
+    --stagger: 1.1s; 
+    padding: clamp(1rem, 2vw, 1.5rem); 
+  }
+  .tarjeta-nicho--04 { 
+    grid-area: n4; 
+    rotate: 1deg;    
+    border-radius: 46% 54% 42% 58% / 58% 42% 54% 46%; 
+    --stagger: 1.7s; 
+    padding: clamp(1rem, 2vw, 1.5rem); 
+  }
+  .tarjeta-nicho--05 { 
+    grid-area: n5; 
+    rotate: -1.2deg; 
+    border-radius: 58% 42% 50% 50% / 50% 54% 46% 50%; 
+    --stagger: 2.3s; 
+    padding: clamp(0.85rem, 1.8vw, 1.35rem); 
+  }
+  .tarjeta-nicho--05 .tarjeta-nicho__titulo {
+    font-size: clamp(0.82rem, 1.05vw, 1.05rem);
+  }
+  .tarjeta-nicho--06 { 
+    grid-area: n6; 
+    rotate: 1.4deg;  
+    border-radius: 42% 58% 54% 46% / 54% 46% 42% 58%; 
+    --stagger: 2.9s; 
+    padding: clamp(1rem, 2vw, 1.5rem); 
+  }
+
+  .tarjeta-nicho__titulo {
+    font-size: clamp(0.9rem, 1.2vw, 1.15rem);
+    line-height: 1.15;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    text-wrap: pretty;
+  }
 
   .tarjeta-nicho__resumen-movil { display: none; }
 
