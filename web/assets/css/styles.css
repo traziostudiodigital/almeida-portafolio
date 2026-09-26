@@ -269,21 +269,23 @@ input, button, textarea, select {
 .section-gap { gap: clamp(1rem, 3vw, 1.5rem); }
 .section-divider { margin-block: clamp(2.5rem, 5vw, 3.5rem); }
 
-/* Nodo central: pulso muy sutil */
+/* Nodo central: pulso muy sutil — PAUSADO por defecto */
 .chat-node-core {
   animation: chat-core-pulse 3s ease-in-out infinite;
+  animation-play-state: paused;
 }
 @keyframes chat-core-pulse {
   0%, 100% { r: 2.5; opacity: 1; }
   50% { r: 3; opacity: 0.85; }
 }
 
-/* Líneas: trazado tipo constelación en loop, desfasadas entre sí */
+/* Líneas: trazado tipo constelación en loop, desfasadas — PAUSADO por defecto */
 .chat-line {
   stroke-dasharray: 14;
   stroke-dashoffset: 14;
   opacity: 0.5;
   animation: chat-line-draw 9s ease-in-out infinite;
+  animation-play-state: paused;
 }
 .chat-line-1 { animation-delay: 0s; }
 .chat-line-2 { animation-delay: 1.8s; }
@@ -297,7 +299,20 @@ input, button, textarea, select {
   100% { stroke-dashoffset: -14; opacity: 0.3; }
 }
 
-/* Hover: intensifica y acelera todo el conjunto */
+/* Se activa SOLO en hover, focus por teclado, o con el chat abierto
+   (aria-expanded="true" en el botón — ya presente en el HTML) */
+#chat-ia-trigger:hover .chat-node-core,
+#chat-ia-trigger:focus-visible .chat-node-core,
+#chat-ia-trigger[aria-expanded="true"] .chat-node-core {
+  animation-play-state: running;
+}
+#chat-ia-trigger:hover .chat-line,
+#chat-ia-trigger:focus-visible .chat-line,
+#chat-ia-trigger[aria-expanded="true"] .chat-line {
+  animation-play-state: running;
+}
+
+/* Hover: intensifica y acelera todo el conjunto (sin cambios) */
 #chat-ia-trigger:hover .chat-line {
   animation-duration: 3.5s;
   opacity: 0.9;
@@ -306,7 +321,7 @@ input, button, textarea, select {
   animation-duration: 1.2s;
 }
 
-/* Ventana: entrada suave */
+/* Ventana: entrada suave (sin cambios) */
 #chat-ia-window {
   animation: chat-window-in 0.25s ease-out;
 }
@@ -315,7 +330,15 @@ input, button, textarea, select {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Scrollbar discreto en mensajes (opcional, mejora percepción premium) */
+/* Scrollbar discreto en mensajes (sin cambios) */
 #chat-ia-messages::-webkit-scrollbar { width: 3px; }
-#chat-ia-messages::-webkit-scrollbar-thumb { background: rgba(176,141,87,0.3); 
+#chat-ia-messages::-webkit-scrollbar-thumb { background: rgba(176,141,87,0.3); }
+
+/* Respeto a accesibilidad: apaga todo esto si el usuario pidió menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .chat-node-core,
+  .chat-line,
+  #chat-ia-window {
+    animation: none !important;
+  }
 }
