@@ -74,7 +74,8 @@
 
         // Traducir todos los elementos con data-i18n en el documento
         translateAll: function () {
-            this._i18nElements.forEach((el) => this.translateElement(el));
+            var elements = this._i18nElements || (typeof document !== 'undefined' ? document.querySelectorAll('[data-i18n]') : []);
+            (elements || []).forEach((el) => this.translateElement(el));
         },
 
         // Obtener valor anidado usando notación de punto

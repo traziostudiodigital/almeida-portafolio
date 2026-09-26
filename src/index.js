@@ -343,9 +343,12 @@ async function handleChatRequest(request, env) {
     );
 
   } catch (error) {
-    console.error('[Chat API] Error interno:', error);
+    console.error("[Chat API Error]:", error);
     return new Response(
-      JSON.stringify({ success: false, error: 'Error interno al procesar la solicitud.' }),
+      JSON.stringify({ 
+        success: false, 
+        error: error.message || (typeof error === 'string' ? error : JSON.stringify(error)) || "Error interno al procesar la solicitud." 
+      }),
       { status: 500, headers: corsHeaders }
     );
   }
