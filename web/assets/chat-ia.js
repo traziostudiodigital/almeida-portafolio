@@ -120,7 +120,11 @@ async function sendMessage(text) {
        const res = await fetch(API_ENDPOINT, {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({ messages: state.history, lang: state.language })
+         body: JSON.stringify({
+           messages: state.history,
+           lang: state.language,
+           sessionId: state.sessionId
+         })
        });
 
        const data = await res.json();

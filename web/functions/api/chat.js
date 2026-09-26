@@ -11,7 +11,9 @@ const ALLOWED_ORIGINS = [
 
 const DAILY_CAP = 600;
 const KV_KEY_PREFIX = 'chat_count:';
+const KV_SESSION_PREFIX = 'chat_session:';
 const KV_TTL_SECONDS = 90000; // ~25 hours
+const SESSION_TTL_SECONDS = 604800; // 7 days (7 * 24 * 60 * 60)
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL = 'llama-3.1-8b-instant';
 const MAX_TOKENS = 400;
@@ -200,6 +202,33 @@ async function incrementDailyCounter(env, key) {
   return newCount;
 }
 
+async function getSessionHistory(env, sessionId) {
+  if (!env?.CHAT_KV || !sessionId) return [];
+  try {
+    const raw = await env.CHAT_KV.get(`${KV_SESSION_PREFIX}${sessionId}`);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    console.warn('[Chat API] Error al leer historial de KV:', err);
+    return [];
+  }
+}
+
+async function saveSessionHistory(env, sessionId, history) {
+  if (!env?.CHAT_KV || !sessionId || !Array.isArray(history)) return;
+  try {
+    const trimmed = history.slice(-20);
+    await env.CHAT_KV.put(
+      `${KV_SESSION_PREFIX}${sessionId}`,
+      JSON.stringify(trimmed),
+      { expirationTtl: SESSION_TTL_SECONDS }
+    );
+  } catch (err) {
+    console.error('[Chat API] Error al guardar historial en KV:', err);
+  }
+}
+
 export async function onRequestOptions(context) {
   const origin = context.request.headers.get('Origin') || '';
   return new Response(null, {
@@ -215,9 +244,23 @@ export async function onRequestPost(context) {
 
   try {
     const body = await request.json().catch(() => ({}));
-    const messages = body.messages || [];
+    let messages = body.messages || [];
     const lang = (body.lang || 'es').toLowerCase();
     const validLang = ['es', 'en'].includes(lang) ? lang : 'es';
+    const sessionId = body.sessionId || body.session_id || null;
+
+    // Si sessionId existe, sincronizar/recuperar historial desde KV
+    if (sessionId && env?.CHAT_KV) {
+      const storedHistory = await getSessionHistory(env, sessionId);
+      if (storedHistory.length > 0) {
+        if (!messages.length) {
+          messages = storedHistory;
+        } else if (messages.length === 1 && messages[0].role === 'user') {
+          // El cliente envió únicamente el nuevo mensaje del usuario
+          messages = [...storedHistory, messages[0]];
+        }
+      }
+    }
 
     if (!messages.length) {
       return new Response(
@@ -278,9 +321,18 @@ export async function onRequestPost(context) {
     // 5. Incrementar contador KV SOLO tras éxito
     await incrementDailyCounter(env, dailyCheck.key);
 
-    // 6. Respuesta exitosa
+    // 6. Guardar historial actualizado en KV
+    if (sessionId) {
+      const updatedHistory = [
+        ...messages,
+        { role: 'assistant', content: groqResponse }
+      ];
+      await saveSessionHistory(env, sessionId, updatedHistory);
+    }
+
+    // 7. Respuesta exitosa
     return new Response(
-      JSON.stringify({ success: true, response: groqResponse }),
+      JSON.stringify({ success: true, response: groqResponse, sessionId }),
       { status: 200, headers: corsHeaders }
     );
 

@@ -295,12 +295,13 @@
     --stagger: 1.7s; 
     padding: clamp(1rem, 2vw, 1.5rem); 
   }
-  .tarjeta-nicho--05 { 
-    grid-area: n5; 
-    rotate: -1.2deg; 
-    border-radius: 58% 42% 50% 50% / 50% 54% 46% 50%; 
-    --stagger: 2.3s; 
-    padding: clamp(0.85rem, 1.8vw, 1.35rem); 
+.tarjeta-nicho--05 {
+    grid-area: n5;
+    rotate: -1.2deg;
+    border-radius: 58% 42% 50% 50% / 50% 54% 46% 50%;
+    --stagger: 2.3s;
+    margin: 0 auto;
+    padding: clamp(1.1rem, 2vw, 1.5rem);
   }
   .tarjeta-nicho--05 .tarjeta-nicho__titulo {
     font-size: clamp(0.82rem, 1.05vw, 1.05rem);
@@ -437,7 +438,7 @@
    Fix: número-ficha grande en mobile (evita sensación de "cargando")
    ========================================================= */
 @media (max-width: 1023px) {
-
+  
   .tarjeta-nicho__indice {
     position: absolute;
     top: .5rem;
@@ -450,10 +451,19 @@
     color: #B08D57;
     opacity: .22;
   }
-
+  
+  .tarjeta-nicho__titulo {
+    margin-bottom: .8rem;
+  }
+  
+  .tarjeta-nicho__resumen-movil {
+    margin-top: .9rem;
+    font-size: .85rem;
+  }
+  
   /* Ajuste secundario opcional: tarjeta un poco menos alargada,
      reduce el peso visual del vacío restante. Prueba primero solo
      el número de arriba — si ya te convence, puedes omitir esto. */
   .tarjeta-nicho { aspect-ratio: 4 / 4.6; }
-
+  
 }
