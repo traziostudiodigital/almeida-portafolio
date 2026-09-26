@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker Entry Point: src/index.js
+ * Cloudflare Pages Function: /api/chat
  * Asistente Virtual Pericial - Ecosistema Luis Manuel Almeida Luis
  * Implementación real con Groq + KV + Detección de Nicho
  */
@@ -46,7 +46,7 @@ function getI18nMessage(key, lang) {
   return messages[lang]?.[key] || messages.es[key] || key;
 }
 
-// CONTEXT_BLOCKS
+// CONTEXT_BLOCKS - Placeholders vacíos (se llenarán posteriormente según indicaciones)
 const CONTEXT_BLOCKS = {
   perfil: { 
     es: `Luis Manuel Almeida Luis es Especialista en Patrimonio Cultural y Tasación de Obras de Arte, con más de 40 años de trayectoria institucional en Cuba e Iberoamérica. Ha inventariado y tasado más de 20.000 obras de arte y bienes patrimoniales a lo largo de su carrera.\n\nFue responsable de aduanas y decomisos aeroportuarios (1988–2024, 41 años) y Jefe del Departamento de Registro e Inventario del Registro Nacional de Bienes Culturales de Cuba durante 19 años. Ejerce el peritaje bajo un principio estricto de cero conflicto de interés: no compra ni vende obras de arte, ni cobra honorarios como porcentaje del valor tasado.\n\nProfesor Auxiliar con más de 25 años de docencia universitaria activa en la Universidad de las Artes (ISA), la Universidad de La Habana y el Colegio Universitario San Gerónimo. Coautor de dos capítulos en el libro "Tasación de Obras de Arte" del Dr. Alex J. Rosenberg (Fundación Ludwig / Consejo Nacional de Patrimonio Cultural, 2010). Publicó en la Revista Cultura y Desarrollo de la UNESCO (2013).\n\nHa colaborado con los Carabinieri TPC de Italia, la red IBERMUSEOS, y representó a Cuba en el Foro Cusco (UNESCO/OEI, 2020). Condecorado con la Distinción por la Cultura Cubana (2006), máxima distinción del Ministerio de Cultura.\n\nAtiende seis áreas de especialidad: Coleccionistas Privados, Herencias y Sucesiones, Docencia y Conferencias, Abogados y Notarios, Aseguradoras y Family Offices, y Patrimonio Arqueológico Subacuático.\n\nCómo trabaja: 1) Consulta inicial confidencial del caso, 2) Evaluación técnica preliminar de documentación o fotografías, 3) Propuesta de alcance, honorarios y plazo, 4) Entrega del dictamen pericial firmado con fundamentación metodológica.\n\nSi la consulta requiere más detalle del disponible aquí, orienta al usuario a explorar la especialidad correspondiente en el sitio o a escribir por correo electrónico para una consulta confidencial.`,
@@ -229,7 +229,23 @@ async function saveSessionHistory(env, sessionId, history) {
   }
 }
 
-async function handleChat(request, env) {
+// CON CROSSEDO DE CORS PARA PAGES FUNCTIONS (onRequest)
+export async function onRequestOptions(context) {
+  const origin = context.request.headers.get('Origin') || '';
+  return new Response(null, {
+    status: 204,
+    headers: getCorsHeaders(origin)
+  });
+}
+
+export async function onRequest(context) {
+  if (context.request.method === 'OPTIONS') return onRequestOptions(context);
+  if (context.request.method === 'POST') return onRequestPost(context);
+  return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405 });
+}
+
+export async function onRequestPost(context) {
+  const { request, env } = context;
   const origin = request.headers.get('Origin') || '';
   const corsHeaders = getCorsHeaders(origin);
 
@@ -335,31 +351,3 @@ async function handleChat(request, env) {
     );
   }
 }
-
-async function handleOptions(request) {
-  const origin = request.headers.get('Origin') || '';
-  return new Response(null, {
-    status: 204,
-    headers: getCorsHeaders(origin)
-  });
-}
-
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-
-    // Enrutar al Chat IA
-    if (url.pathname === "/api/chat" || url.pathname === "/api/chat/") {
-      if (request.method === "POST") {
-        return handleChat(request, env);
-      }
-      if (request.method === "OPTIONS") {
-        return handleOptions(request);
-      }
-      return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405 });
-    }
-
-    // Fallback: Servir los archivos estáticos de la web
-    return env.ASSETS.fetch(request);
-  }
-};
