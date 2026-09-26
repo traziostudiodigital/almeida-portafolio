@@ -1,7 +1,8 @@
 /**
- * Cloudflare Pages Function: /api/chat
+ * Cloudflare Worker: /api/chat
  * Asistente Virtual Pericial - Ecosistema Luis Manuel Almeida Luis
  * Implementación real con Groq + KV + Detección de Nicho
+ * Adaptado para Worker estándar (sin Pages Functions)
  */
 
 const ALLOWED_ORIGINS = [
@@ -50,7 +51,7 @@ function getI18nMessage(key, lang) {
 const CONTEXT_BLOCKS = {
   perfil: { 
     es: `Luis Manuel Almeida Luis es Especialista en Patrimonio Cultural y Tasación de Obras de Arte, con más de 40 años de trayectoria institucional en Cuba e Iberoamérica. Ha inventariado y tasado más de 20.000 obras de arte y bienes patrimoniales a lo largo de su carrera.\n\nFue responsable de aduanas y decomisos aeroportuarios (1988–2024, 41 años) y Jefe del Departamento de Registro e Inventario del Registro Nacional de Bienes Culturales de Cuba durante 19 años. Ejerce el peritaje bajo un principio estricto de cero conflicto de interés: no compra ni vende obras de arte, ni cobra honorarios como porcentaje del valor tasado.\n\nProfesor Auxiliar con más de 25 años de docencia universitaria activa en la Universidad de las Artes (ISA), la Universidad de La Habana y el Colegio Universitario San Gerónimo. Coautor de dos capítulos en el libro "Tasación de Obras de Arte" del Dr. Alex J. Rosenberg (Fundación Ludwig / Consejo Nacional de Patrimonio Cultural, 2010). Publicó en la Revista Cultura y Desarrollo de la UNESCO (2013).\n\nHa colaborado con los Carabinieri TPC de Italia, la red IBERMUSEOS, y representó a Cuba en el Foro Cusco (UNESCO/OEI, 2020). Condecorado con la Distinción por la Cultura Cubana (2006), máxima distinción del Ministerio de Cultura.\n\nAtiende seis áreas de especialidad: Coleccionistas Privados, Herencias y Sucesiones, Docencia y Conferencias, Abogados y Notarios, Aseguradoras y Family Offices, y Patrimonio Arqueológico Subacuático.\n\nCómo trabaja: 1) Consulta inicial confidencial del caso, 2) Evaluación técnica preliminar de documentación o fotografías, 3) Propuesta de alcance, honorarios y plazo, 4) Entrega del dictamen pericial firmado con fundamentación metodológica.\n\nSi la consulta requiere más detalle del disponible aquí, orienta al usuario a explorar la especialidad correspondiente en el sitio o a escribir por correo electrónico para una consulta confidencial.`,
-    en: `Luis Manuel Almeida Luis is a Specialist in Cultural Heritage and Fine Art Appraisal with over 40 years of institutional experience in Cuba and Ibero-America. He has inventoried and appraised over 20,000 works of art and heritage assets throughout his career.\n\nHe served as airport customs and seizures specialist (1988–2024, 41 years) and Head of the Inventory and Registry Department at Cuba's National Registry of Cultural Assets for 19 years. He practices appraisal under a strict zero-conflict-of-interest principle: he neither buys nor sells works of art, nor charges fees as a percentage of the appraised value.\n\nAssociate Professor with more than 25 years of active university teaching at the University of the Arts (ISA), the University of Havana, and San Gerónimo University College. Co-author of two chapters in Dr. Alex J. Rosenberg's reference textbook "Fine Art Appraisal" (Ludwig Foundation / National Council of Cultural Heritage, 2010). Published in UNESCO's Cultura y Desarrollo journal (2013).\n\nHe has collaborated with Italy's Carabinieri TPC, IBERMUSEOS, and represented Cuba at the Cusco Forum (UNESCO/OEI, 2020). Awarded the Distinction for Cuban Culture (2006), the highest award conferred by the Ministry of Culture.\n\nHe serves six areas of expertise: Private Collectors, Estates & Inheritance, Teaching & Lectures, Lawyers & Notaries, Insurers & Family Offices, and Underwater Archaeological Heritage.\n\nHow we work: 1) Confidential initial consultation, 2) Preliminary technical evaluation of documentation or photographs, 3) Proposal of scope, fees, and timeline, 4) Delivery of signed technical appraisal report with required methodological grounding.\n\nFor inquiries requiring greater technical detail, please explore the corresponding specialty on our site or write directly by email for a confidential evaluation.`
+    en: `Luis Manuel Almeida Luis is a Specialist in Cultural Heritage and Fine Art Appraisal with over 40 years of institutional experience in Cuba and Ibero-America. He has inventoried and appraised over 20,000 works of art and heritage assets throughout his career.\n\nHe served as airport customs and seizures specialist (1988–2024, 41 years) and Head of the Inventory and Registry Department at Cuba's National Registry of Cultural Assets for 19 years. He practices appraisal under a strict zero-conflict-of-interest principle: he neither buys nor sells works of art, nor charges fees as a percentage of the appraised value.\n\nAssociate Professor with more than 25 years of active university teaching at the University of the Arts (ISA), the University of Havana, and San Gerónimo University College. Co-author of two chapters in Dr. Alex J. Rosenberg's reference textbook "Fine Art Appraisal" (Ludwig Foundation / National Council of Cultural Heritage, 2010). Published in UNESCO's Cultura y Desarrollo journal (2013).\n\nHe has collaborated with Italy's Carabinieri TPC, IBERMUSEOS, and represented Cuba at the Cusco Forum (UNESCO/OEI, 2020). Awarded the Distinction for Cuban Culture (2006), the highest award conferred by the Ministry of Culture.\n\nHe serves six areas of expertise: Private Collectors, Estates & Inheritance, Teaching & Lectures, Lawyers & Notaries, Insurers & Family Offies, and Underwater Archaeological Heritage.\n\nHow we work: 1) Confidential initial consultation, 2) Preliminary technical evaluation of documentation or photographs, 3) Proposal of scope, fees, and timeline, 4) Delivery of signed technical appraisal report with required methodological grounding.\n\nFor inquiries requiring greater technical detail, please explore the corresponding specialty on our site or write directly by email for a confidential evaluation.`
   },
   n1: { 
     es: `Especialidad: Peritaje y Tasación de Arte para Coleccionistas Privados.\n\nPara quién: propietarios, coleccionistas e inversionistas de obras de arte y bienes de alto valor que necesitan autenticar, catalogar o valorar una pieza.\n\nPrincipio clave: cero conflicto de interés — Luis Manuel Almeida no compra ni vende obras de arte, ni cobra sobre el valor tasado. Cada dictamen es un juicio técnico independiente.\n\nServicios: dictamen técnico de autenticidad (análisis estilístico, material, bibliográfico e histórico de procedencia); ficha técnica catalográfica; informe pericial de valoración económico basado en cotización de mercado y subastas contrastadas; informe de estado de conservación.\n\nCasos documentados: inventario de las colecciones de René Portocarrero (1988), Fayad Jamís (1988), Sandú Darié (1993) y Luis Alberto Quintero (1999); tasación de bienes del Patrimonio Cultural Cubano clasificados Grado de Valor I (2005).\n\nCuándo aplica: adquisición, custodia, venta o aseguramiento de una pieza donde se necesita despejar dudas de autenticidad o determinar su valor real de mercado.`,
@@ -61,7 +62,7 @@ const CONTEXT_BLOCKS = {
     en: `Specialty: Estate & Inheritance Art Appraisal Services.\n\nFor whom: Heirs, executors, and families managing the partition of works of art or heritage assets in inheritance declarations, probate, and notarial/tax partition processes.\n\nRole: Partition Appraiser (Perito Tasador-Partidor) — combines technical asset analysis with the mediation required for an equitable distribution among heirs. More than 15 estate liquidation processes executed under strict professional secrecy.\n\nServices: Appraisal report for tax and notarial purposes; reasoned descriptive inventory with objective values according to fiscal legislation; technical proposal for equitable lot partition of homogeneous value; confidential peritial mediation to avoid judicial conflicts among co-heirs.\n\nDocumented cases (historical): Servando Cabrera Moreno (1992), Amelia Peláez del Casal (2003), Dulce María Loynaz (1997/2006), Alejo Carpentier (2006), Alfredo Luis Guevara Valdés (2014).\n\nWhen it applies: When disagreement or risk of dispute exists among heirs regarding the value of artistic assets, or when a formal appraisal is required for Notary or Tax Authority proceedings.`
   },
   n3: { 
-    es: `Especialidad: Perito Tasador de Arte para Litigios, Sucesiones y Notarías.\n\nPara quién: abogados, notarios y bufetes que requieren un dictamen con fuerza procesal en litigios civiles, juicios sucesorios, liquidaciones conyugales o disolución de patrimonios.\n\nRespaldo: 41 años como responsable de aduanas y decomisos aeroportuarios (1988–2024), con dictámenes ratificados en sede judicial. Representó a Cuba en el Foro Cusco (UNESCO/OEI, 2020) sobre cooperación jurídica contra el tráfico ilícito.\n\nServicios: dictámenes periciales judiciales estructurados metodológicamente; informes de expertisaje técnico con cadena de custodia documental; ratificación pericial de los dictámenes ante la autoridad competente.\n\nCasos documentados: Caso Diego Velázquez (1984, dictamen conjunto con la Dra. Marta Arjona, CNPC); Caso Escultura Demétre Chiparus ("La gallinita ciega").\n\nPrecisión importante: no se ofrece la función de "testigo experto en estrado" (Expert Witness) como rol específico no documentado; el servicio verificado es la ratificación pericial ante la autoridad competente.\n\nCuándo aplica: cuando un caso judicial o notarial requiere un dictamen técnico capaz de resistir impugnación de la contraparte.`,
+    es: `Especialidad: Perito Tasador de Arte para Litigios, Sucesiones y Notarías.\n\nPara quién: abogados, notarios y bufetes que requieren un dictamen con fuerza procesal en litigios civiles, juicios sucesorios, liquidaciones conyugales o disolución de patrimonios.\n\nRespaldo: 41 años como responsable de aduanas y decomisos aeroportuarios (1988–2024), con dictámenes ratificados en sede judicial. Representó a Cuba en el Foro Cusco (UNESCO/OEI, 2020) sobre cooperación jurídica contra el tráfico ilícito.\n\nServicios: dictámenes periciales judiciales estructurados metodológicamente; informes de expertisaje técnico con cadena de custodia documental; ratificación pericial de los dictámenes ante la autoridad competente.\n\nCasos documentados: Caso Diego Velázquez (1984, dictamen conjunto con la Dra. Marta Arjona, CNPC); Caso Escultura Demétre Chiparus ("La gallinita ciega").\n\nPrecisión importante: no se ofrece la función de "testigo experto en estrado" (Expert Witness) como rol específico no documentado; el servicio verificado es la ratificación pericial ante la autoridad competente.\n\nCuándo aplica: cuando un caso judicial o notorial requiere un dictamen técnico capaz de resistir impugnación de la contraparte.`,
     en: `Specialty: Forensic Art Appraiser for Litigation, Probate & Notarial Proceedings.\n\nFor whom: Lawyers, notaries, and law firms requiring a judicial-grade report with procedural force in civil litigation, probate proceedings, marital dissolutions, and estate divisions.\n\nBacking: 41 years as specialist responsible for airport customs and cultural property seizures (1988–2024), with findings ratified before judicial authority. Represented Cuba at the Cusco Forum (UNESCO/OEI, 2020) on legal cooperation against illicit trafficking.\n\nServices: Judicial appraisal reports methodologically structured for court proceedings; technical expert examination reports with documented chain of custody; formal ratification of appraisal findings before the competent authority.\n\nDocumented cases: Diego Velázquez Case (1984, joint opinion with Dr. Marta Arjona, CNPC); Demétre Chiparus Sculpture Case ("La gallinita ciega").\n\nImportant precision: The role of "Expert Witness" on the stand is not claimed as an unverified function; the documented and verified service is formal ratification of appraisal findings before the competent authority.\n\nWhen it applies: When a judicial or notarial case requires a technical report capable of withstanding impeachment by opposing counsel.`
   },
   n4: { 
@@ -229,25 +230,23 @@ async function saveSessionHistory(env, sessionId, history) {
   }
 }
 
-// CON CROSSEDO DE CORS PARA PAGES FUNCTIONS (onRequest)
-export async function onRequestOptions(context) {
-  const origin = context.request.headers.get('Origin') || '';
-  return new Response(null, {
-    status: 204,
-    headers: getCorsHeaders(origin)
-  });
-}
-
-export async function onRequest(context) {
-  if (context.request.method === 'OPTIONS') return onRequestOptions(context);
-  if (context.request.method === 'POST') return onRequestPost(context);
-  return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405 });
-}
-
-export async function onRequestPost(context) {
-  const { request, env } = context;
+async function handleChatRequest(request, env) {
   const origin = request.headers.get('Origin') || '';
   const corsHeaders = getCorsHeaders(origin);
+
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders
+    });
+  }
+
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
+      status: 405,
+      headers: corsHeaders
+    });
+  }
 
   try {
     const body = await request.json().catch(() => ({}));
@@ -351,3 +350,17 @@ export async function onRequestPost(context) {
     );
   }
 }
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // Enrutar al Chat IA
+    if (url.pathname === '/api/chat') {
+      return handleChatRequest(request, env);
+    }
+
+    // Fallback: Servir los archivos estáticos de la web
+    return env.ASSETS.fetch(request);
+  }
+};
