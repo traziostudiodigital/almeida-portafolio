@@ -100,8 +100,15 @@ async function compileTemplates() {
       const content = fs.readFileSync(templatePath, 'utf8');
       const processed = processIncludes(content);
       
+      // Minificación simple SOLO al HTML final de salida
+      const minified = processed
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/>\s+</g, '><')
+        .trim();
+      
       const outputFile = path.join(WEB_DIR, templateFile.replace('.template.html', '.html'));
-      fs.writeFileSync(outputFile, processed);
+      fs.writeFileSync(outputFile, minified);
       
       console.log(`✓ Compilado: ${templateFile} -> ${path.basename(outputFile)}`);
     } catch (err) {

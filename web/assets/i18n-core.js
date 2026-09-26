@@ -26,6 +26,9 @@
                 this.currentLang = storedLang;
             }
 
+            // Cachear elementos con data-i18n para evitar querySelectorAll repetido
+            this._i18nElements = document.querySelectorAll('[data-i18n]');
+
             // Traducir todos los elementos con data-i18n
             this.translateAll();
 
@@ -71,7 +74,7 @@
 
         // Traducir todos los elementos con data-i18n en el documento
         translateAll: function () {
-            document.querySelectorAll('[data-i18n]').forEach((el) => this.translateElement(el));
+            this._i18nElements.forEach((el) => this.translateElement(el));
         },
 
         // Obtener valor anidado usando notación de punto

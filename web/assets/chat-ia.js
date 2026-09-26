@@ -205,7 +205,7 @@ async function sendMessage(text) {
       if (state.isOpen && !els.widget.contains(e.target)) {
         toggleWindow(false);
       }
-    });
+    }, { passive: true });
   }
 
   // Sincronizar idioma con i18n global

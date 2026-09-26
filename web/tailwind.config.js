@@ -2,7 +2,9 @@ module.exports = {
   content: [
     './**/*.html',
     './componentes/**/*.html',
-    './plantillas/**/*.html'
+    './plantillas/**/*.html',
+    './assets/chat-ia.html',
+    './assets/css/**/*.css'
   ],
   theme: {
     extend: {

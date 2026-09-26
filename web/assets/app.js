@@ -427,10 +427,6 @@
         window.CursorHero.onLanguageChange(newLang);
       }
 
-      if (window.SelectorPaneles && typeof window.SelectorPaneles.onLanguageChange === 'function') {
-        window.SelectorPaneles.onLanguageChange();
-      }
-
       if (window.HeroStagger && typeof window.HeroStagger.reinit === 'function') {
         window.HeroStagger.reinit();
       }
