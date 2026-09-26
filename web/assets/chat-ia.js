@@ -200,7 +200,7 @@ async function sendMessage(text) {
       }
     });
 
-    // Click fuera para cerrar (opcional, solo si no es el trigger)
+    // Click fuera para cerrar (opcional, pero solo si no es el trigger)
     document.addEventListener('click', (e) => {
       if (state.isOpen && !els.widget.contains(e.target)) {
         toggleWindow(false);
