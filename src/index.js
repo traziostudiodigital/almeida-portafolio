@@ -342,15 +342,16 @@ async function handleChatRequest(request, env) {
       { status: 200, headers: corsHeaders }
     );
 
-  } catch (error) {
-    console.error("[Chat API Error]:", error);
-    return new Response(
-      JSON.stringify({ 
-        success: false, 
-        error: error.message || (typeof error === 'string' ? error : JSON.stringify(error)) || "Error interno al procesar la solicitud." 
-      }),
-      { status: 500, headers: corsHeaders }
-    );
+} catch (error) {
+     console.error("[Chat API Error]:", error);
+     const errorDetail = error instanceof Error ? `${error.message}` : String(error);
+     return new Response(
+       JSON.stringify({ 
+         success: false, 
+         error: errorDetail 
+       }),
+       { status: 500, headers: { "Content-Type": "application/json" } }
+     );
   }
 }
 
