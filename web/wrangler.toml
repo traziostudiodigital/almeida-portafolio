@@ -3,3 +3,6 @@ name = "almeida-portafolio"
 [[kv_namespaces]]
 binding = "CHAT_KV"
 id = "40f17acc9c554ff994f2ca0c5f15973b"
+
+[assets]
+run_worker_first = ["/api/*"]
