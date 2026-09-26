@@ -127,8 +127,13 @@ async function sendMessage(text) {
          })
        });
 
-       const data = await res.json();
+       if (!res.ok) {
+         const text = await res.text().catch(() => '');
+         console.error(`[Chat IA] HTTP Error ${res.status}: ${res.statusText}`, text);
+         throw new Error(`Error en el servidor (${res.status})`);
+       }
 
+       const data = await res.json();
        if (data.success && data.response) {
          renderMessage('bot', data.response);
          state.history.push({ role: 'assistant', content: data.response });
