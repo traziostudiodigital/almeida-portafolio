@@ -61,21 +61,28 @@
         },
 
         // Resolución de contenido con manejo especial para matices de nicho
-        resolveContent: function (key) {
+resolveContent: function (key) {
             // i18n-data.js usa claves planas con puntos literales (ej. "home.h1"),
             // por lo que se busca directamente y no como ruta anidada.
             var dict = i18nData[this.currentLang];
             var content = dict ? dict[key] : undefined;
 
-            
+
 
             return content;
         },
 
+        // Obtener lista de elementos a traducir (cache o consulta fresca)
+        getElementsToTranslate: function () {
+            return this._i18nElements || (typeof document !== 'undefined' ? document.querySelectorAll('[data-i18n]') : []);
+        },
+
         // Traducir todos los elementos con data-i18n en el documento
         translateAll: function () {
-            var elements = this._i18nElements || (typeof document !== 'undefined' ? document.querySelectorAll('[data-i18n]') : []);
-            (elements || []).forEach((el) => this.translateElement(el));
+            const elements = this.getElementsToTranslate();
+            (elements || []).forEach((el) => {
+                this.translateElement(el);
+            });
         },
 
         // Obtener valor anidado usando notación de punto

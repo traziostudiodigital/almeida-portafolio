@@ -343,16 +343,13 @@ async function handleChatRequest(request, env) {
     );
 
 } catch (error) {
-     console.error("[Chat API Error]:", error);
-     const errorDetail = error instanceof Error ? `${error.message}` : String(error);
-     return new Response(
-       JSON.stringify({ 
-         success: false, 
-         error: errorDetail 
-       }),
-       { status: 500, headers: { "Content-Type": "application/json" } }
-     );
-  }
+      console.error("[Chat API Error]:", error);
+      const errorDetail = error.message || JSON.stringify(error, Object.getOwnPropertyNames(error)) || "Error desconocido";
+      return new Response(
+        JSON.stringify({ success: false, error: errorDetail }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
 }
 
 export default {
