@@ -120,8 +120,8 @@ Cualquier menú, listado o bloque de navegación que enumere los nichos de espec
   - Imagen `og-image.webp` (1200x630px), comprimida en WebP local (< 80 KB).
   - Fondo `#EAE7E2` con marco sutil `#2E3238`, monograma "Almeida", titulación *"Luis Manuel Almeida | Perito Tasador de Arte y Bienes Culturales"*.
 - **Rutas Absolutas Estrictas (Meta Tags):**
-  - `og:image` -> `https://luismanuelalmeida.com/assets/img/og-image.webp`
-  - `twitter:image` -> `https://luismanuelalmeida.com/assets/img/og-image.webp`
+  - `og:image` -> `https://almeidatasacion.com/assets/img/og-image.webp`
+  - `twitter:image` -> `https://almeidatasacion.com/assets/img/og-image.webp`
 
 ---
 
@@ -145,7 +145,7 @@ Cualquier menú, listado o bloque de navegación que enumere los nichos de espec
 
 #### 1. `robots.txt`
 ```txt
-# robots.txt para luismanuelalmeida.com
+# robots.txt para almeidatasacion.com
 User-agent: *
 Allow: /
 Disallow: /404.html
@@ -153,7 +153,7 @@ Disallow: /gracias.html
 Disallow: /aviso-legal.html
 Disallow: /privacidad.html
 
-Sitemap: https://luismanuelalmeida.com/sitemap.xml
+Sitemap: https://almeidatasacion.com/sitemap.xml
 ```
 
 #### 2. `sitemap.xml` (7 URLs Principales + Canonicals)
