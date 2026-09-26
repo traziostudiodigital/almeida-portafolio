@@ -83,8 +83,7 @@
   if (prefersReduced || isNarrowMobile) {
     // Revelar todo instantáneamente, sin observer, sin transform inicial
     elementsToReveal.forEach(el => {
-      el.classList.remove(SELECTORS.hiddenClass);
-      el.classList.add(SELECTORS.visibleClass);
+      revealElement(el);
       el.style.transform = 'none';
     });
     elementsToReveal = []; // Vaciar para que initObserver() no observe nada

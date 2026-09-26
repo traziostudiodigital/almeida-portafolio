@@ -304,7 +304,9 @@
     padding: clamp(1.1rem, 2vw, 1.5rem);
   }
   .tarjeta-nicho--05 .tarjeta-nicho__titulo {
-    font-size: clamp(0.82rem, 1.05vw, 1.05rem);
+    font-size: clamp(0.72rem, 0.95vw, 0.95rem);
+    text-align: center;
+    padding-inline: 0.25rem;
   }
   .tarjeta-nicho--06 { 
     grid-area: n6; 

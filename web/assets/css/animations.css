@@ -242,17 +242,17 @@ section[data-reveal="left"] > .photo-duotone {
    ========================================================= */
 
 .process-steps {
-  padding-block: 3rem;
+  padding-block: clamp(1.5rem, 3.5vw, 2.5rem);
 }
 
 .process-steps__title {
   font-family: var(--font-body);
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-size: clamp(1.3rem, 2.5vw, 2.25rem);
   font-weight: 400;
   color: var(--color-brand-dark);
   line-height: 1.2;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .process-steps__grid {
@@ -520,13 +520,17 @@ section[data-reveal="left"] > .photo-duotone {
    MOBILE: slider horizontal con auto-scroll
    ============================================ */
 @media (max-width: 1023px) {
+  .process-steps {
+    padding-block: 1.5rem;
+  }
+
   .process-steps__grid {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 0;
+    gap: 0.5rem;
     padding-inline: 1.25rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     margin-inline: -1.25rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
