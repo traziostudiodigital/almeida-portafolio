@@ -15,7 +15,19 @@
     isLoading: false,
     history: [],
     language: 'es',
-    sessionId: Math.random().toString(36).substr(2, 9), // Session ID efímero
+    sessionId: (() => {
+      try {
+        const stored = sessionStorage.getItem('chat_session_id');
+        if (stored) return stored;
+      } catch (e) {
+        console.warn('[Chat IA] No se pudo acceder a sessionStorage');
+      }
+      const newId = Math.random().toString(36).substr(2, 9);
+      try {
+        sessionStorage.setItem('chat_session_id', newId);
+      } catch (e) {}
+      return newId;
+    })(),
     turnCount: 0 // Contador de turnos efímero
   };
 
@@ -133,12 +145,17 @@ async function sendMessage(text) {
          throw new Error(`Error en el servidor (${res.status})`);
        }
 
-       const data = await res.json();
-       if (data.success && data.response) {
-         renderMessage('bot', data.response);
-         state.history.push({ role: 'assistant', content: data.response });
-         state.turnCount++;
-       } else {
+        const data = await res.json();
+        if (data.success && data.response) {
+          // Si el backend devuelve historial completo, actualizar el estado
+          if (Array.isArray(data.history)) {
+             state.history = data.history;
+          } else {
+             state.history.push({ role: 'assistant', content: data.response });
+          }
+          renderMessage('bot', data.response);
+          state.turnCount++;
+        } else {
          throw new Error(data.error || 'Respuesta inválida del servidor');
        }
      } catch (err) {

@@ -19,8 +19,12 @@ const KV_TTL_SECONDS = 90000; // ~25 hours
 const SESSION_TTL_SECONDS = 604800; // 7 days (7 * 24 * 60 * 60)
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
 const RELAY_ENDPOINT = 'https://traziostudio--1892a740ba7911f19bc11607ee4eb77e.web.val.run';
-const GROQ_MODEL = 'openai/gpt-oss-20b';
-const MAX_TOKENS = 400;
+const MODEL_FALLBACK_CHAIN = [
+  'openai/gpt-oss-20b',
+  'openai/gpt-oss-120b',
+  'llama-3.3-70b-versatile'
+];
+const MAX_TOKENS = 220;
 const TEMPERATURE = 0.3;
 
 function getCorsHeaders(origin) {
@@ -78,40 +82,64 @@ function buildSystemPrompt(detectedNiches, lang) {
     .filter(Boolean)
     .join('\n\n---\n\n');
 
-  return `${toneInstruction}\n\n${zeroInventionRule}\n\n${closingRule}\n\n=== CONTEXTO TÉCNICO ===\n${contextBlocks}`;
+  const lengthRule = isEn
+    ? 'LENGTH RULE: Adapt response length to the actual complexity of the question. - Simple/direct questions: 2-4 concise sentences. - Technical explanations requiring methodological detail (e.g., appraisal process, case methodological breakdown): up to 6-7 sentences, never more. - NEVER use preambles, NEVER repeat the user question, go DIRECTLY to the point.'
+    : 'REGLA DE LONGITUD: Adapta la extensión a la complejidad real de la pregunta. - Preguntas simples/directas: 2-4 oraciones concisas. - Preguntas técnicas que requieren explicación metodológica (ej. proceso de tasación, desglose metodológico de un caso documentado): hasta 6-7 oraciones, nunca más. - NUNCA uses preámbulos, NUNCA repitas la pregunta del usuario, ve SIEMPRE directo al punto.';
+
+  return `${toneInstruction}\n\n${zeroInventionRule}\n\n${closingRule}\n\n${lengthRule}\n\n=== CONTEXTO TÉCNICO ===\n${contextBlocks}`;
 }
 
 async function callGroq(messages, systemPrompt, apiKey, relaySecret) {
-  const payload = {
-    model: GROQ_MODEL,
-    messages: [
-      { role: 'system', content: systemPrompt },
-      ...messages
-    ],
-    max_tokens: MAX_TOKENS,
-    temperature: TEMPERATURE
-  };
+  for (const model of MODEL_FALLBACK_CHAIN) {
+    const payload = {
+      model: model,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages
+      ],
+      max_tokens: MAX_TOKENS,
+      temperature: TEMPERATURE
+    };
 
-  const response = await fetch(RELAY_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-relay-secret': relaySecret,
-      'x-groq-key': apiKey
-    },
-    body: JSON.stringify(payload)
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    if (response.status === 429) {
-      throw { status: 429, message: 'Rate limited', data: errorData };
+    let response;
+    try {
+      response = await fetch(RELAY_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-relay-secret': relaySecret,
+          'x-groq-key': apiKey
+        },
+        body: JSON.stringify(payload)
+      });
+    } catch (networkErr) {
+      // Network errors should fail immediately - not a model issue
+      throw { status: 503, message: 'Network error contacting relay', data: networkErr };
     }
-    throw { status: response.status, message: errorData.error?.message || 'Relay/Groq API error', data: errorData };
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      
+      // 429 (rate limit) or 404 (model unavailable) - try next model
+      if (response.status === 429 || response.status === 404) {
+        console.warn(`[callGroq] Model ${model} failed with status ${response.status}, trying next...`);
+        continue;
+      }
+      
+      // Any other error (401, 500, etc.) - fail immediately
+      throw { status: response.status, message: errorData.error?.message || 'Relay/Groq API error', data: errorData };
+    }
+
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content?.trim() || '';
   }
 
-  const data = await response.json();
-  return data.choices?.[0]?.message?.content?.trim() || '';
+  // All models exhausted
+  throw { 
+    status: 502, 
+    message: `Se agotó la cadena de fallback de modelos: ${MODEL_FALLBACK_CHAIN.join(', ')}`,
+    data: { tried: MODEL_FALLBACK_CHAIN }
+  };
 }
 
 async function checkDailyCounter(env, lang) {
