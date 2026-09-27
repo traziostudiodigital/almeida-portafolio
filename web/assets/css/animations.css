@@ -238,9 +238,10 @@ section[data-reveal="left"] > .photo-duotone {
 }
 
 /* =========================================================
-   PROCESS STEPS — Cómo Trabajamos (entre Servicios y Casos)
+   PROCESS STEPS — Cómo Trabajamos (único bloque consolidado)
    ========================================================= */
 
+/* ----- Base común (móvil < 768px) ----- */
 .process-steps {
   padding-block: clamp(1.5rem, 3.5vw, 2.5rem);
 }
@@ -322,204 +323,8 @@ section[data-reveal="left"] > .photo-duotone {
   margin-inline: auto;
 }
 
-/* Tablet: 2 columnas (md ≥768px) — reusa breakpoint de Servicios */
-@media (min-width: 768px) {
-  .process-steps__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 1rem;
-    padding-inline: 1rem;
-  }
-
-  .process-steps__grid::before {
-    left: 0;
-    right: 0;
-    top: 50%;
-    bottom: auto;
-    height: 1px;
-    width: auto;
-    transform: translateY(-50%);
-  }
-
-  .process-step {
-    padding-top: 3.5rem;
-    padding-inline: 1rem;
-  }
-
-  .process-step__number {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  /* Conector horizontal entre pasos de la misma fila */
-  .process-step:nth-child(odd)::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -50%;
-    width: 100%;
-    height: 1px;
-    background: var(--color-brand-accent);
-    opacity: .35;
-    transform: translateY(-50%);
-    z-index: 0;
-  }
-}
-
-/* ============================================
-   PROCESS STEPS — Cómo Trabajamos
-   ============================================ */
-
-.process-steps__grid {
-  display: grid;
-  position: relative;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-.process-steps__grid::before {
-  content: "";
-  position: absolute;
-  background: var(--color-brand-accent);
-  opacity: .35;
-}
-
-.process-step {
-  position: relative;
-  text-align: center;
-}
-
-.process-step__number {
-  position: relative;
-  font-family: var(--font-serif, 'Source Serif 4', serif);
-  color: var(--color-brand-accent);
-  font-size: 1.75rem;
-  font-weight: 600;
-  z-index: 1;
-}
-
-.process-step__title {
-  font-family: var(--font-serif, 'Source Serif 4', serif);
-  font-size: 1.15rem;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
-}
-
-.process-step__desc {
-  font-size: .95rem;
-  line-height: 1.5;
-  color: var(--color-text-muted, #4a4a4a);
-  /* SIN line-clamp — se elimina el truncado que cortaba el texto */
-  max-width: 220px;
-  margin-inline: auto;
-}
-
-/* ============================================
-   MOBILE: slider horizontal con scroll-snap
-   (por debajo de 1024px — reemplaza el stack vertical)
-   ============================================ */
-@media (max-width: 1023px) {
-  .process-steps__grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 0;
-    padding-inline: 1.25rem;
-    padding-bottom: 1rem;
-    margin-inline: -1.25rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .process-steps__grid::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
-
-  .process-steps__grid::before {
-    display: none; /* sin línea conectora horizontal en el slider */
-  }
-
-  .process-step {
-    flex: 0 0 78%;
-    scroll-snap-align: center;
-    padding-inline: 1rem;
-  }
-
-  .process-step__desc {
-    max-width: 100%;
-  }
-
-  /* Indicador visual de que hay más pasos (línea sutil bajo el activo) */
-  .process-step::after {
-    content: "";
-    display: block;
-    width: 2rem;
-    height: 2px;
-    background: var(--color-brand-accent);
-    opacity: .35;
-    margin: 1rem auto 0;
-  }
-}
-
-/* ============================================
-   PROCESS STEPS — Cómo Trabajamos
-   ============================================ */
-
-.process-steps__grid {
-  display: grid;
-  position: relative;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-.process-steps__grid::before {
-  content: "";
-  position: absolute;
-  background: var(--color-brand-accent);
-  opacity: .35;
-}
-
-.process-step {
-  position: relative;
-  text-align: center;
-}
-
-.process-step__number {
-  position: relative;
-  font-family: var(--font-serif, 'Source Serif 4', serif);
-  color: var(--color-brand-accent);
-  font-size: 1.75rem;
-  font-weight: 600;
-  z-index: 1;
-}
-
-.process-step__title {
-  font-family: var(--font-serif, 'Source Serif 4', serif);
-  font-size: 1.15rem;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
-}
-
-.process-step__desc {
-  font-size: .95rem;
-  line-height: 1.5;
-  color: var(--color-text-muted, #4a4a4a);
-  /* FORZADO explícito: anula cualquier line-clamp/max-height heredado */
-  display: block !important;
-  -webkit-line-clamp: unset !important;
-  -webkit-box-orient: unset !important;
-  overflow: visible !important;
-  text-overflow: unset !important;
-  max-height: none !important;
-  white-space: normal !important;
-  max-width: 220px;
-  margin-inline: auto;
-}
-
-/* ============================================
-   MOBILE: slider horizontal con auto-scroll
-   ============================================ */
-@media (max-width: 1023px) {
+/* Tablet 768–1023px: slider horizontal con scroll-snap (manteniendo comportamiento actual) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .process-steps {
     padding-block: 1.5rem;
   }
@@ -548,13 +353,46 @@ section[data-reveal="left"] > .photo-duotone {
   .process-step {
     flex: 0 0 78%;
     scroll-snap-align: center;
+    position: relative;
+    text-align: center;
     padding-inline: 1rem;
   }
 
-  .process-step__desc {
-    max-width: 100%;
+  .process-step__number {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-serif, 'Source Serif 4', serif);
+    color: var(--color-brand-accent);
+    font-size: 1.75rem;
+    font-weight: 600;
+    z-index: 1;
   }
 
+  .process-step__title {
+    font-family: var(--font-serif, 'Source Serif 4', serif);
+    font-size: 1.15rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  .process-step__desc {
+    font-size: .95rem;
+    line-height: 1.5;
+    color: var(--color-text-muted, #4a4a4a);
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-height: none !important;
+    white-space: normal !important;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  /* Indicador visual de que hay más pasos (línea sutil bajo el activo) */
   .process-step::after {
     content: "";
     display: block;
@@ -565,7 +403,7 @@ section[data-reveal="left"] > .photo-duotone {
     margin: 1rem auto 0;
   }
 
-  /* Dots indicadores debajo del slider (opcional, requiere el JS de abajo) */
+  /* Dots indicadores debajo del slider (opcional) */
   .process-steps__dots {
     display: flex;
     justify-content: center;
