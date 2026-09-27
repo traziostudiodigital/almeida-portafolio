@@ -78,10 +78,12 @@ resolveContent: function (key) {
         },
 
         // Traducir todos los elementos con data-i18n en el documento
-        translateAll: function () {
-            const elements = this.getElementsToTranslate();
-            (elements || []).forEach((el) => {
-                this.translateElement(el);
+        translateAll() {
+            const elements = document.querySelectorAll('[data-i18n], [data-i18n-placeholder]');
+            elements.forEach((el) => {
+                if (typeof this.translateElement === 'function') {
+                    this.translateElement(el);
+                }
             });
         },
 
