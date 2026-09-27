@@ -16,7 +16,7 @@ const KV_TTL_SECONDS = 90000; // ~25 hours
 const SESSION_TTL_SECONDS = 604800; // 7 days (7 * 24 * 60 * 60)
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL = 'llama-3.1-8b-instant';
-const MAX_TOKENS = 400;
+const MAX_TOKENS = 280;
 const TEMPERATURE = 0.3;
 
 function getCorsHeaders(origin) {
@@ -144,12 +144,16 @@ function buildSystemPrompt(detectedNiches, lang) {
     ? 'CLOSING RULE: Naturally invite the user to write by email for a confidential evaluation. Never sound like a marketing CTA or tech support. Never mention WhatsApp.'
     : 'REGLA DE CIERRE: Invita naturalmente a escribir por correo para evaluación confidencial. Nunca suenes a CTA de marketing ni soporte técnico. Nunca menciones WhatsApp.';
 
+  const lengthRule = isEn
+    ? 'LENGTH RULE: If you approach the available token limit, prioritize closing the idea completely and naturally — never end mid-sentence or mid-enumeration.'
+    : 'REGLA DE LONGITUD: Si te acercas al límite de tokens disponible, prioriza cerrar la idea de forma completa y natural — nunca termines a mitad de una oración o enumeración.';
+
   const contextBlocks = detectedNiches
     .map(n => CONTEXT_BLOCKS[n]?.[lang] || '')
     .filter(Boolean)
     .join('\n\n---\n\n');
 
-  return `${toneInstruction}\n\n${zeroInventionRule}\n\n${closingRule}\n\n=== CONTEXTO TÉCNICO ===\n${contextBlocks}`;
+  return `${toneInstruction}\n\n${zeroInventionRule}\n\n${closingRule}\n\n${lengthRule}\n\n=== CONTEXTO TÉCNICO ===\n${contextBlocks}`;
 }
 
 async function callGroq(messages, systemPrompt, apiKey) {

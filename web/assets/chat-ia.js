@@ -18,7 +18,10 @@
     sessionId: (() => {
       try {
         const stored = sessionStorage.getItem('chat_session_id');
-        if (stored) return stored;
+        if (stored) {
+          console.log('[Chat IA] sessionId: persistido desde sessionStorage:', stored);
+          return stored;
+        }
       } catch (e) {
         console.warn('[Chat IA] No se pudo acceder a sessionStorage');
       }
@@ -26,6 +29,7 @@
       try {
         sessionStorage.setItem('chat_session_id', newId);
       } catch (e) {}
+      console.log('[Chat IA] sessionId: nuevo generado:', newId);
       return newId;
     })(),
     turnCount: 0 // Contador de turnos efímero
@@ -129,16 +133,17 @@ async function sendMessage(text) {
 
      setLoading(true);
 
-     try {
-       const res = await fetch(API_ENDPOINT, {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({
-           messages: state.history,
-           lang: state.language,
-           sessionId: state.sessionId
-         })
-       });
+      try {
+        console.log('[Chat IA] Enviando sessionId al backend:', state.sessionId);
+        const res = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: state.history,
+            lang: state.language,
+            sessionId: state.sessionId
+          })
+        });
 
        if (!res.ok) {
          const text = await res.text().catch(() => '');
