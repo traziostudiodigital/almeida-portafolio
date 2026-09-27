@@ -45,16 +45,17 @@
     }
     // Fallback hardcoded de seguridad
     const fallback = {
-      'chat.header_title': 'Consulta Pericial IA',
-      'chat.header_subtitle': 'Asistencia técnica basada en el archivo pericial de Almeida',
-      'chat.bot_label': 'Archivo Almeida · Asistente',
+      'chat.header_title': 'Asistente IA Especializado',
+      'chat.header_subtitle': 'Consultas técnicas sobre el ecosistema profesional de Almeida',
+      'chat.bot_label': 'Asistente IA',
       'chat.user_label': 'Usted',
-      'chat.welcome_msg': 'Consulte información sobre metodologías de tasación, catalogación patrimonial o alcance pericial en los 6 nichos de especialización. Asistente técnico del ecosistema Almeida.',
-      'chat.analyzing': 'Consultando dictámenes y archivo pericial...',
-      'chat.input_placeholder': 'Escriba su consulta pericial...',
-      'chat.footer_notice': 'Atención confidencial · Dictámenes bajo estricto secreto profesional',
-      'chat.error_msg': 'No se pudo conectar con el servicio pericial. Inténtelo nuevamente o contacte directamente por los canales oficiales.',
-      'chat.empty_warning': 'Por favor, formule una consulta pericial.'
+      'chat.welcome_msg': 'Consulte información sobre metodologías, catalogación patrimonial o alcance profesional en los 6 nichos de especialización. Asistente técnico del ecosistema Almeida.',
+      'chat.analyzing': 'Consultando la base de conocimiento...',
+      'chat.input_placeholder': 'Escriba su consulta...',
+      'chat.footer_notice': 'Atención confidencial · Información bajo estricto secreto profesional',
+      'chat.error_msg': 'No se pudo conectar con el asistente. Inténtelo nuevamente o contacte directamente por los canales oficiales.',
+      'chat.empty_warning': 'Por favor, formule su consulta.',
+      'chat.session_limit_msg': 'Se alcanzó el límite de esta sesión. Para continuar la conversación, contáctenos directamente por los canales oficiales.'
     };
     return fallback[key] || key;
   }
@@ -74,7 +75,7 @@
       ? `<span class="block text-[10px] uppercase font-semibold text-[#B08D57] mb-1" data-i18n="chat.bot_label">${t('chat.bot_label')}</span>`
       : `<span class="block text-[10px] uppercase font-semibold text-[#2E3238]/60 mb-1 text-right" data-i18n="chat.user_label">Usted</span>`;
 
-    wrapper.innerHTML = `${label}<p class="text-xs leading-relaxed ${isBot ? 'text-[#2E3238]' : 'text-[#2E3238]'}">${escapeHtml(content)}</p>`;
+    wrapper.innerHTML = `${label}<p class="text-sm leading-relaxed text-[#2E3238]">${escapeHtml(content)}</p>`;
     container.appendChild(wrapper);
     container.scrollTop = container.scrollHeight;
   }

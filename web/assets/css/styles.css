@@ -269,57 +269,57 @@ input, button, textarea, select {
 .section-gap { gap: clamp(1rem, 3vw, 1.5rem); }
 .section-divider { margin-block: clamp(2.5rem, 5vw, 3.5rem); }
 
-/* Nodo central: pulso muy sutil — PAUSADO por defecto */
+/* Nodo antena: pulso sutil — PAUSADO por defecto */
 .chat-node-core {
   animation: chat-core-pulse 3s ease-in-out infinite;
   animation-play-state: paused;
 }
 @keyframes chat-core-pulse {
-  0%, 100% { r: 2.5; opacity: 1; }
-  50% { r: 3; opacity: 0.85; }
+  0%, 100% { r: 1.8; opacity: 1; }
+  50% { r: 2.2; opacity: 0.85; }
 }
 
-/* Líneas: trazado tipo constelación en loop, desfasadas — PAUSADO por defecto */
-.chat-line {
-  stroke-dasharray: 14;
-  stroke-dashoffset: 14;
-  opacity: 0.5;
-  animation: chat-line-draw 9s ease-in-out infinite;
+/* Ojos: parpadeo sutil — PAUSADO por defecto */
+.chat-eye {
+  animation: chat-eye-blink 4s ease-in-out infinite;
   animation-play-state: paused;
 }
-.chat-line-1 { animation-delay: 0s; }
-.chat-line-2 { animation-delay: 1.8s; }
-.chat-line-3 { animation-delay: 3.6s; }
-.chat-line-4 { animation-delay: 5.4s; }
-
-@keyframes chat-line-draw {
-  0%   { stroke-dashoffset: 14; opacity: 0.3; }
-  40%  { stroke-dashoffset: 0;  opacity: 0.75; }
-  60%  { stroke-dashoffset: 0;  opacity: 0.75; }
-  100% { stroke-dashoffset: -14; opacity: 0.3; }
+.chat-eye:nth-of-type(2) { animation-delay: 0.15s; }
+@keyframes chat-eye-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.15); }
 }
 
-/* Se activa SOLO en hover, focus por teclado, o con el chat abierto
-   (aria-expanded="true" en el botón — ya presente en el HTML) */
+/* Boca: leve "respiración" — PAUSADO por defecto */
+.chat-line {
+  stroke-dasharray: 16;
+  stroke-dashoffset: 0;
+  opacity: 0.6;
+  animation: chat-mouth-talk 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+@keyframes chat-mouth-talk {
+  0%, 100% { stroke-dashoffset: 0; opacity: 0.5; }
+  50% { stroke-dashoffset: -3; opacity: 0.85; }
+}
+
+/* Activación: hover, focus, o chat abierto */
 #chat-ia-trigger:hover .chat-node-core,
 #chat-ia-trigger:focus-visible .chat-node-core,
-#chat-ia-trigger[aria-expanded="true"] .chat-node-core {
-  animation-play-state: running;
-}
+#chat-ia-trigger[aria-expanded="true"] .chat-node-core,
+#chat-ia-trigger:hover .chat-eye,
+#chat-ia-trigger:focus-visible .chat-eye,
+#chat-ia-trigger[aria-expanded="true"] .chat-eye,
 #chat-ia-trigger:hover .chat-line,
 #chat-ia-trigger:focus-visible .chat-line,
 #chat-ia-trigger[aria-expanded="true"] .chat-line {
   animation-play-state: running;
 }
 
-/* Hover: intensifica y acelera todo el conjunto (sin cambios) */
-#chat-ia-trigger:hover .chat-line {
-  animation-duration: 3.5s;
-  opacity: 0.9;
-}
-#chat-ia-trigger:hover .chat-node-core {
-  animation-duration: 1.2s;
-}
+/* Hover: intensifica */
+#chat-ia-trigger:hover .chat-node-core { animation-duration: 1.2s; }
+#chat-ia-trigger:hover .chat-eye { animation-duration: 2s; }
+#chat-ia-trigger:hover .chat-line { animation-duration: 1.2s; opacity: 0.9; }
 
 /* Ventana: entrada suave (sin cambios) */
 #chat-ia-window {
@@ -337,6 +337,7 @@ input, button, textarea, select {
 /* Respeto a accesibilidad: apaga todo esto si el usuario pidió menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   .chat-node-core,
+  .chat-eye,
   .chat-line,
   #chat-ia-window {
     animation: none !important;
