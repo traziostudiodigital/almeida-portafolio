@@ -18,7 +18,7 @@ const KV_SESSION_PREFIX = 'chat_session:';
 const KV_TTL_SECONDS = 90000; // ~25 hours
 const SESSION_TTL_SECONDS = 604800; // 7 days (7 * 24 * 60 * 60)
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
-const RELAY_ENDPOINT = 'https://groq-relay.trazio-studiodigital.workers.dev';
+const RELAY_ENDPOINT = 'https://traziostudio-groq_relay.val.run';
 const GROQ_MODEL = 'openai/gpt-oss-20b';
 const MAX_TOKENS = 400;
 const TEMPERATURE = 0.3;
@@ -259,6 +259,7 @@ async function handleChatRequest(request, env) {
         );
       }
       console.error('[Chat API] Error Groq:', groqErr);
+      console.error('[DEBUG] groqErr completo:', JSON.stringify(groqErr));
       throw groqErr;
     }
 
