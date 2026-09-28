@@ -173,8 +173,8 @@ en: `Specialty: Forensic Art Appraiser for Litigation, Probate & Notarial Procee
 
 Important legal precision: In accordance with his documented professional trajectory, the role of an anglo-style "Expert Witness" on the stand is not claimed; the verified and documented service is the formal ratification of the technical appraisal report before the competent judicial or notarial authority. <!-- Source: nichos-servicio.md, Nicho 4; copy-editorial-nichos.md, Nicho 4; experiencia.md; Respuestas.md, Bloque 4.5 -->`
   },
-n5: { 
-      es: `Especialidad: Valoración de Arte para Aseguradoras y Family Offices.
+  n5: { 
+    es: `Especialidad: Valoración de Arte para Aseguradoras y Family Offices.
  
   Para quién: Compañías de seguros de arte (Fine Art Insurance), reaseguradoras, family offices, firmas de gestión patrimonial y el mercado internacional de alto patrimonio neto (HNW/UHNW) que necesitan avalúos objetivos con validez global para la cobertura de riesgos, auditoría de activos artísticos o peritajes post-siniestro.
 
@@ -207,7 +207,7 @@ n5: {
  - **International courses and diplomas**: Fine art appraisal courses taught at the Fundación de Museos Nacionales of Caracas (Venezuela, 2007), IARTES and IPC (Caracas, 2010), the University of Panama (2015), and the IBERMUSEOS regional training program (Costa Rica, 2018).
  - **Collaboration with Italy's Carabinieri TPC (2018)**: Joint conference and technical exchange on border control and recovery of stolen cultural property, held at the Office of the Historian of Havana (April 16-20, 2018).
  - **UNESCO publications (2013)**: Two independent academic papers published in UNESCO's "Cultura y Desarrollo" journal (No. 10, 2013) on "The Value of Works of Art" (pages 9-11) and "Control in Cuban Customs" (pages 70-73).
- When it applies: This service is essential when underwriting Fine Art insurance, conducting periodic asset audits, or requiring an independent expert opinion to resolve coverage disputes following material damage. <!-- Source: nichos-servicio.md, Nicho 5; copy-editorial-nichos.md, Nicho 5; experiencia.md; certificaciones.md -->
+ When it applies: This service is essential when underwriting Fine Art insurance, conducting periodic asset audits, or requiring an independent expert opinion to resolve coverage disputes following material damage. <!-- Source: nichos-servicio.md, Nicho 5; copy-editorial-nichos.md, Nicho 5; experiencia.md; certificaciones.md -->`
   },
   n6: { 
     es: `Especialidad: Peritaje de Patrimonio Arqueológico Subacuático y Pecios Históricos.
