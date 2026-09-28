@@ -5,8 +5,8 @@
 
 export const NICHE_KEYWORDS = {
   n1: {
-    es: ['coleccionista', 'particular', 'autenticidad', 'catalogación', 'valoración', 'obra', 'pintura', 'escultura', 'inversión', 'adquirir', 'comprar', 'vender', 'certificado'],
-    en: ['collector', 'private', 'authentication', 'cataloguing', 'valuation', 'artwork', 'painting', 'sculpture', 'investment', 'acquire', 'buy', 'sell', 'certificate']
+    es: ['coleccionista', 'particular', 'expertizaje', 'catalogación', 'tasación', 'valoración', 'obra', 'pintura', 'escultura', 'inversión', 'adquirir', 'comprar', 'vender', 'dictamen'],
+    en: ['collector', 'private', 'expertise', 'cataloguing', 'appraisal', 'valuation', 'artwork', 'painting', 'sculpture', 'investment', 'acquire', 'buy', 'sell', 'report']
   },
   n2: {
     es: ['herencia', 'sucesión', 'heredero', 'partición', 'testamento', 'caudal relicto', 'notaría', 'hacienda', 'fiscal', 'liquidación', 'reparto', 'legítima'],
